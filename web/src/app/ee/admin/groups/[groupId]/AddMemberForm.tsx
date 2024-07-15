@@ -44,7 +44,7 @@ export const AddMemberForm: React.FC<AddMemberFormProps> = ({
             });
             if (response.ok) {
               setPopup({
-                message: "Successfully added users to group",
+                message: "Erfolg beim Hinzufügen zur Gruppe",
                 type: "success",
               });
               onClose();
@@ -52,7 +52,7 @@ export const AddMemberForm: React.FC<AddMemberFormProps> = ({
               const responseJson = await response.json();
               const errorMsg = responseJson.detail || responseJson.message;
               setPopup({
-                message: `Failed to add users to group - ${errorMsg}`,
+                message: `Fehler beim Hinzufügen - ${errorMsg}`,
                 type: "error",
               });
               onClose();

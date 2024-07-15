@@ -675,7 +675,7 @@ export function ChatPage({
     if (!messageToResend && messageIdToResend !== undefined) {
       setPopup({
         message:
-          "Failed to re-send message - please refresh the page and try again.",
+          "Fehler beim Senden. Bitte Seite aktualisieren und nochmals versuchen.",
         type: "error",
       });
       return;
@@ -958,14 +958,14 @@ export function ChatPage({
 
     if (response.ok) {
       setPopup({
-        message: "Thanks for your feedback!",
+        message: "Danke für Ihr Feedback!",
         type: "success",
       });
     } else {
       const responseJson = await response.json();
       const errorMsg = responseJson.detail || responseJson.message;
       setPopup({
-        message: `Failed to submit feedback - ${errorMsg}`,
+        message: `Fehler beim Senden - ${errorMsg}`,
         type: "error",
       });
     }
@@ -992,7 +992,7 @@ export function ChatPage({
       setPopup({
         type: "error",
         message:
-          "The current Assistant does not support image input. Please select an assistant with Vision support.",
+          "Der aktuelle Assistent unterstützt keine Bild-Uploads. Bitte wähle einen Assistenten mit Bild-Unterstützung.",
       });
       return;
     }
@@ -1354,7 +1354,7 @@ export function ChatPage({
                                             setPopup({
                                               type: "error",
                                               message:
-                                                "Cannot edit query of first message - please refresh the page and try again.",
+                                              "Die Abfrage der ersten Nachricht kann nicht bearbeitet werden - bitte aktualisieren Sie die Seite und versuchen Sie es erneut.",
                                             });
                                             return;
                                           }
@@ -1365,7 +1365,7 @@ export function ChatPage({
                                             setPopup({
                                               type: "error",
                                               message:
-                                                "Cannot edit query of a pending message - please wait a few seconds and try again.",
+                                              "Die Abfrage einer ausstehenden Nachricht kann nicht bearbeitet werden - bitte warten Sie einige Sekunden und versuchen Sie es erneut.",
                                             });
                                             return;
                                           }
@@ -1408,11 +1408,11 @@ export function ChatPage({
                                           currentAlternativeAssistant,
                                       });
                                     } else {
-                                      setPopup({
+                                        setPopup({
                                         type: "error",
                                         message:
-                                          "Failed to force search - please refresh the page and try again.",
-                                      });
+                                          "Suche erzwingen fehlgeschlagen - bitte aktualisieren Sie die Seite und versuchen Sie es erneut.",
+                                        });
                                     }
                                   }}
                                   retrievalDisabled={

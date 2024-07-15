@@ -42,7 +42,7 @@ export function ChatTab({
         router.refresh(); // Refresh the page to reflect the changes
       } catch (error) {
         setPopup({
-          message: "Failed to remove chat from folder",
+          message: "Entfernen fehlgeschlagen.",
           type: "error",
         });
       }

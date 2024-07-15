@@ -38,7 +38,7 @@ export function StatusRow<ConnectorConfigType, ConnectorCredentialType>({
   let statusDisplay;
   switch (connectorIndexingStatus.last_status) {
     case "failed":
-      statusDisplay = <div className="text-error">Failed</div>;
+      statusDisplay = <div className="text-error">Fehler</div>;
       break;
     default:
       statusDisplay = <div className="text-success flex">Enabled!</div>;

@@ -39,7 +39,7 @@ export const AddTokenRateLimitForm: React.FC<AddMemberFormProps> = ({
     handleCreateGroupTokenRateLimit(period_hours, token_budget, group_id)
       .then(() => {
         setIsOpen(false);
-        setPopup({ type: "success", message: "Token rate limit created!" });
+        setPopup({ type: "success", message: "Token Limit erstellt!" });
         mutate(`/api/admin/token-rate-limits/user-group/${userGroupId}`);
       })
       .catch((error) => {

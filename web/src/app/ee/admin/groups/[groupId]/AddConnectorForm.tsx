@@ -132,7 +132,7 @@ export const AddConnectorForm: React.FC<AddConnectorFormProps> = ({
               });
               if (response.ok) {
                 setPopup({
-                  message: "Successfully added users to group",
+                  message: "Erfolg beim Hinzufügen von Nutzern zur Gruppe.",
                   type: "success",
                 });
                 onClose();
@@ -140,14 +140,14 @@ export const AddConnectorForm: React.FC<AddConnectorFormProps> = ({
                 const responseJson = await response.json();
                 const errorMsg = responseJson.detail || responseJson.message;
                 setPopup({
-                  message: `Failed to add users to group - ${errorMsg}`,
+                  message: `Fehler beim Hinzufügen - ${errorMsg}`,
                   type: "error",
                 });
                 onClose();
               }
             }}
           >
-            Add Connectors
+            Quelle hinzufügen
           </Button>
         </div>
       </div>

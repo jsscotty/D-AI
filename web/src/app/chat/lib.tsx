@@ -66,7 +66,7 @@ export async function createChatSession(
     console.log(
       `Failed to create chat session - ${createChatSessionResponse.status}`
     );
-    throw Error("Failed to create chat session");
+    throw Error("Fehler Chat zu erstellen");
   }
   const chatSessionResponseJson = await createChatSessionResponse.json();
   return chatSessionResponseJson.chat_session_id;
@@ -166,7 +166,7 @@ export async function* sendMessage({
   if (!sendMessageResponse.ok) {
     const errorJson = await sendMessageResponse.json();
     const errorMsg = errorJson.message || errorJson.detail || "";
-    throw Error(`Failed to send message - ${errorMsg}`);
+    throw Error(`Fehler beim Senden - ${errorMsg}`);
   }
 
   yield* handleStream<PacketType>(sendMessageResponse);
@@ -322,9 +322,9 @@ export function groupSessionsByDateRange(chatSessions: ChatSession[]) {
 
   const groups: Record<string, ChatSession[]> = {
     Today: [],
-    "Previous 7 Days": [],
-    "Previous 30 Days": [],
-    "Over 30 days ago": [],
+    "Vor 7 Tagen": [],
+    "Letzten 30 Tage": [],
+    "Über 30 Tage her": [],
   };
 
   chatSessions.forEach((chatSession) => {
@@ -336,11 +336,11 @@ export function groupSessionsByDateRange(chatSessions: ChatSession[]) {
     if (diffDays < 1) {
       groups["Today"].push(chatSession);
     } else if (diffDays <= 7) {
-      groups["Previous 7 Days"].push(chatSession);
+      groups["Vor 7 Tagen"].push(chatSession);
     } else if (diffDays <= 30) {
-      groups["Previous 30 Days"].push(chatSession);
+      groups["Letzten 30 Tage"].push(chatSession);
     } else {
-      groups["Over 30 days ago"].push(chatSession);
+      groups["Über 30 Tage her"].push(chatSession);
     }
   });
 
@@ -586,7 +586,7 @@ export async function uploadFilesForChat(
     body: formData,
   });
   if (!response.ok) {
-    return [[], `Failed to upload files - ${(await response.json()).detail}`];
+    return [[], `Fehler beim Upload - ${(await response.json()).detail}`];
   }
   const responseJson = await response.json();
 

@@ -60,10 +60,10 @@ export const UserGroupsTable = ({
         <TableHead>
           <TableRow>
             <TableHeaderCell>Name</TableHeaderCell>
-            <TableHeaderCell>Connectors</TableHeaderCell>
-            <TableHeaderCell>Users</TableHeaderCell>
+            <TableHeaderCell>Quellen</TableHeaderCell>
+            <TableHeaderCell>Nutzer</TableHeaderCell>
             <TableHeaderCell>Status</TableHeaderCell>
-            <TableHeaderCell>Delete</TableHeaderCell>
+            <TableHeaderCell>Entfernen</TableHeaderCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -131,7 +131,7 @@ export const UserGroupsTable = ({
                               })}
                             <div>
                               + {userGroup.users.length - MAX_USERS_TO_DISPLAY}{" "}
-                              more
+                              mehr
                             </div>
                           </div>
                         )}
@@ -142,7 +142,7 @@ export const UserGroupsTable = ({
                   </TableCell>
                   <TableCell>
                     {userGroup.is_up_to_date ? (
-                      <div className="text-success">Up to date!</div>
+                      <div className="text-success">Aktuell!</div>
                     ) : (
                       <div className="w-10">
                         <LoadingAnimation text="Syncing" />
@@ -156,13 +156,13 @@ export const UserGroupsTable = ({
                         const response = await deleteUserGroup(userGroup.id);
                         if (response.ok) {
                           setPopup({
-                            message: `User Group "${userGroup.name}" deleted`,
+                            message: `Nutzergruppe "${userGroup.name}" entfernt`,
                             type: "success",
                           });
                         } else {
                           const errorMsg = (await response.json()).detail;
                           setPopup({
-                            message: `Failed to delete User Group - ${errorMsg}`,
+                            message: `Fehler beim Löschen der Nutzergruppe - ${errorMsg}`,
                             type: "error",
                           });
                         }
@@ -273,7 +273,7 @@ export const UserGroupsTable = ({
                     } else {
                       const errorMsg = (await response.json()).detail;
                       setPopup({
-                        message: `Failed to delete User Group - ${errorMsg}`,
+                        message: `Fehler beim Löschen der Nutzergruppe - ${errorMsg}`,
                         type: "error",
                       });
                     }

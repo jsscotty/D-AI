@@ -32,7 +32,7 @@ export const UserGroupCreationForm = ({
     <Modal onOutsideClick={onClose}>
       <div className="px-8 py-6 bg-background">
         <h2 className="text-xl font-bold flex">
-          {isUpdate ? "Update a User Group" : "Create a new User Group"}
+          {isUpdate ? "Nutzergruppe aktualisieren" : "Neue Nutzergruppe erstellen"}
           <div
             onClick={onClose}
             className="ml-auto hover:bg-hover p-1.5 rounded"
@@ -53,7 +53,7 @@ export const UserGroupCreationForm = ({
             cc_pair_ids: [] as number[],
           }}
           validationSchema={Yup.object().shape({
-            name: Yup.string().required("Please enter a name for the group"),
+            name: Yup.string().required("Name für die Gruppe eingeben"),
             user_ids: Yup.array().of(Yup.string().required()),
             cc_pair_ids: Yup.array().of(Yup.number().required()),
           })}
@@ -65,8 +65,8 @@ export const UserGroupCreationForm = ({
             if (response.ok) {
               setPopup({
                 message: isUpdate
-                  ? "Successfully updated user group!"
-                  : "Successfully created user group!",
+                  ? "Nutzergruppe erfolgreich aktualisiert!"
+                  : "Nutzergruppe erfolgreich erstellt!",
                 type: "success",
               });
               onClose();
@@ -75,8 +75,8 @@ export const UserGroupCreationForm = ({
               const errorMsg = responseJson.detail || responseJson.message;
               setPopup({
                 message: isUpdate
-                  ? `Error updating user group - ${errorMsg}`
-                  : `Error creating user group - ${errorMsg}`,
+                  ? `Fehler beim Aktualisieren der Nutzergruppe - ${errorMsg}`
+                  : `Fehler beim Erstellen der Nutzergruppe - ${errorMsg}`,
                 type: "error",
               });
             }
@@ -88,7 +88,7 @@ export const UserGroupCreationForm = ({
                 <TextFormField
                   name="name"
                   label="Name:"
-                  placeholder="A name for the User Group"
+                  placeholder="Name der Nutzergruppe"
                   disabled={isUpdate}
                   autoCompleteDisabled={true}
                 />
@@ -96,11 +96,10 @@ export const UserGroupCreationForm = ({
                 <Divider />
 
                 <h2 className="mb-1 font-medium">
-                  Select which connectors this group has access to:
+                  Wähle die Datenquellen, zu denen diese Gruppe Zugriff hat:
                 </h2>
                 <p className="mb-3 text-xs">
-                  All documents indexed by the selected connectors will be
-                  visible to users in this group.
+                  Alle Dokumente in den ausgewählten Quellen sind für die Nutzergruppe zugänglich. 
                 </p>
 
                 <ConnectorEditor
@@ -114,11 +113,10 @@ export const UserGroupCreationForm = ({
                 <Divider />
 
                 <h2 className="mb-1 font-medium">
-                  Select which Users should be a part of this Group.
+                  Wähle aus, welche Benutzer Teil dieser Gruppe sein sollen.
                 </h2>
                 <p className="mb-3 text-xs">
-                  All selected users will be able to search through all
-                  documents indexed by the selected connectors.
+                  Alle ausgewählten Benutzer können in allen von den ausgewählten Connectors indizierten Dokumenten suchen.
                 </p>
                 <div className="mb-3 gap-2">
                   <UserEditor
@@ -138,7 +136,7 @@ export const UserGroupCreationForm = ({
                     disabled={isSubmitting}
                     className="mx-auto w-64"
                   >
-                    {isUpdate ? "Update!" : "Create!"}
+                    {isUpdate ? "Aktualisieren!" : "Erstellen!"}
                   </Button>
                 </div>
               </div>

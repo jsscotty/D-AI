@@ -37,15 +37,15 @@ const Main = () => {
   }
 
   if (error || !data) {
-    return <div className="text-red-600">Error loading users</div>;
+    return <div className="text-red-600">Fehler beim Laden von Nutzern</div>;
   }
 
   if (ccPairsError || !ccPairs) {
-    return <div className="text-red-600">Error loading connectors</div>;
+    return <div className="text-red-600">Fehler beim Laden von Datenquellen</div>;
   }
 
   if (usersError || !users) {
-    return <div className="text-red-600">Error loading users</div>;
+    return <div className="text-red-600">Fehler beim Laden von Nutzern</div>;
   }
 
   return (
@@ -53,7 +53,7 @@ const Main = () => {
       {popup}
       <div className="my-3">
         <Button size="xs" color="green" onClick={() => setShowForm(true)}>
-          Create New User Group
+          Neue Nutzergruppe erstellen
         </Button>
       </div>
       {data.length > 0 && (
@@ -85,7 +85,7 @@ const Page = () => {
   return (
     <div className="mx-auto container">
       <AdminPageTitle
-        title="Manage Users Groups"
+        title="Nutzer Gruppe bearbeiten"
         icon={<GroupsIcon size={32} />}
       />
 

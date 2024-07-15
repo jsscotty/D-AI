@@ -28,7 +28,7 @@ import { deleteApiKey, regenerateApiKey } from "./lib";
 import { DanswerApiKeyForm } from "./DanswerApiKeyForm";
 
 const API_KEY_TEXT = `
-API Keys allow you to access Danswer APIs programmatically. Click the button below to generate a new API Key.
+API-Schlüssel ermöglichen den programmatischen Zugriff auf Blona APIs. Klicken Sie auf den unten stehenden Button, um einen neuen API-Schlüssel zu generieren.
 `;
 
 function NewApiKeyModal({
@@ -51,8 +51,7 @@ function NewApiKeyModal({
         </div>
         <div className="h-32">
           <Text className="mb-4">
-            Make sure you copy your new API key. You won’t be able to see this
-            key again.
+            Kopieren Sie den neuen API Schlüssel. Dieser wird nicht erneut angezeigt.
           </Text>
 
           <div className="flex mt-2">
@@ -72,7 +71,7 @@ function NewApiKeyModal({
           </div>
           {copyClicked && (
             <Text className="text-success text-xs font-medium mt-1">
-              API Key copied!
+              API Schlüssel kopiert!
             </Text>
           )}
         </div>
@@ -167,14 +166,14 @@ function Main() {
 
       <Divider />
 
-      <Title className="mt-6">Existing API Keys</Title>
+      <Title className="mt-6">Bestehende API Schlüssel</Title>
       <Table className="overflow-visible">
         <TableHead>
           <TableRow>
             <TableHeaderCell>Name</TableHeaderCell>
-            <TableHeaderCell>API Key</TableHeaderCell>
-            <TableHeaderCell>Regenerate</TableHeaderCell>
-            <TableHeaderCell>Delete</TableHeaderCell>
+            <TableHeaderCell>API Schlüssel</TableHeaderCell>
+            <TableHeaderCell>Regenerieren</TableHeaderCell>
+            <TableHeaderCell>Löschen</TableHeaderCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -276,7 +275,7 @@ function Main() {
 export default function Page() {
   return (
     <div className="mx-auto container">
-      <AdminPageTitle title="API Keys" icon={<KeyIcon size={32} />} />
+      <AdminPageTitle title="API Schlüssel" icon={<KeyIcon size={32} />} />
 
       <Main />
     </div>

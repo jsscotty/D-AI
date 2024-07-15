@@ -50,7 +50,7 @@ export const GroupDisplay = ({
       <div className="text-sm mb-3 flex">
         <Text className="mr-1">Status:</Text>{" "}
         {userGroup.is_up_to_date ? (
-          <div className="text-success font-bold">Up to date</div>
+          <div className="text-success font-bold">aktuell</div>
         ) : (
           <div className="text-accent font-bold">
             <LoadingAnimation text="Syncing" />
@@ -72,7 +72,7 @@ export const GroupDisplay = ({
                 <TableRow>
                   <TableHeaderCell>Email</TableHeaderCell>
                   <TableHeaderCell className="flex w-full">
-                    <div className="ml-auto">Remove User</div>
+                    <div className="ml-auto">Nutzer entfernen</div>
                   </TableHeaderCell>
                 </TableRow>
               </TableHead>
@@ -105,7 +105,7 @@ export const GroupDisplay = ({
                                 if (response.ok) {
                                   setPopup({
                                     message:
-                                      "Successfully removed user from group",
+                                      "Erfolg beim Entfernen des Nutzers",
                                     type: "success",
                                   });
                                 } else {
@@ -113,7 +113,7 @@ export const GroupDisplay = ({
                                   const errorMsg =
                                     responseJson.detail || responseJson.message;
                                   setPopup({
-                                    message: `Error removing user from group - ${errorMsg}`,
+                                    message: `Fehler beim Entfernen - ${errorMsg}`,
                                     type: "error",
                                   });
                                 }
@@ -130,7 +130,7 @@ export const GroupDisplay = ({
             </Table>
           </>
         ) : (
-          <div className="text-sm">No users in this group...</div>
+          <div className="text-sm">Kein Nutzer in dieser Gruppe...</div>
         )}
       </div>
 
@@ -158,7 +158,7 @@ export const GroupDisplay = ({
 
       <Divider />
 
-      <h2 className="text-xl font-bold mt-8">Connectors</h2>
+      <h2 className="text-xl font-bold mt-8">Quellen</h2>
       <div className="mt-2">
         {userGroup.cc_pairs.length > 0 ? (
           <>
@@ -167,7 +167,7 @@ export const GroupDisplay = ({
                 <TableRow>
                   <TableHeaderCell>Connector</TableHeaderCell>
                   <TableHeaderCell className="flex w-full">
-                    <div className="ml-auto">Remove Connector</div>
+                    <div className="ml-auto">Quelle entfernen</div>
                   </TableHeaderCell>
                 </TableRow>
               </TableHead>
@@ -212,7 +212,7 @@ export const GroupDisplay = ({
                                   const errorMsg =
                                     responseJson.detail || responseJson.message;
                                   setPopup({
-                                    message: `Error removing connector from group - ${errorMsg}`,
+                                    message: `Fehler beim Entfernen - ${errorMsg}`,
                                     type: "error",
                                   });
                                 }
@@ -229,7 +229,7 @@ export const GroupDisplay = ({
             </Table>
           </>
         ) : (
-          <div className="text-sm">No connectors in this group...</div>
+          <div className="text-sm">Keine Quellen in dieser Gruppe...</div>
         )}
       </div>
 
@@ -240,7 +240,7 @@ export const GroupDisplay = ({
         color="green"
         disabled={!userGroup.is_up_to_date}
       >
-        Add Connectors
+        Quelle hinzufügen
       </Button>
 
       {addConnectorFormVisible && (
@@ -257,7 +257,7 @@ export const GroupDisplay = ({
 
       <Divider />
 
-      <h2 className="text-xl font-bold mt-8 mb-2">Document Sets</h2>
+      <h2 className="text-xl font-bold mt-8 mb-2">Dokumente</h2>
 
       <div>
         {userGroup.document_sets.length > 0 ? (
@@ -275,7 +275,7 @@ export const GroupDisplay = ({
           </div>
         ) : (
           <>
-            <Text>No document sets in this group...</Text>
+            <Text>Keine Dokumente in dieser Gruppe...</Text>
           </>
         )}
       </div>
@@ -300,7 +300,7 @@ export const GroupDisplay = ({
           </div>
         ) : (
           <>
-            <Text>No Personas in this group...</Text>
+            <Text>Keine Persona in dieser Gruppe...</Text>
           </>
         )}
       </div>
@@ -327,7 +327,7 @@ export const GroupDisplay = ({
         className="mt-3"
         onClick={() => setAddRateLimitFormVisible(true)}
       >
-        Create a Token Rate Limit
+        Token Rate Limit erstellen
       </Button>
     </div>
   );

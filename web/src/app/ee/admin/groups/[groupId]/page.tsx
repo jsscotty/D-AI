@@ -67,7 +67,7 @@ const Page = ({ params }: { params: { groupId: string } }) => {
           refreshUserGroup={refreshUserGroup}
         />
       ) : (
-        <div>Unable to fetch User Group :(</div>
+        <div>Fehler beim Laden der Gruppe :(</div>
       )}
     </div>
   );

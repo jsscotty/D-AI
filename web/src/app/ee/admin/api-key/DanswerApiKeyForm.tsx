@@ -25,7 +25,7 @@ export const DanswerApiKeyForm = ({
     <Modal onOutsideClick={onClose} width="w-2/6">
       <div className="px-8 py-6 bg-background">
         <h2 className="text-xl font-bold flex">
-          {isUpdate ? "Update API Key" : "Create a new API Key"}
+          {isUpdate ? "API-Schlüssel aktualisieren" : "Neuen API-Schlüssel erstellen"}
           <div
             onClick={onClose}
             className="ml-auto hover:bg-hover p-1.5 rounded"
@@ -55,8 +55,8 @@ export const DanswerApiKeyForm = ({
             if (response.ok) {
               setPopup({
                 message: isUpdate
-                  ? "Successfully updated API key!"
-                  : "Successfully created API key!",
+                  ? "API-Schlüssel erfolgreich aktualisiert!"
+                  : "API-Schlüssel erfolgreich erstellt!",
                 type: "success",
               });
               if (!isUpdate) {
@@ -68,8 +68,8 @@ export const DanswerApiKeyForm = ({
               const errorMsg = responseJson.detail || responseJson.message;
               setPopup({
                 message: isUpdate
-                  ? `Error updating API key - ${errorMsg}`
-                  : `Error creating API key - ${errorMsg}`,
+                  ? `Fehler beim Aktualisieren des API-Schlüssels - ${errorMsg}`
+                  : `Fehler beim Erstellen des API-Schlüssels - ${errorMsg}`,
                 type: "error",
               });
             }
@@ -78,8 +78,7 @@ export const DanswerApiKeyForm = ({
           {({ isSubmitting, values, setFieldValue }) => (
             <Form>
               <Text className="mb-4 text-lg">
-                Choose a memorable name for your API key. This is optional and
-                can be added or changed later!
+                Wählen Sie einen einprägsamen Namen für Ihren API-Schlüssel. Dies ist optional und kann später hinzugefügt oder geändert werden!
               </Text>
 
               <TextFormField
@@ -96,7 +95,7 @@ export const DanswerApiKeyForm = ({
                   disabled={isSubmitting}
                   className="mx-auto w-64"
                 >
-                  {isUpdate ? "Update!" : "Create!"}
+                  {isUpdate ? "Aktualisieren!" : "Erstellen!"}
                 </Button>
               </div>
             </Form>

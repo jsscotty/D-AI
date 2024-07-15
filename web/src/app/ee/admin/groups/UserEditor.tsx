@@ -87,7 +87,7 @@ export const UserEditor = ({
             className="ml-3 flex-nowrap w-32"
             onClick={() => onSubmit(selectedUsers)}
           >
-            Add Users
+            Nutzer hinzufügen
           </Button>
         )}
       </div>

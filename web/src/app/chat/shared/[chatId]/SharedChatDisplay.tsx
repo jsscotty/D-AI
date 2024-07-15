@@ -19,7 +19,7 @@ function BackToDanswerButton() {
     <div className="absolute bottom-4 w-full flex border-t border-border pt-4">
       <div className="mx-auto">
         <Button onClick={() => router.push("/chat")}>
-          Back to Danswer Chat
+          Zurück zum Chat
         </Button>
       </div>
     </div>
@@ -37,8 +37,8 @@ export function SharedChatDisplay({
     return (
       <div className="min-h-full w-full">
         <div className="mx-auto w-fit pt-8">
-          <Callout color="red" title="Shared Chat Not Found">
-            Did not find a shared chat with the specified ID.
+          <Callout color="red" title="Geteilter Chat nicht gefunden">
+            Geteilter Chat mit ID konnte nicht gefunden werden.
           </Callout>
         </div>
 
