@@ -722,7 +722,7 @@ export function AssistantEditor({
                           );
                         }}
                         explanationText="Need help? Text us!"
-                        explanationLink="mailto:sebastian@blona.de""
+                        explanationLink="mailto:sebastian@blona"
                       />
                     </>
                   )}
