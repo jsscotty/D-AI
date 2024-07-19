@@ -165,7 +165,7 @@ export function WhitelabelingForm() {
                 name="custom_popup_header"
                 subtext={`The title for the popup that will be displayed for each user on their initial visit 
                 to the application. If left blank AND Custom Popup Content is specified, will use "Welcome to ${
-                  values.application_name || "Danswer"
+                  values.application_name || "Blona"
                 }!".`}
                 placeholder="Initial Popup Header"
                 disabled={isSubmitting}

@@ -50,12 +50,12 @@ export function AdminSidebar({ collections }: { collections: Collection[] }) {
                       </HeaderTitle>
                       {!NEXT_PUBLIC_DO_NOT_USE_TOGGLE_OFF_DANSWER_POWERED && (
                         <p className="text-xs text-subtle -mt-1.5">
-                          Powered by Danswer
+                          Powered by Blona
                         </p>
                       )}
                     </div>
                   ) : (
-                    <HeaderTitle>Danswer</HeaderTitle>
+                    <HeaderTitle>Blona</HeaderTitle>
                   )}
                 </div>
               </div>
