@@ -82,7 +82,7 @@ export const AVAILABLE_MODELS: HostedEmbeddingModel[] = [
     model_dim: 384,
     normalize: true,
     description:
-      "A smaller / faster version of the default model. If you're running Danswer on a resource constrained system, then this is a good choice.",
+      "A smaller / faster version of the default model. If you're running Blona on a resource constrained system, then this is a good choice.",
     link: "https://huggingface.co/intfloat/e5-small-v2",
     query_prefix: "query: ",
     passage_prefix: "passage: ",

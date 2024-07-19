@@ -11,7 +11,7 @@ function Main() {
         <div className="mt-4">
           <Callout title="Custom Analytics is not enabled." color="red">
             To set up custom analytics scripts, please work with the team who
-            setup Danswer in your organization to set the{" "}
+            setup Blona in your organization to set the{" "}
             <i>CUSTOM_ANALYTICS_SECRET_KEY</i> environment variable.
           </Callout>
         </div>

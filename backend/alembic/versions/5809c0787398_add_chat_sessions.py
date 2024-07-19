@@ -60,7 +60,7 @@ def upgrade() -> None:
                 "SYSTEM",
                 "USER",
                 "ASSISTANT",
-                "DANSWER",
+                "BLONA",
                 name="messagetype",
                 native_enum=False,
             ),

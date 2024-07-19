@@ -67,12 +67,12 @@ if __name__ == "__main__":
         "--danswer-url",
         type=str,
         default="http://localhost:80",
-        help="Danswer URL, should point to Danswer nginx.",
+        help="Blona URL, should point to Danswer nginx.",
     )
     parser.add_argument(
         "--test-question",
         type=str,
-        default="What is Danswer?",
+        default="What is Blona?",
         help="Test question for new Chat Session.",
     )
 

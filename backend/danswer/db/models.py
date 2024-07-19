@@ -1486,7 +1486,7 @@ class ExternalPermission(Base):
     """Maps user info both internal and external to the name of the external group
     This maps the user to all of their external groups so that the external group name can be
     attached to the ACL list matching during query time. User level permissions can be handled by
-    directly adding the Danswer user to the doc ACL list"""
+    directly adding the Blona user to the doc ACL list"""
 
     __tablename__ = "external_permission"
 
@@ -1503,9 +1503,9 @@ class ExternalPermission(Base):
 
 
 class EmailToExternalUserCache(Base):
-    """A way to map users IDs in the external tool to a user in Danswer or at least an email for
+    """A way to map users IDs in the external tool to a user in Blona or at least an email for
     when the user joins. Used as a cache for when fetching external groups which have their own
-    user ids, this can easily be mapped back to users already known in Danswer without needing
+    user ids, this can easily be mapped back to users already known in Blona without needing
     to call external APIs to get the user emails.
 
     This way when groups are updated in the external tool and we need to update the mapping of

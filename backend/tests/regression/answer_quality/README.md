@@ -17,7 +17,7 @@ This Python script automates the process of running search quality tests for a b
 1. Ensure you have the required dependencies installed.
 2. Configure the `search_test_config.yaml` file based on the `search_test_config.yaml.template` file.
 3. Configure the `.env_eval` file in `deployment/docker_compose` with the correct environment variables.
-4. Navigate to Danswer repo:
+4. Navigate to Blona repo:
 ```
 cd path/to/danswer
 ```

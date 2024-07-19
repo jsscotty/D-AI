@@ -42,7 +42,7 @@ class CustomModelServer(LLM):
     ):
         if not endpoint:
             raise ValueError(
-                "Cannot point Danswer to a custom LLM server without providing the "
+                "Cannot point Blona to a custom LLM server without providing the "
                 "endpoint for the model server."
             )
 

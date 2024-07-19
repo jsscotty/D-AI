@@ -117,7 +117,7 @@ def extract_source_filter(
             },
             {
                 "role": "user",
-                "content": "What page from Danswer contains debugging instruction on segfault",
+                "content": "What page from Blona contains debugging instruction on segfault",
             },
             {
                 "role": "assistant",

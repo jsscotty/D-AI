@@ -55,9 +55,9 @@ DANSWER_METADATA_FILENAME = ".danswer_metadata.json"
 
 # Messages
 DISABLED_GEN_AI_MSG = (
-    "Your System Admin has disabled the Generative AI functionalities of Danswer.\n"
+    "Your System Admin has disabled the Generative AI functionalities of Blona.\n"
     "Please contact them if you wish to have this enabled.\n"
-    "You can still use Danswer as a search engine."
+    "You can still use Blona as a search engine."
 )
 
 

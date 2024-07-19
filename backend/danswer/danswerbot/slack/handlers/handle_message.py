@@ -186,7 +186,7 @@ def handle_message(
     if respond_tag_only and not bypass_filters:
         logger.info(
             "Skipping message since the channel is configured such that "
-            "DanswerBot only responds to tags"
+            "Blona Bot only responds to tags"
         )
         return False
 
@@ -212,7 +212,7 @@ def handle_message(
                 client=client,
                 channel=channel,
                 receiver_ids=[sender_id],
-                text="The DanswerBot slash command is not enabled for this channel",
+                text="The BlonaBot slash command is not enabled for this channel",
                 thread_ts=None,
             )
 

@@ -115,7 +115,7 @@ export function _WelcomeModal({ user }: { user: User | null }) {
             </Text>
             <div>
               <Text>
-                Connectors are the way that Danswer gets data from your
+                Connectors are the way that Blona gets data from your
                 organization&apos;s various data sources. Once setup, we&apos;ll
                 automatically sync data from your apps and docs into Danswer, so
                 you can search through all of them in one place.

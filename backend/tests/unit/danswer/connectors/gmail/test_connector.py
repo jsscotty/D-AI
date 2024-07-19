@@ -12,7 +12,7 @@ from danswer.connectors.models import Document
 def test_email_to_document() -> None:
     connector = GmailConnector()
     email_id = "18cabedb1ea46b03"
-    email_subject = "Danswer Test Subject"
+    email_subject = "Blona Test Subject"
     email_sender = "Google <no-reply@accounts.google.com>"
     email_recipient = "test.mail@gmail.com"
     email_date = "Wed, 27 Dec 2023 15:38:49 GMT"
