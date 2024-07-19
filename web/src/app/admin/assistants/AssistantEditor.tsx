@@ -721,8 +721,8 @@ export function AssistantEditor({
                             searchToolEnabled()
                           );
                         }}
-                        explanationText="Learn about prompting in our docs!"
-                        explanationLink="https://docs.danswer.dev/guides/assistants"
+                        explanationText="Need help? Text us!"
+                        explanationLink="mailto:sebastian@blona.de""
                       />
                     </>
                   )}

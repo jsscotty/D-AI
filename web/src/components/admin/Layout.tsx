@@ -335,7 +335,7 @@ export async function Layout({ children }: { children: React.ReactNode }) {
               className="transition-all duration-150 cursor-pointer p-1 text-sm items-center flex gap-x-1 px-2 py-1 rounded-lg hover:shadow-sm hover:ring-1 hover:ring-ingio-900/40 hover:bg-opacity-90 text-neutral-100 bg-accent"
             >
               <BackIcon size={20} className="text-neutral" />
-              Back to Danswer
+              Back to Blona
             </a>
             <UserDropdown user={user} />
           </div>

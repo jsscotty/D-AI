@@ -265,7 +265,7 @@ function Main() {
     <div className="h-screen">
       <Text>
         Embedding models are used to generate embeddings for your documents,
-        which then power Danswer&apos;s search.
+        which then power Blona&apos;s search.
       </Text>
 
       {alreadySelectedModel && (
