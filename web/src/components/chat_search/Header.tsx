@@ -56,21 +56,21 @@ export default function FunctionalHeader({
     };
   }, []);
   return (
-    < <div className="pb-6 left-0 sticky top-0 z-10 w-full relative flex">
-    <div className="mt-2 mx-4 text-text-700 flex w-full">
-      <div className="absolute z-[100] my-auto flex items-center text-xl font-bold">
-        <div className="pt-[2px] mb-auto">
-          <FiSidebar size={20} />
-        </div>
-        <div className="break-words inline-block w-fit ml-2 text-text-700 text-xl">
-          <div className="max-w-[200px]">
-            {enterpriseSettings && enterpriseSettings.application_name ? (
-              <HeaderTitle>{enterpriseSettings.application_name}</HeaderTitle>
-            ) : (
-              <HeaderTitle>Blona</HeaderTitle>
-            )}
+    <div className="pb-6 left-0 sticky top-0 z-10 w-full relative flex">
+      <div className="mt-2 mx-4 text-text-700 flex w-full">
+        <div className="absolute z-[100] my-auto flex items-center text-xl font-bold">
+          <div className="pt-[2px] mb-auto">
+            <FiSidebar size={20} />
           </div>
-        </div>
+          <div className="break-words inline-block w-fit ml-2 text-text-700 text-xl">
+            <div className="max-w-[200px]">
+              {enterpriseSettings && enterpriseSettings.application_name ? (
+                <HeaderTitle>{enterpriseSettings.application_name}</HeaderTitle>
+              ) : (
+                <HeaderTitle>Blona</HeaderTitle>
+              )}
+            </div>
+          </div>
 
           {page == "chat" && (
             <Tooltip delayDuration={1000} content={`${commandSymbol}U`}>
@@ -112,8 +112,5 @@ export default function FunctionalHeader({
         <div className="h-24 left-0 absolute top-0 z-10 w-full bg-gradient-to-b via-50% z-[-1] from-background via-background to-background/10 flex" />
       )}
     </div>
-    
-  ) 
- 
   );
 }
