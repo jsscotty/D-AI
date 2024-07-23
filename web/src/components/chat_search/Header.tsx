@@ -66,11 +66,23 @@ export default function FunctionalHeader({
             ) : (
               <HeaderTitle>Blona</HeaderTitle>
             )}
+          <div className="pt-[2px] mb-auto">
+            <FiSidebar size={20} />
+          </div>
+          <div className="break-words inline-block w-fit ml-2 text-text-700 text-xl">
+            <div className="max-w-[200px]">
+              {enterpriseSettings && enterpriseSettings.application_name ? (
+                <HeaderTitle>{enterpriseSettings.application_name}</HeaderTitle>
+              ) : (
+                <HeaderTitle>Blona</HeaderTitle>
+              )}
+            </div>
           </div>
 
           {page == "chat" && (
             <Tooltip delayDuration={1000} content={`${commandSymbol}U`}>
               <Link
+                className="mb-auto pt-[2px]"
                 href={
                   `/${page}` +
                   (NEXT_PUBLIC_NEW_CHAT_DIRECTS_TO_SAME_PERSONA &&
@@ -79,10 +91,9 @@ export default function FunctionalHeader({
                     : "")
                 }
               >
-                <NewChatIcon
-                  size={20}
-                  className="ml-2 my-auto cursor-pointer text-text-700 hover:text-text-600 transition-colors duration-300"
-                />
+                <div className="cursor-pointer ml-2 flex-none text-text-700 hover:text-text-600 transition-colors duration-300">
+                  <NewChatIcon size={20} className="" />
+                </div>
               </Link>
             </Tooltip>
           )}

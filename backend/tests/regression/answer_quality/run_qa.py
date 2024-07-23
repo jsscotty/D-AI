@@ -6,7 +6,6 @@ import time
 
 import yaml
 
-from tests.regression.answer_quality.api_utils import check_if_query_ready
 from tests.regression.answer_quality.api_utils import get_answer_from_query
 from tests.regression.answer_quality.cli_utils import get_current_commit_sha
 from tests.regression.answer_quality.cli_utils import get_docker_container_env_vars
@@ -46,19 +45,16 @@ def _get_test_output_folder(config: dict) -> str:
     base_output_folder = os.path.expanduser(config["output_folder"])
     if config["run_suffix"]:
         base_output_folder = os.path.join(
-            base_output_folder, ("test" + config["run_suffix"]), "evaluations_output"
+            base_output_folder, config["run_suffix"], "evaluations_output"
         )
     else:
         base_output_folder = os.path.join(base_output_folder, "no_defined_suffix")
 
     counter = 1
-    run_suffix = config["run_suffix"][1:]
-    output_folder_path = os.path.join(base_output_folder, f"{run_suffix}_run_1")
+    output_folder_path = os.path.join(base_output_folder, "run_1")
     while os.path.exists(output_folder_path):
         output_folder_path = os.path.join(
-            output_folder_path.replace(
-                f"{run_suffix}_run_{counter-1}", f"{run_suffix}_run_{counter}"
-            ),
+            output_folder_path.replace(f"run_{counter-1}", f"run_{counter}"),
         )
         counter += 1
 
@@ -121,6 +117,7 @@ def _process_question(question_data: dict, config: dict, question_number: int) -
     print(f"query: {query}")
     context_data_list, answer = get_answer_from_query(
         query=query,
+        only_retrieve_docs=config["only_retrieve_docs"],
         run_suffix=config["run_suffix"],
     )
 
@@ -145,22 +142,21 @@ def _process_and_write_query_results(config: dict) -> None:
     test_output_folder, questions = _initialize_files(config)
     print("saving test results to folder:", test_output_folder)
 
-    while not check_if_query_ready(config["run_suffix"]):
-        time.sleep(5)
-
     if config["limit"] is not None:
         questions = questions[: config["limit"]]
 
-    with multiprocessing.Pool(processes=multiprocessing.cpu_count() * 2) as pool:
+    # Use multiprocessing to process questions
+    with multiprocessing.Pool() as pool:
         results = pool.starmap(
-            _process_question, [(q, config, i + 1) for i, q in enumerate(questions)]
+            _process_question,
+            [(question, config, i + 1) for i, question in enumerate(questions)],
         )
 
     _populate_results_file(test_output_folder, results)
 
     invalid_answer_count = 0
     for result in results:
-        if not result.get("answer"):
+        if len(result["context_data_list"]) == 0:
             invalid_answer_count += 1
 
     _update_metadata_file(test_output_folder, invalid_answer_count)

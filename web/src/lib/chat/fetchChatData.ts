@@ -23,14 +23,13 @@ import { cookies } from "next/headers";
 import {
   SIDEBAR_TOGGLED_COOKIE_NAME,
   DOCUMENT_SIDEBAR_WIDTH_COOKIE_NAME,
-} from "@/components/resizable/contants";
+} from "@/components/resizable/constants";
 import { hasCompletedWelcomeFlowSS } from "@/components/initialSetup/welcome/WelcomeModalWrapper";
 import { fetchAssistantsSS } from "../assistants/fetchAssistantsSS";
 
 interface FetchChatDataResult {
   user: User | null;
   chatSessions: ChatSession[];
-
   ccPairs: CCPairBasicInfo[];
   availableSources: ValidSources[];
   documentSets: DocumentSet[];
@@ -39,7 +38,7 @@ interface FetchChatDataResult {
   llmProviders: LLMProviderDescriptor[];
   folders: Folder[];
   openedFolders: Record<string, boolean>;
-  defaultPersonaId?: number;
+  defaultAssistantId?: number;
   toggleSidebar: boolean;
   finalDocumentSidebarInitialWidth?: number;
   shouldShowWelcomeModal: boolean;
@@ -150,9 +149,9 @@ export async function fetchChatData(searchParams: {
     console.log(`Failed to fetch tags - ${tagsResponse?.status}`);
   }
 
-  const defaultPersonaIdRaw = searchParams["assistantId"];
-  const defaultPersonaId = defaultPersonaIdRaw
-    ? parseInt(defaultPersonaIdRaw)
+  const defaultAssistantIdRaw = searchParams["assistantId"];
+  const defaultAssistantId = defaultAssistantIdRaw
+    ? parseInt(defaultAssistantIdRaw)
     : undefined;
 
   const documentSidebarCookieInitialWidth = cookies().get(
@@ -178,7 +177,8 @@ export async function fetchChatData(searchParams: {
     !shouldShowWelcomeModal &&
     !ccPairs.some(
       (ccPair) => ccPair.has_successful_run && ccPair.docs_indexed > 0
-    );
+    ) &&
+    (!user || user.role == "admin");
 
   // if no connectors are setup, only show personas that are pure
   // passthrough and don't do any retrieval
@@ -209,7 +209,7 @@ export async function fetchChatData(searchParams: {
     llmProviders,
     folders,
     openedFolders,
-    defaultPersonaId,
+    defaultAssistantId,
     finalDocumentSidebarInitialWidth,
     toggleSidebar,
     shouldShowWelcomeModal,

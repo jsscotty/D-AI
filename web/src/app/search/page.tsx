@@ -30,7 +30,7 @@ import {
 } from "@/lib/assistants/fetchAssistantsSS";
 import FunctionalWrapper from "../chat/shared_chat_search/FunctionalWrapper";
 import { ChatSession } from "../chat/interfaces";
-import { SIDEBAR_TOGGLED_COOKIE_NAME } from "@/components/resizable/contants";
+import { SIDEBAR_TOGGLED_COOKIE_NAME } from "@/components/resizable/constants";
 import ToggleSearch from "./WrappedSearch";
 import {
   AGENTIC_SEARCH_TYPE_COOKIE_NAME,
@@ -168,7 +168,8 @@ export default async function Home() {
       (ccPair) => ccPair.has_successful_run && ccPair.docs_indexed > 0
     ) &&
     !shouldDisplayNoSourcesModal &&
-    !shouldShowWelcomeModal;
+    !shouldShowWelcomeModal &&
+    (!user || user.role == "admin");
 
   const sidebarToggled = cookies().get(SIDEBAR_TOGGLED_COOKIE_NAME);
   const agenticSearchToggle = cookies().get(AGENTIC_SEARCH_TYPE_COOKIE_NAME);
@@ -178,7 +179,7 @@ export default async function Home() {
     : false;
 
   const agenticSearchEnabled = agenticSearchToggle
-    ? agenticSearchToggle.value.toLocaleLowerCase() == "true" || true
+    ? agenticSearchToggle.value.toLocaleLowerCase() == "true" || false
     : false;
 
   return (

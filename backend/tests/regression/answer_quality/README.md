@@ -61,6 +61,11 @@ Edit `search_test_config.yaml` to set:
     - Set this to true to automatically delete all docker containers, networks and volumes after the test
 - launch_web_ui
     - Set this to true if you want to use the UI during/after the testing process
+- only_state
+    - Whether to only run Vespa and Postgres
+- only_retrieve_docs
+    - Set true to only retrieve documents, not LLM response
+    - This is to save on API costs
 - use_cloud_gpu
     - Set to true or false depending on if you want to use the remote gpu
     - Only need to set this if use_cloud_gpu is true
@@ -70,7 +75,7 @@ Edit `search_test_config.yaml` to set:
 - model_server_port
     - This is the port of the remote model server
     - Only need to set this if use_cloud_gpu is true
-- existing_test_suffix
+- existing_test_suffix (THIS IS NOT A SUFFIX ANYMORE, TODO UPDATE THE DOCS HERE)
     - Use this if you would like to relaunch a previous test instance
     - Input the suffix of the test you'd like to re-launch 
     - (E.g. to use the data from folder "test-1234-5678" put "-1234-5678")

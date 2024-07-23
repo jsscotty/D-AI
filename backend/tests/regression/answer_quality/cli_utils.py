@@ -97,7 +97,7 @@ def get_docker_container_env_vars(suffix: str) -> dict:
 
 def manage_data_directories(suffix: str, base_path: str, use_cloud_gpu: bool) -> None:
     # Use the user's home directory as the base path
-    target_path = os.path.join(os.path.expanduser(base_path), f"test{suffix}")
+    target_path = os.path.join(os.path.expanduser(base_path), suffix)
     directories = {
         "DANSWER_POSTGRES_DATA_DIR": os.path.join(target_path, "postgres/"),
         "DANSWER_VESPA_DATA_DIR": os.path.join(target_path, "vespa/"),
@@ -144,26 +144,30 @@ def _is_port_in_use(port: int) -> bool:
 
 
 def start_docker_compose(
-    run_suffix: str, launch_web_ui: bool, use_cloud_gpu: bool
+    run_suffix: str, launch_web_ui: bool, use_cloud_gpu: bool, only_state: bool = False
 ) -> None:
     print("Starting Docker Compose...")
     os.chdir(os.path.dirname(__file__))
     os.chdir("../../../../deployment/docker_compose/")
-    command = f"docker compose -f docker-compose.search-testing.yml -p danswer-stack{run_suffix} up -d"
+    command = f"docker compose -f docker-compose.search-testing.yml -p danswer-stack-{run_suffix} up -d"
     command += " --build"
     command += " --force-recreate"
-    if use_cloud_gpu:
-        command += " --scale indexing_model_server=0"
-        command += " --scale inference_model_server=0"
-    if launch_web_ui:
-        web_ui_port = 3000
-        while _is_port_in_use(web_ui_port):
-            web_ui_port += 1
-        print(f"UI will be launched at http://localhost:{web_ui_port}")
-        os.environ["NGINX_PORT"] = str(web_ui_port)
+
+    if only_state:
+        command += " index relational_db"
     else:
-        command += " --scale web_server=0"
-        command += " --scale nginx=0"
+        if use_cloud_gpu:
+            command += " --scale indexing_model_server=0"
+            command += " --scale inference_model_server=0"
+        if launch_web_ui:
+            web_ui_port = 3000
+            while _is_port_in_use(web_ui_port):
+                web_ui_port += 1
+            print(f"UI will be launched at http://localhost:{web_ui_port}")
+            os.environ["NGINX_PORT"] = str(web_ui_port)
+        else:
+            command += " --scale web_server=0"
+            command += " --scale nginx=0"
 
     print("Docker Command:\n", command)
 
@@ -279,39 +283,13 @@ def get_api_server_host_port(suffix: str) -> str:
     return matching_ports[0]
 
 
-# Added function to check Vespa container health status
-def is_vespa_container_healthy(suffix: str) -> bool:
-    print(f"Checking health status of Vespa container for suffix: {suffix}")
-
-    # Find the Vespa container
-    stdout, _ = _run_command(
-        f"docker ps -a --format '{{{{.Names}}}}' | awk /vespa/ && /{suffix}/"
-    )
-    container_name = stdout.strip()
-
-    if not container_name:
-        print(f"No Vespa container found with suffix: {suffix}")
-        return False
-
-    # Get the health status
-    stdout, _ = _run_command(
-        f"docker inspect --format='{{{{.State.Health.Status}}}}' {container_name}"
-    )
-    health_status = stdout.strip()
-
-    is_healthy = health_status.lower() == "healthy"
-    print(f"Vespa container '{container_name}' health status: {health_status}")
-
-    return is_healthy
-
-
 # Added function to restart Vespa container
 def restart_vespa_container(suffix: str) -> None:
     print(f"Restarting Vespa container for suffix: {suffix}")
 
     # Find the Vespa container
     stdout, _ = _run_command(
-        f"docker ps -a --format '{{{{.Names}}}}' | awk /vespa/ && /{suffix}/"
+        f"docker ps -a --format '{{{{.Names}}}}' | awk '/index-1/ && /{suffix}/'"
     )
     container_name = stdout.strip()
 
@@ -323,11 +301,7 @@ def restart_vespa_container(suffix: str) -> None:
 
     print(f"Vespa container '{container_name}' has begun restarting")
 
-    time_to_wait = 5
-    while not is_vespa_container_healthy(suffix):
-        print(f"Waiting {time_to_wait} seconds for vespa container to restart")
-        time.sleep(5)
-
+    time.sleep(30)
     print(f"Vespa container '{container_name}' has been restarted")
 
 
