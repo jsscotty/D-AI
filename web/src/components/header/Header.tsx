@@ -65,7 +65,7 @@ export function Header({ user, page }: HeaderProps) {
 
         <div className="ml-auto h-full flex flex-col">
           <div className="my-auto">
-            <TranslateWidget /> {/* Add the TranslateWidget here */}
+            <TranslateWidget />
             <UserDropdown user={user} page={page} />
           </div>
         </div>
