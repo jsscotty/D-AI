@@ -10,9 +10,10 @@ import { FiCheckCircle, FiMessageSquare, FiShare2 } from "react-icons/fi";
 import { useEffect, useState } from "react";
 import { BackButton } from "@/components/BackButton";
 import { ApiKeyForm } from "@/components/llm/ApiKeyForm";
-import { WellKnownLLMProviderDescriptor } from "@/app/admin/models/llm/interfaces";
+import { WellKnownLLMProviderDescriptor } from "@/app/[locale]/admin/models/llm/interfaces";
 import { checkLlmProvider } from "./lib";
 import { User } from "@/lib/types";
+import { useTranslations } from "next-intl";
 
 function setWelcomeFlowComplete() {
   Cookies.set(COMPLETED_WELCOME_FLOW_COOKIE, "true", { expires: 365 });
@@ -65,6 +66,8 @@ export function _WelcomeModal({ user }: { user: User | null }) {
     WellKnownLLMProviderDescriptor[]
   >([]);
 
+  const trans = useTranslations("home");
+  const transWelcome = useTranslations("welcomeModal");
   useEffect(() => {
     async function fetchProviderInfo() {
       const { providers, options, defaultCheckSuccessful } =
@@ -215,36 +218,25 @@ export function _WelcomeModal({ user }: { user: User | null }) {
       );
       break;
     default:
-      title = "🎉 Welcome to Danswer";
+      title = transWelcome("welcome");
       body = (
         <>
           <div>
-            <Text>How are you planning on using Danswer?</Text>
+            <Text>{transWelcome("plan")}</Text>
           </div>
           <Divider />
           <UsageTypeSection
-            title="Search / Chat with Knowledge"
-            description={
-              <Text>
-                If you&apos;re looking to search through, chat with, or ask
-                direct questions of your organization&apos;s knowledge, then
-                this is the option for you!
-              </Text>
-            }
-            callToAction="Get Started"
+            title={transWelcome("search-title")}
+            description={<Text>{transWelcome("search-msg")}</Text>}
+            callToAction={transWelcome("start")}
             onClick={() => setSelectedFlow("search")}
           />
           <Divider />
           <UsageTypeSection
-            title="Secure ChatGPT"
-            description={
-              <Text>
-                If you&apos;re looking for a pure ChatGPT-like experience, then
-                this is the option for you!
-              </Text>
-            }
+            title={transWelcome("chatgpt-title")}
+            description={<Text>{transWelcome("chatgpt-msg")}</Text>}
             icon={FiMessageSquare}
-            callToAction="Get Started"
+            callToAction={transWelcome("start")}
             onClick={() => {
               setSelectedFlow("chat");
             }}

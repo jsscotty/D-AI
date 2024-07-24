@@ -1,8 +1,8 @@
-import { Persona } from "@/app/admin/assistants/interfaces";
+import { Persona } from "@/app/[locale]/admin/assistants/interfaces";
 import { CCPairBasicInfo, DocumentSet, User } from "../types";
 import { getCurrentUserSS } from "../userSS";
 import { fetchSS } from "../utilsSS";
-import { FullLLMProvider } from "@/app/admin/models/llm/interfaces";
+import { FullLLMProvider } from "@/app/[locale]/admin/models/llm/interfaces";
 import { ToolSnapshot } from "../tools/interfaces";
 import { fetchToolsSS } from "../tools/fetchTools";
 import { IconManifestType } from "react-icons/lib";

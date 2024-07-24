@@ -1,20 +1,28 @@
 "use client";
 
-import { CombinedSettings } from "@/app/admin/settings/interfaces";
-import { createContext } from "react";
+import { CombinedSettings } from "@/app/[locale]/admin/settings/interfaces";
+import { createContext, ReactNode, useContext } from "react";
 
 export const SettingsContext = createContext<CombinedSettings | null>(null);
 
-export function SettingsProvider({
+type SettingsProviderProps = {
+  children: ReactNode;
+  settings: CombinedSettings;
+};
+
+// Create the SettingsProvider component
+export const SettingsProvider = ({
   children,
   settings,
-}: {
-  children: React.ReactNode | JSX.Element;
-  settings: CombinedSettings;
-}) {
+}: SettingsProviderProps): JSX.Element => {
   return (
     <SettingsContext.Provider value={settings}>
       {children}
     </SettingsContext.Provider>
   );
-}
+};
+
+// Helper hook to use the settings context
+export const useSettings = (): CombinedSettings | null => {
+  return useContext(SettingsContext);
+};

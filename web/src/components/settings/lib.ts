@@ -1,4 +1,4 @@
-import { EnterpriseSettings, Settings } from "@/app/admin/settings/interfaces";
+import { EnterpriseSettings, Settings } from "@/app/[locale]/admin/settings/interfaces";
 import {
   CUSTOM_ANALYTICS_ENABLED,
   SERVER_SIDE_ONLY__PAID_ENTERPRISE_FEATURES_ENABLED,

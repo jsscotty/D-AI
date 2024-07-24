@@ -21,18 +21,19 @@ import { searchRequestStreamed } from "@/lib/search/streamingQa";
 import { CancellationToken, cancellable } from "@/lib/search/cancellable";
 import { useFilters, useObjectState } from "@/lib/hooks";
 import { questionValidationStreamed } from "@/lib/search/streamingQuestionValidation";
-import { Persona } from "@/app/admin/assistants/interfaces";
+import { Persona } from "@/app/[locale]/admin/assistants/interfaces";
 import { computeAvailableFilters } from "@/lib/filters";
 import { useRouter, useSearchParams } from "next/navigation";
 import { SettingsContext } from "../settings/SettingsProvider";
-import { HistorySidebar } from "@/app/chat/sessionSidebar/HistorySidebar";
-import { ChatSession, SearchSession } from "@/app/chat/interfaces";
+import { HistorySidebar } from "@/app/[locale]/chat/sessionSidebar/HistorySidebar";
+import { ChatSession, SearchSession } from "@/app/[locale]/chat/interfaces";
 import FunctionalHeader from "../chat_search/Header";
 import { useSidebarVisibility } from "../chat_search/hooks";
 import { SIDEBAR_TOGGLED_COOKIE_NAME } from "../resizable/contants";
 import { AGENTIC_SEARCH_TYPE_COOKIE_NAME } from "@/lib/constants";
 import Cookies from "js-cookie";
-import FixedLogo from "@/app/chat/shared_chat_search/FixedLogo";
+import FixedLogo from "@/app/[locale]/chat/shared_chat_search/FixedLogo";
+import { useTranslations } from "next-intl";
 
 export type searchState =
   | "input"
@@ -110,9 +111,9 @@ export const SearchSection = ({
       SIDEBAR_TOGGLED_COOKIE_NAME,
       String(!toggledSidebar).toLocaleLowerCase()
     ),
-    {
-      path: "/",
-    };
+      {
+        path: "/",
+      };
     toggle();
   };
 
@@ -476,6 +477,9 @@ export const SearchSection = ({
     setShowDocSidebar,
   });
 
+  // TRANSLATIONS
+  const trans = useTranslations("home");
+
   return (
     <>
       <div className="flex relative w-full pr-[8px] h-full text-default overflow-x-hidden">
@@ -494,9 +498,10 @@ export const SearchSection = ({
             bg-opacity-80
             duration-300 
             ease-in-out
-            ${showDocSidebar || toggledSidebar
-              ? "opacity-100 w-[300px] translate-x-0"
-              : "opacity-0 w-[200px] pointer-events-none -translate-x-10"
+            ${
+              showDocSidebar || toggledSidebar
+                ? "opacity-100 w-[300px] translate-x-0"
+                : "opacity-0 w-[200px] pointer-events-none -translate-x-10"
             }
           `}
         >
@@ -550,9 +555,10 @@ export const SearchSection = ({
                 <div className="max-w-searchbar-max w-[90%] mx-auto">
                   <div
                     className={`transition-all duration-500 ease-in-out overflow-hidden 
-                      ${firstSearch
-                        ? "opacity-100 max-h-[500px]"
-                        : "opacity-0 max-h-0"
+                      ${
+                        firstSearch
+                          ? "opacity-100 max-h-[500px]"
+                          : "opacity-0 max-h-0"
                       }`}
                     onTransitionEnd={handleTransitionEnd}
                   >
@@ -560,7 +566,7 @@ export const SearchSection = ({
                       <div className="w-message-xs 2xl:w-message-sm 3xl:w-message">
                         <div className="flex">
                           <div className="text-3xl font-bold font-strong text-strong mx-auto">
-                            Unlock Knowledge
+                            {trans("title")}
                           </div>
                         </div>
                       </div>

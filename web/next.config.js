@@ -3,7 +3,9 @@ const { version: package_version } = require("./package.json"); // version from 
 const env_version = process.env.DANSWER_VERSION; // version from env variable
 // Use env version if set & valid, otherwise default to package version
 const version = env_version || package_version;
-
+const createNextIntlPlugin = require('next-intl/plugin');
+ 
+const withNextIntl = createNextIntlPlugin();
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   output: "standalone",
@@ -54,4 +56,4 @@ const nextConfig = {
   },
 };
 
-module.exports = nextConfig;
+module.exports = withNextIntl(nextConfig);

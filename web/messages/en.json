@@ -1,0 +1,18 @@
+{
+    "home": {
+        "title": "Unlock Knowledge",
+        "welcome": "Welcome to danswer"
+    },
+    "welcomeModal": {
+        "welcome": "Welcome to Blona - DAI",
+        "plan": "How are you planning on using Blona?",
+        "search-title": "Search/Chat with Knowledge",
+        "search-msg": "If you're looking to search through, chat with, or ask direct questions of your organization's knowledge, then this is the option for you!",
+        "start": "Get started",
+        "chatgpt-title": "Secure ChatGPT",
+        "chatgpt-msg": "If you're looking for a pure ChatGPT-like experience, then this is the option for you!"
+    },
+    "NotFoundPage" :{
+    	"title": "Error with displaying page"
+    }
+}
