@@ -20,6 +20,38 @@
         "locale": "en"
     },
     "admin": {
-        "connectors": "Anschlüsse"
+        "connectors": "Connectors",
+        "connector-title": "Add Connector",
+        "connector-text": "Connect Danswer to your organization&apos;s knowledge sources. We&apos;ll automatically sync your data into Danswer, so you can find exactly what you&apos;re looking for in one place.",
+        "import-title": "Import Knowledge",
+        "import-text": "Connect to pieces of knowledge that live outside your apps. Upload files, scrape websites, or connect to your organization&apos;s Google Site.",
+        "setup-title": "Setup Auto-Syncing from Apps",
+        "setup-text": "Setup auto-syncing from your organization&apos;s most used apps and services. Unless otherwise specified during the connector setup, we will pull in the latest updates from the source every 10 minutes.",
+        "delete-fail": "Failed to delete persona",
+        "delete-assistant": "Delete Assistant"
+    },
+    "assistants": {
+        "public": "Public",
+        "shared-with": "Shared with",
+        "shared-by": "Shared with you by",
+        "shared-with-you": "Shared with you",
+        "private": "Private",
+        "search": "Search",
+        "image-generation": "Image Generation",
+        "internet-search": "Internet Search",
+        "delete-assistant": "Delete Assistant",
+        "delete-assistant-text":"Click the button below to permanently delete this assistant.",
+        "edit-assistant": "Edit Assistant",
+        "author": "Author",
+        "assistant-gallery": "Assistant Gallery",
+        "view-assistant": "View Your Assistants",
+        "view-assistant-text": "Discover and create custom assistants that combine instructions, extra knowledge, and any combination of tools.",
+        "search-assistants": "Search assistants...",
+        "remove-error-no-assistant": "Cannot remove {assistant.name} - you must have at least one assistant.",
+        "remove-success": "{assistant.name} has been removed from your list.",
+        "remove-error": "{assistant.name} could not be removed from your list.",
+        "add-assistant": "{assistant.name} has been removed to your list.",
+        "add-assistant-error": "{assistant.name} could not be added to your list."
+
     }
 }

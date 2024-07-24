@@ -16,6 +16,7 @@ import {
 import { usePopup } from "@/components/admin/connectors/Popup";
 import { useRouter } from "next/navigation";
 import { ToolsDisplay } from "../ToolsDisplay";
+import { useTranslations } from "next-intl";
 
 export function AssistantsGallery({
   assistants,
@@ -39,27 +40,26 @@ export function AssistantsGallery({
 
   const allAssistantIds = assistants.map((assistant) => assistant.id);
   const filteredAssistants = filterAssistants(assistants, searchQuery);
-
+  const trans = useTranslations("assistants")
   return (
     <>
       {popup}
       <div className="mx-auto w-searchbar-xs 2xl:w-searchbar-sm 3xl:w-searchbar">
-        <AssistantsPageTitle>Assistant Gallery</AssistantsPageTitle>
+        <AssistantsPageTitle>{trans(assistant-gallery)}</AssistantsPageTitle>
         <div className="flex justify-center mb-6">
           <Link href="/assistants/mine">
-            <NavigationButton>View Your Assistants</NavigationButton>
+            <NavigationButton>{trans("view-assistant")}</NavigationButton>
           </Link>
         </div>
 
         <p className="text-center mb-6">
-          Discover and create custom assistants that combine instructions, extra
-          knowledge, and any combination of tools.
+          {trans("view-assistant-text")}
         </p>
 
         <div className="mb-6">
           <input
             type="text"
-            placeholder="Search assistants..."
+            placeholder={trans("search-assistants")}
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             className="
@@ -124,8 +124,9 @@ export function AssistantsGallery({
                             user.preferences?.chosen_assistants &&
                             user.preferences?.chosen_assistants.length === 1
                           ) {
+                            // TODO CHECK
                             setPopup({
-                              message: `Cannot remove "${assistant.name}" - you must have at least one assistant.`,
+                              message: {trans("remove-error-no-assistant", {assistant.name})},
                               type: "error",
                             });
                             return;
@@ -138,13 +139,13 @@ export function AssistantsGallery({
                           );
                           if (success) {
                             setPopup({
-                              message: `"${assistant.name}" has been removed from your list.`,
+                              message: {trans("remove-success". {assistant.name})},
                               type: "success",
                             });
                             router.refresh();
                           } else {
                             setPopup({
-                              message: `"${assistant.name}" could not be removed from your list.`,
+                              message: {trans("remove-error", {assistant.name})},
                               type: "error",
                             });
                           }
@@ -169,13 +170,13 @@ export function AssistantsGallery({
                           );
                           if (success) {
                             setPopup({
-                              message: `"${assistant.name}" has been added to your list.`,
+                              message: {trans("add-assistant", {assistant.name})},
                               type: "success",
                             });
                             router.refresh();
                           } else {
                             setPopup({
-                              message: `"${assistant.name}" could not be added to your list.`,
+                              message: {trans("add-assistant-error", {assistant.name})},
                               type: "error",
                             });
                           }
@@ -194,7 +195,7 @@ export function AssistantsGallery({
               )}
               <p className="text-sm mt-2">{assistant.description}</p>
               <p className="text-subtle text-sm mt-2">
-                Author: {assistant.owner?.email || "Danswer"}
+                {trans("author")}: {assistant.owner?.email || "Blona"}
               </p>
             </div>
           ))}

@@ -2,6 +2,7 @@ import { User } from "@/lib/types";
 import { Persona } from "../admin/assistants/interfaces";
 import { checkUserOwnsAssistant } from "@/lib/assistants/checkOwnership";
 import { FiLock, FiUnlock } from "react-icons/fi";
+import { useTranslations } from "next-intl";
 
 export function AssistantSharedStatusDisplay({
   assistant,
@@ -15,12 +16,13 @@ export function AssistantSharedStatusDisplay({
   const assistantSharedUsersWithoutOwner = assistant.users?.filter(
     (u) => u.id !== assistant.owner?.id
   );
+  const trans = useTranslations("assistants")
 
   if (assistant.is_public) {
     return (
       <div className="text-subtle text-sm flex items-center">
         <FiUnlock className="mr-1" />
-        Public
+        {trans("public")}
       </div>
     );
   }
@@ -30,7 +32,7 @@ export function AssistantSharedStatusDisplay({
       <div className="text-subtle text-sm flex items-center">
         <FiUnlock className="mr-1" />
         {isOwnedByUser ? (
-          `Shared with: ${
+          `${trans("shared-with")}: ${
             assistantSharedUsersWithoutOwner.length <= 4
               ? assistantSharedUsersWithoutOwner.map((u) => u.email).join(", ")
               : `${assistantSharedUsersWithoutOwner
@@ -42,10 +44,10 @@ export function AssistantSharedStatusDisplay({
           <div>
             {assistant.owner ? (
               <div>
-                Shared with you by <i>{assistant.owner?.email}</i>
+                {trans("shared-by")} <i>{assistant.owner?.email}</i>
               </div>
             ) : (
-              "Shared with you"
+              {trans("shared-with-you")}
             )}
           </div>
         )}
@@ -56,7 +58,7 @@ export function AssistantSharedStatusDisplay({
   return (
     <div className="text-subtle text-sm flex items-center">
       <FiLock className="mr-1" />
-      Private
+      {trans("private")}
     </div>
   );
 }

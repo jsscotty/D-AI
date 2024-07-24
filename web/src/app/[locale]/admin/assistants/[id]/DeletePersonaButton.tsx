@@ -5,6 +5,7 @@ import { FiTrash } from "react-icons/fi";
 import { deletePersona } from "../lib";
 import { useRouter } from "next/navigation";
 import { SuccessfulPersonaUpdateRedirectType } from "../enums";
+import { useTranslations } from "next-intl";
 
 export function DeletePersonaButton({
   personaId,
@@ -14,7 +15,7 @@ export function DeletePersonaButton({
   redirectType: SuccessfulPersonaUpdateRedirectType;
 }) {
   const router = useRouter();
-
+  const trans = useTranslations("admin");
   return (
     <Button
       size="xs"
@@ -28,7 +29,7 @@ export function DeletePersonaButton({
               : `/chat`
           );
         } else {
-          alert(`Failed to delete persona - ${await response.text()}`);
+          alert(`${trans("delete-fail")} - ${await response.text()}`);
         }
       }}
       icon={FiTrash}

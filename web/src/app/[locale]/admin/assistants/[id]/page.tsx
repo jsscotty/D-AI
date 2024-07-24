@@ -7,9 +7,12 @@ import { fetchAssistantEditorInfoSS } from "@/lib/assistants/fetchPersonaEditorI
 import { SuccessfulPersonaUpdateRedirectType } from "../enums";
 import { RobotIcon } from "@/components/icons/icons";
 import { AdminPageTitle } from "@/components/admin/Title";
+import { getTranslations } from "next-intl/server";
+
 
 export default async function Page({ params }: { params: { id: string } }) {
   const [values, error] = await fetchAssistantEditorInfoSS(params.id);
+  const trans = await getTranslations("admin");
 
   let body;
   if (!values) {
@@ -28,7 +31,7 @@ export default async function Page({ params }: { params: { id: string } }) {
         </Card>
 
         <div className="mt-12">
-          <Title>Delete Assistant</Title>
+          <Title>{trans("delete-assistant")}</Title>
           <div className="flex mt-6">
             <DeletePersonaButton
               personaId={values.existingPersona!.id}

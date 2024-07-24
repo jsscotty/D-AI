@@ -6,9 +6,11 @@ import { SuccessfulPersonaUpdateRedirectType } from "@/app/[locale]/admin/assist
 import { fetchAssistantEditorInfoSS } from "@/lib/assistants/fetchPersonaEditorInfoSS";
 import { DeletePersonaButton } from "@/app/[locale]/admin/assistants/[id]/DeletePersonaButton";
 import { LargeBackButton } from "../../LargeBackButton";
+import { getTranslations } from "next-intl/server";
 
 export default async function Page({ params }: { params: { id: string } }) {
   const [values, error] = await fetchAssistantEditorInfoSS(params.id);
+  const trans = await getTranslations("assistants");
 
   let body;
   if (!values) {
@@ -30,9 +32,9 @@ export default async function Page({ params }: { params: { id: string } }) {
               />
             </Card>
 
-            <Title className="mt-12">Delete Assistant</Title>
+            <Title className="mt-12">{trans("delete-assistant")}</Title>
             <Text>
-              Click the button below to permanently delete this assistant.
+              {trans("delete-assistant-text")}
             </Text>
             <div className="flex mt-6">
               <DeletePersonaButton
@@ -53,7 +55,7 @@ export default async function Page({ params }: { params: { id: string } }) {
           <div className="flex my-auto">
             <LargeBackButton />
             <h1 className="flex text-xl text-strong font-bold my-auto">
-              Edit Assistant
+              {trans("edit-assistant")}
             </h1>
           </div>
         </div>
