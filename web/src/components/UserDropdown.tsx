@@ -9,7 +9,7 @@ import { checkUserIsNoAuthUser, logout } from "@/lib/user";
 import { BasicSelectable } from "@/components/BasicClickable";
 import { Popover } from "./popover/Popover";
 import { LOGOUT_DISABLED } from "@/lib/constants";
-import { Settings } from "@/app/admin/settings/interfaces";
+import { Settings } from "@/app/[locale]/admin/settings/interfaces";
 import { SettingsContext } from "./settings/SettingsProvider";
 import { LightSettingsIcon } from "./icons/icons";
 

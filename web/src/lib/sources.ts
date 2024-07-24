@@ -43,7 +43,7 @@ import {
   SourceCategory,
   SourceMetadata,
 } from "./search/interfaces";
-import { Persona } from "@/app/admin/assistants/interfaces";
+import { Persona } from "@/app/[locale]/admin/assistants/interfaces";
 import { FaAccessibleIcon, FaSlack } from "react-icons/fa";
 
 interface PartialSourceMetadata {

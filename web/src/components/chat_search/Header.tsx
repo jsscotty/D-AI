@@ -6,7 +6,7 @@ import { SetStateAction, useContext, useEffect } from "react";
 import { Logo } from "../Logo";
 import { ChatIcon, NewChatIcon, PlusCircleIcon } from "../icons/icons";
 import { NEXT_PUBLIC_NEW_CHAT_DIRECTS_TO_SAME_PERSONA } from "@/lib/constants";
-import { ChatSession } from "@/app/chat/interfaces";
+import { ChatSession } from "@/app/[locale]/chat/interfaces";
 import { HeaderTitle } from "../header/Header";
 import { Tooltip } from "../tooltip/Tooltip";
 import KeyboardSymbol from "@/lib/browserUtilities";
