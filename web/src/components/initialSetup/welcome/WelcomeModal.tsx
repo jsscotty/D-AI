@@ -67,7 +67,6 @@ export function _WelcomeModal({ user }: { user: User | null }) {
     WellKnownLLMProviderDescriptor[]
   >([]);
 
-  const trans = useTranslations("home");
   const transWelcome = useTranslations("welcomeModal");
   useEffect(() => {
     async function fetchProviderInfo() {
@@ -221,7 +220,7 @@ export function _WelcomeModal({ user }: { user: User | null }) {
     default:
       title = (
         <>
-        <div>transWelcome("welcome")</div>
+        <div>{transWelcome("welcome")}</div>
         <div><LanguageSwitcher/></div>
         </>
         
