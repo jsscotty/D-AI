@@ -1,16 +1,17 @@
 {
     "home": {
         "title": "Unlock Wissen",
-        "welcome": "Willkommen in Danswer"
+        "welcome": "Willkommen bei Blona"
     },
     "welcomeModal": {
-        "welcome": "Willkommen in Blona - DAI",
+        "welcome": "Willkommen bei Blona",
         "plan": "Wie werden Sie Blona benutzen?",
         "search-title": "Suche/Chatte mit Wissen",
         "search-msg": "Wenn Sie in den Wissensressourcen Ihrer Organisation suchen, sich darüber unterhalten oder direkte Fragen stellen möchten, dann ist dies die richtige Option für Sie!",
         "start": "Los gehts",
         "chatgpt-title": "Sicher chatgpt",
-        "chatgpt-msg":"Wenn Sie eine reine ChatGPT-ähnliche Erfahrung suchen, dann ist dies die richtige Option für Sie!"
+        "chatgpt-msg":"Wenn Sie eine reine ChatGPT-ähnliche Erfahrung suchen, dann ist dies die richtige Option für Sie!",
+        "Start-chatting!": "Starte zu chatten!"
     },
     "NotFoundPage" :{
     	"title": "Fehler beim Laden der Seite."

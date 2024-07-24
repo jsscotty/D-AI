@@ -180,7 +180,7 @@ export function _WelcomeModal({ user }: { user: User | null }) {
             </Text>
 
             <Text>
-              Click the button below to start chatting with the LLM setup above!
+             Click the button below to start chatting with the LLM setup above!
               Don&apos;t worry, if you do decide later on you want to connect
               your organization&apos;s knowledge, you can always do that in the{" "}
               <Link
@@ -209,7 +209,7 @@ export function _WelcomeModal({ user }: { user: User | null }) {
                 className="w-fit mx-auto"
               >
                 <Button size="xs" icon={FiShare2} disabled={!apiKeyVerified}>
-                  Start chatting!
+                {transWelcome("Start-chatting!")}
                 </Button>
               </Link>
             </div>
