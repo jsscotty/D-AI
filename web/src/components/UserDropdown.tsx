@@ -12,7 +12,7 @@ import { LOGOUT_DISABLED } from "@/lib/constants";
 import { Settings } from "@/app/[locale]/admin/settings/interfaces";
 import { SettingsContext } from "./settings/SettingsProvider";
 import { LightSettingsIcon } from "./icons/icons";
-
+import LanguageSwitcher from "./LanguageSwitcher"
 export function UserDropdown({
   user,
   page,
@@ -79,6 +79,8 @@ export function UserDropdown({
                 overscroll-contain
               `}
           >
+            {/* LANGS */}
+            <><LanguageSwitcher/><>
             {showAdminPanel && (
               <>
                 <Link
@@ -86,6 +88,7 @@ export function UserDropdown({
                   className="flex py-3 px-4 cursor-pointer rounded hover:bg-hover-light"
                 >
                   <LightSettingsIcon className="h-5 w-5 text-text-200est0 my-auto mr-2" />
+                  {/* TODO: translation */}
                   Admin Panel
                 </Link>
               </>
@@ -100,6 +103,7 @@ export function UserDropdown({
                   className="mt-1 flex py-3 px-4 cursor-pointer hover:bg-hover-light"
                 >
                   <FiLogOut className="my-auto mr-2 text-lg" />
+                  {/* TODO translate */}
                   Log out
                 </div>
               </>

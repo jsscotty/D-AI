@@ -43,6 +43,7 @@ const QAFeedback = ({
         const isSuccessful = await giveFeedback(messageId, feedbackType);
         if (isSuccessful) {
           setPopup({
+            // TODO: translation
             message: "Thanks for your feedback!",
             type: "success",
           });

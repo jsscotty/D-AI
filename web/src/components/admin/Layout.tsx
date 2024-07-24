@@ -59,10 +59,12 @@ import {
 import { UserDropdown } from "../UserDropdown";
 import LanguageSwitcher from "../LanguageSwitcher"
 import {VStack} from  '@chakra-ui/react'
+import { useTranslations } from "next-intl";
+
 
 export async function Layout({ children }: { children: React.ReactNode }) {
   const tasks = [getAuthTypeMetadataSS(), getCurrentUserSS()];
-
+  const trans = useTranslations("admin")
   // catch cases where the backend is completely unreachable here
   // without try / catch, will just raise an exception and the page
   // will not render
@@ -96,8 +98,10 @@ export async function Layout({ children }: { children: React.ReactNode }) {
         <div className="w-64 z-20 bg-background-100 pt-4 pb-8 h-full border-r border-border miniscroll overflow-auto">
           <AdminSidebar
             collections={[
+              // TODO: translation
+              // in name and items[name]
               {
-                name: "Connectors",
+                name: {trans("connectors")},
                 items: [
                   {
                     name: (
@@ -336,6 +340,7 @@ export async function Layout({ children }: { children: React.ReactNode }) {
               href="/chat"
               className="transition-all duration-150 cursor-pointer p-1 text-sm items-center flex gap-x-1 px-2 py-1 rounded-lg hover:shadow-sm hover:ring-1 hover:ring-ingio-900/40 hover:bg-opacity-90 text-neutral-100 bg-accent"
             >
+            {/* TODO: translation */}
               <BackIcon size={20} className="text-neutral" />
               Back to Danswer
             </a>

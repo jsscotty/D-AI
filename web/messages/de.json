@@ -18,5 +18,8 @@
     "locale":{
         "language": "Deutsch",
         "locale": "de"
+    },
+    "admin": {
+        "connectors": "Konnektoren ?"
     }
 }

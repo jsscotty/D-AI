@@ -83,11 +83,13 @@ const DocumentFeedback = ({
         );
         if (!errorMsg) {
           setPopup({
+            // TODO: translation
             message: "Thanks for your feedback!",
             type: "success",
           });
         } else {
           setPopup({
+            // TODO: translation
             message: `Error giving feedback - ${errorMsg}`,
             type: "error",
           });

@@ -18,5 +18,8 @@
     "locale":{
         "language": "English",
         "locale": "en"
+    },
+    "admin": {
+        "connectors": "Anschlüsse"
     }
 }
