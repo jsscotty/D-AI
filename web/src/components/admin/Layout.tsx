@@ -57,6 +57,8 @@ import {
   FiTool,
 } from "react-icons/fi";
 import { UserDropdown } from "../UserDropdown";
+import LanguageSwitcher from "../LanguageSwitcher"
+import {VStack} from  '@chakra-ui/react'
 
 export async function Layout({ children }: { children: React.ReactNode }) {
   const tasks = [getAuthTypeMetadataSS(), getCurrentUserSS()];
@@ -337,7 +339,11 @@ export async function Layout({ children }: { children: React.ReactNode }) {
               <BackIcon size={20} className="text-neutral" />
               Back to Danswer
             </a>
-            <UserDropdown user={user} />
+            <VStack>
+              <LanguageSwitcher />
+             <UserDropdown user={user} /> 
+            </VStack>
+            
           </div>
           <div className="pt-20 flex overflow-y-auto h-full px-4 md:px-12">
             {children}
