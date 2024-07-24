@@ -12,7 +12,7 @@ import { LOGOUT_DISABLED } from "@/lib/constants";
 import { Settings } from "@/app/[locale]/admin/settings/interfaces";
 import { SettingsContext } from "./settings/SettingsProvider";
 import { LightSettingsIcon } from "./icons/icons";
-import LanguageSwitcher from "./LanguageSwitcher"
+import LanguageSwitcher from "./LanguageSwitcher";
 export function UserDropdown({
   user,
   page,
@@ -80,7 +80,9 @@ export function UserDropdown({
               `}
           >
             {/* LANGS */}
-            <><LanguageSwitcher/><>
+            <>
+              <LanguageSwitcher />
+            </>
             {showAdminPanel && (
               <>
                 <Link
