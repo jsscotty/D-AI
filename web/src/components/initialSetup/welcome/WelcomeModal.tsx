@@ -14,7 +14,7 @@ import { WellKnownLLMProviderDescriptor } from "@/app/[locale]/admin/models/llm/
 import { checkLlmProvider } from "./lib";
 import { User } from "@/lib/types";
 import { useTranslations } from "next-intl";
-import LanguageSwitcher from "../LanguageSwitcher"
+import LanguageSwitcher from "@/components/LanguageSwitcher"
 
 function setWelcomeFlowComplete() {
   Cookies.set(COMPLETED_WELCOME_FLOW_COOKIE, "true", { expires: 365 });
