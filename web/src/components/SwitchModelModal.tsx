@@ -10,6 +10,7 @@ export function SwitchModelModal({
   embeddingModelName: undefined | null | string;
 }) {
   return (
+    // TODO: translation
     <Modal className="max-w-4xl">
       <div className="text-base">
         <h2 className="text-xl font-bold mb-4 pb-2 border-b border-border flex">

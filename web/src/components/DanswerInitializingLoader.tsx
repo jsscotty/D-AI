@@ -10,6 +10,7 @@ export function DanswerInitializingLoader() {
     <div className="mx-auto my-auto animate-pulse">
       <Logo height={96} width={96} className="mx-auto mb-3" />
       <Bold>
+        {/* TODO: translation */}
         Initializing{" "}
         {settings?.enterpriseSettings?.application_name ?? "Danswer"}
       </Bold>

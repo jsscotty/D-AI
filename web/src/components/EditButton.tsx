@@ -19,7 +19,7 @@ export function EditButton({ onClick }: { onClick: () => void }) {
       onClick={onClick}
     >
       <FiEdit2 className="mr-1 my-auto" />
-      Edit
+      Edit {/*  // TODO: translation */}
     </div>
   );
 }

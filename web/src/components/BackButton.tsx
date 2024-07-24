@@ -33,6 +33,7 @@ export function BackButton({
       }}
     >
       <FiChevronLeft className="mr-1 my-auto" />
+      {/* TODO: translation */}
       Back
     </div>
   );

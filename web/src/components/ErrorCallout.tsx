@@ -12,7 +12,7 @@ export function ErrorCallout({
     <div>
       <Callout
         className="mt-4"
-        title={errorTitle || "Page not found"}
+        title={errorTitle || "Page not found"} // TODO: translation
         icon={FiAlertOctagon}
         color="rose"
       >

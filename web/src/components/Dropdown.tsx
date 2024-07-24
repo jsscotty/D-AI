@@ -91,7 +91,7 @@ export function SearchMultiSelectDropdown({
       <div>
         <input
           type="text"
-          placeholder="Search..."
+          placeholder="Search..." // TODO: translation
           value={searchTerm}
           onChange={(e: ChangeEvent<HTMLInputElement>) => {
             if (!searchTerm) {
@@ -179,7 +179,7 @@ export function SearchMultiSelectDropdown({
                 role="menuitem"
                 onClick={() => setIsOpen(false)}
               >
-                No matches found...
+                No matches found... {/* // TODO: translation */}
               </button>
             )}
           </div>

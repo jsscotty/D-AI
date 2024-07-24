@@ -22,6 +22,7 @@ export function DeleteButton({
       onClick={onClick}
     >
       <FiTrash className="mr-1 my-auto" />
+      {/* TODO: translation */}
       Delete
     </div>
   );
