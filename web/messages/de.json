@@ -14,5 +14,9 @@
     },
     "NotFoundPage" :{
     	"title": "Fehler beim Laden der Seite."
+    },
+    "locale":{
+        "language": "Deutsch",
+        "locale": "de"
     }
 }

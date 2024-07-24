@@ -14,5 +14,9 @@
     },
     "NotFoundPage" :{
     	"title": "Error with displaying page"
+    },
+    "locale":{
+        "language": "English",
+        "locale": "en"
     }
 }
