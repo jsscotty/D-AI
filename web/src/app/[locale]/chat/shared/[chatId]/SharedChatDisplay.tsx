@@ -11,15 +11,15 @@ import { AIMessage, HumanMessage } from "../../message/Messages";
 import { Button, Callout, Divider } from "@tremor/react";
 import { useRouter } from "next/navigation";
 import { Persona } from "@/app/[locale]/admin/assistants/interfaces";
-
+import { useTranslations } from "next-intl";
 function BackToDanswerButton() {
   const router = useRouter();
-
+  const transGeneral = useTranslations("general");
   return (
     <div className="absolute bottom-4 w-full flex border-t border-border pt-4">
       <div className="mx-auto">
         <Button onClick={() => router.push("/chat")}>
-          Back to Blona Chat
+          {transGeneral("back-to")} Blona Chat
         </Button>
       </div>
     </div>
@@ -33,12 +33,13 @@ export function SharedChatDisplay({
   chatSession: BackendChatSession | null;
   availableAssistants: Persona[];
 }) {
+  const transChat = useTranslations("chat");
   if (!chatSession) {
     return (
       <div className="min-h-full w-full">
         <div className="mx-auto w-fit pt-8">
           <Callout color="red" title="Shared Chat Not Found">
-            Did not find a shared chat with the specified ID.
+            {transChat("shared-chat-not-found")}
           </Callout>
         </div>
 

@@ -5,7 +5,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { ChatIcon, SearchIcon } from "@/components/icons/icons";
 import { SettingsContext } from "@/components/settings/SettingsProvider";
 import KeyboardSymbol from "@/lib/browserUtilities";
-
+import { useTranslations } from "next-intl";
 const ToggleSwitch = () => {
   const commandSymbol = KeyboardSymbol();
   const pathname = usePathname();
@@ -29,7 +29,7 @@ const ToggleSwitch = () => {
     localStorage.setItem("activeTab", tab);
     router.push(tab === "search" ? "/search" : "/chat");
   };
-
+  const transAssistants = useTranslations("assistants");
   return (
     <div className="bg-gray-100 flex rounded-full p-1">
       <div
@@ -49,7 +49,7 @@ const ToggleSwitch = () => {
       >
         <SearchIcon size={16} className="mr-2" />
         <p className="items-baseline flex">
-          Search
+          {transAssistants("search")}
           <span className="text-xs ml-2">{commandSymbol}S</span>
         </p>
       </button>
@@ -63,7 +63,7 @@ const ToggleSwitch = () => {
       >
         <ChatIcon size={16} className="mr-2" />
         <p className="items-baseline flex">
-          Chat
+          {transAssistants("chat")}
           <span className="text-xs ml-2">{commandSymbol}D</span>
         </p>
       </button>

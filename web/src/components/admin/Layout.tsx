@@ -59,13 +59,13 @@ import {
 import { UserDropdown } from "../UserDropdown";
 import LanguageSwitcher from "../LanguageSwitcher";
 import { VStack } from "@chakra-ui/react";
-import { useTranslations } from "next-intl";
+import { getTranslations } from "next-intl/server";
 import { HealthCheckBanner } from "../health/healthcheck";
 import { getSecondsUntilExpiration } from "@/lib/time";
 
 export async function Layout({ children }: { children: React.ReactNode }) {
   const tasks = [getAuthTypeMetadataSS(), getCurrentUserSS()];
-  const trans = useTranslations("admin");
+  const trans = await getTranslations("admin");
   // catch cases where the backend is completely unreachable here
   // without try / catch, will just raise an exception and the page
   // will not render

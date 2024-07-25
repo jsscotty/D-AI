@@ -16,7 +16,8 @@
         "active": "Active",
         "log-out": "Log out",
         "admin-panel":"Admin Panel",
-        "failed-logout": "Failed to logout"
+        "failed-logout": "Failed to logout",
+        "back-to": "Back to"
     },
     "home": {
         "title": "Unlock Knowledge",
@@ -118,6 +119,7 @@
         "shared-with-you": "Shared with you",
         "private": "Private",
         "search": "Search",
+        "chat": "Chat",
         "image-generation": "Image Generation",
         "internet-search": "Internet Search",
         "delete-assistant": "Delete Assistant",
@@ -186,9 +188,23 @@
         "share-security-msg":  "Ensure that all content in the chat is safe to share with the whole organization. The content of the retrieved documents will not be visible, but the names of cited documents as well as the AI and human messages will be visible.",
         "generate-link": "Generate and Copy Share Link",
         "chatting-with-x": "Chatting with {num} Selected Documents",
-        "select-assistant": "Select an assistant below to start chatting with them!"
-        
-
+        "select-assistant": "Select an Assistant below to start chatting with them!",
+        "global": "Global",
+        "personal": "Personal",
+        "rename-chat-fail": "Failed to rename chat session",
+        "delete-chat-fail": "Failed to delete chat session",
+        "rename": "Rename",
+        "share":"Share",
+        "manage-assistants": "Manage Assistants",
+        "new-chat": "New Chat",
+        "new-folder": "New Folder",
+        "folders": "Folders",
+        "history": "History",
+        "remove-from-folder-fail": "Failed to remove chat from folder",
+        "shared-chat-not-found":"Did not find a shared chat with the specified ID.",
+        "empty-search": "Try running a search! Your search history will appear here.",
+        "empty-chat": "Try sending a message! Your chat history will appear here.",
+        "connected-sources": "Connected Sources"
     },
     "SwitchModelModal": {
         "switch-model": "❗ Switch Embedding Model ❗",

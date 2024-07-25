@@ -38,7 +38,7 @@ import {
 import { PagesTab } from "./PagesTab";
 import { Tooltip } from "@/components/tooltip/Tooltip";
 import KeyboardSymbol from "@/lib/browserUtilities";
-
+import { useTranslations } from "next-intl";
 interface HistorySidebarProps {
   page: "search" | "chat" | "assistants";
   existingChats?: ChatSession[];
@@ -67,6 +67,7 @@ export const HistorySidebar = forwardRef<HTMLDivElement, HistorySidebarProps>(
     const { popup, setPopup } = usePopup();
 
     const currentChatId = currentChatSession?.id;
+    const trans = useTranslations("chat");
 
     // prevent the NextJS Router cache from causing the chat sidebar to not
     // update / show an outdated list of chats
@@ -80,7 +81,6 @@ export const HistorySidebar = forwardRef<HTMLDivElement, HistorySidebarProps>(
     }
     const settings = combinedSettings.settings;
     const enterpriseSettings = combinedSettings.enterpriseSettings;
-
     return (
       <>
         {popup}
@@ -111,7 +111,7 @@ export const HistorySidebar = forwardRef<HTMLDivElement, HistorySidebarProps>(
                     {enterpriseSettings.application_name}
                   </HeaderTitle>
                   {!NEXT_PUBLIC_DO_NOT_USE_TOGGLE_OFF_DANSWER_POWERED && (
-                    <p className="text-xs text-subtle">Powered by Danswer</p>
+                    <p className="text-xs text-subtle">Powered by Blona</p>
                   )}
                 </div>
               ) : (
@@ -139,7 +139,9 @@ export const HistorySidebar = forwardRef<HTMLDivElement, HistorySidebarProps>(
                 className="w-full p-2 bg-white border-border border rounded items-center hover:bg-background-200 cursor-pointer transition-all duration-150 flex gap-x-2"
               >
                 <FiEdit className="flex-none " />
-                <p className="my-auto flex items-center text-sm">New Chat</p>
+                <p className="my-auto flex items-center text-sm">
+                  {trans("new-chat")}
+                </p>
               </Link>
 
               <button
@@ -160,7 +162,9 @@ export const HistorySidebar = forwardRef<HTMLDivElement, HistorySidebarProps>(
                 className="w-full p-2 bg-white border-border border rounded items-center hover:bg-background-200 cursor-pointer transition-all duration-150 flex gap-x-2"
               >
                 <FiFolderPlus className="my-auto" />
-                <p className="my-auto flex items-center text-sm">New Folder</p>
+                <p className="my-auto flex items-center text-sm">
+                  {trans("new-folder")}
+                </p>
               </button>
 
               <Link
@@ -169,7 +173,7 @@ export const HistorySidebar = forwardRef<HTMLDivElement, HistorySidebarProps>(
               >
                 <AssistantsIconSkeleton className="h-4 w-4 my-auto" />
                 <p className="my-auto flex items-center text-sm">
-                  Manage Assistants
+                  {trans("manage-assistants")}
                 </p>
               </Link>
             </div>

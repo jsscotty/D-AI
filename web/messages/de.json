@@ -16,7 +16,8 @@
         "active": "Aktiv",
         "log-out": "Abmelden",
         "admin-panel": "Administrationsbereich",
-        "failed-logout": "Abmeldung fehlgeschlagen"
+        "failed-logout": "Abmeldung fehlgeschlagen",
+        "back-to": "Zurück zu"
     },
     "home": {
         "title": "Wissen erschließen",
@@ -117,6 +118,7 @@
         "shared-with-you": "Mit Ihnen geteilt",
         "private": "Privat",
         "search": "Suche",
+        "chat": "Chat",
         "image-generation": "Bildgenerierung",
         "internet-search": "Internetsuche",
         "delete-assistant": "Assistent löschen",
@@ -139,7 +141,9 @@
         "documents": "Dokumente",
         "documents-msg": "Wählen Sie, um zum kontinuierlichen Kontext hinzuzufügen",
         "learn-more": "Mehr erfahren",
-        "no-documents-found": "Keine Dokumente für die Anfrage gefunden.",
+       
+
+ "no-documents-found": "Keine Dokumente für die Anfrage gefunden.",
         "documents-question": "Wenn Sie eine Frage stellen, werden die abgerufenen Dokumente hier angezeigt!",
         "save-changes": "Änderungen speichern",
         "delete-context": "Kontext löschen",
@@ -185,7 +189,23 @@
         "share-security-msg": "Stellen Sie sicher, dass alle Inhalte im Chat sicher sind, um sie mit der gesamten Organisation zu teilen. Der Inhalt der abgerufenen Dokumente wird nicht sichtbar sein, aber die Namen der zitierten Dokumente sowie die AI- und menschlichen Nachrichten werden sichtbar sein.",
         "generate-link": "Freigabelink generieren und kopieren",
         "chatting-with-x": "Chatten mit {num} ausgewählten Dokumenten",
-        "select-assistant": "Wählen Sie unten einen Assistenten aus, um mit ihm zu chatten!"
+        "select-assistant": "Wählen Sie unten einen Assistenten aus, um mit ihm zu chatten!",
+        "global": "Global",
+        "personal": "Persönlich",
+        "rename-chat-fail": "Umbenennen der Chat-Sitzung fehlgeschlagen",
+        "delete-chat-fail": "Löschen der Chat-Sitzung fehlgeschlagen",
+        "rename": "Umbenennen",
+        "share": "Teilen",
+        "manage-assistants": "Assistenten verwalten",
+        "new-chat": "Neuer Chat",
+        "new-folder": "Neuer Ordner",
+        "folders": "Ordner",
+        "history": "Verlauf",
+        "remove-from-folder-fail": "Chat konnte nicht aus dem Ordner entfernt werden",
+        "shared-chat-not-found": "Es wurde kein geteilter Chat mit der angegebenen ID gefunden.",
+        "empty-search": "Versuchen Sie eine Suche durchzuführen! Ihr Suchverlauf wird hier erscheinen.",
+        "empty-chat": "Versuchen Sie eine Nachricht zu senden! Ihr Chat-Verlauf wird hier erscheinen.",
+        "connected-sources": "Verbundene Quellen"
     },
     "SwitchModelModal": {
         "switch-model": "❗ Embedding-Modell wechseln ❗",

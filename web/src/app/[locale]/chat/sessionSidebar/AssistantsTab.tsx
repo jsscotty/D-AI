@@ -6,7 +6,7 @@ import { Text } from "@tremor/react";
 import Link from "next/link";
 import { FaRobot } from "react-icons/fa";
 import { FiEdit2 } from "react-icons/fi";
-
+import { useTranslations } from "next-intl";
 function AssistantDisplay({
   persona,
   onSelect,
@@ -56,6 +56,7 @@ export function AssistantsTab({
   onPersonaChange: (persona: Persona | null) => void;
   user: User | null;
 }) {
+  const trans = useTranslations("chat");
   const globalAssistants = personas.filter((persona) => persona.is_public);
   const personalAssistants = personas.filter(
     (persona) =>
@@ -65,15 +66,13 @@ export function AssistantsTab({
 
   return (
     <div className="mt-4 pb-1 overflow-y-auto h-full flex flex-col gap-y-1">
-      <Text className="mx-3 text-xs mb-4">
-        Select an Assistant below to begin a new chat with them!
-      </Text>
+      <Text className="mx-3 text-xs mb-4">{trans("select-assistant")}</Text>
 
       <div className="mx-3">
         {globalAssistants.length > 0 && (
           <>
             <div className="text-xs text-subtle flex pb-0.5 ml-1 mb-1.5 font-bold">
-              Global
+              {trans("global")}
             </div>
             {globalAssistants.map((persona) => {
               return (
@@ -91,7 +90,7 @@ export function AssistantsTab({
         {personalAssistants.length > 0 && (
           <>
             <div className="text-xs text-subtle flex pb-0.5 ml-1 mb-1.5 mt-5 font-bold">
-              Personal
+              {trans("personal")}
             </div>
             {personalAssistants.map((persona) => {
               return (
