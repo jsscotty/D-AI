@@ -8,6 +8,7 @@ import {
   DislikeFeedbackIcon,
   LikeFeedbackIcon,
 } from "@/components/icons/icons";
+import { useTranslations } from "next-intl";
 
 const predefinedPositiveFeedbackOptions =
   process.env.NEXT_PUBLIC_POSITIVE_PREDEFINED_FEEDBACK_OPTIONS?.split(",") ||
@@ -51,7 +52,7 @@ export const FeedbackModal = ({
     feedbackType === "like"
       ? predefinedPositiveFeedbackOptions
       : predefinedNegativeFeedbackOptions;
-
+  const trans = useTranslations("chat");
   return (
     <ModalWrapper onClose={onClose} modalClassName="max-w-5xl">
       <>
@@ -69,7 +70,7 @@ export const FeedbackModal = ({
               />
             )}
           </div>
-          Provide additional feedback
+          {trans("feedback-additional")}
         </h2>
 
         <div className="mb-4 flex flex-wrap justify-start">
@@ -100,8 +101,8 @@ export const FeedbackModal = ({
           aria-multiline
           placeholder={
             feedbackType === "like"
-              ? "(Optional) What did you like about this response?"
-              : "(Optional) What was the issue with the response? How could it be improved?"
+              ? trans("feedback-like")
+              : trans("feedback-dislike")
           }
           value={message}
           onChange={(e) => setMessage(e.target.value)}
@@ -112,7 +113,7 @@ export const FeedbackModal = ({
             className="bg-accent text-white py-2 px-4 rounded hover:bg-blue-600 focus:outline-none mx-auto"
             onClick={handleSubmit}
           >
-            Submit feedback
+            {trans("feedback-submit")}
           </button>
         </div>
       </>

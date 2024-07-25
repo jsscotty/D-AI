@@ -5,6 +5,7 @@ import { Spinner } from "@/components/Spinner";
 import { ChatSessionSharedStatus } from "../interfaces";
 import { FiCopy, FiX } from "react-icons/fi";
 import { CopyButton } from "@/components/CopyButton";
+import { useTranslations } from "next-intl";
 
 function buildShareLink(chatSessionId: number) {
   const baseUrl = `${window.location.protocol}//${window.location.host}`;
@@ -55,13 +56,14 @@ export function ShareChatSessionModal({
       ? buildShareLink(chatSessionId)
       : ""
   );
+  const trans = useTranslations("chat");
 
   return (
     <ModalWrapper onClose={onClose} modalClassName="max-w-3xl">
       <>
         <div className="flex mb-4">
           <h2 className="text-2xl text-emphasis font-bold flex my-auto">
-            Share link to Chat
+            {trans("share-link")}
           </h2>
 
           <div
@@ -77,11 +79,7 @@ export function ShareChatSessionModal({
         <div className="flex mt-2">
           {shareLink ? (
             <div>
-              <Text>
-                This chat session is currently shared. Anyone at your
-                organization can view the message history using the following
-                link:
-              </Text>
+              <Text>{trans("share-msg")}</Text>
 
               <div className="flex mt-2">
                 <CopyButton content={shareLink} />
@@ -96,9 +94,7 @@ export function ShareChatSessionModal({
 
               <Divider />
 
-              <Text className="mb-4">
-                Click the button below to make the chat private again.
-              </Text>
+              <Text className="mb-4">{trans("private-chat")}</Text>
 
               <Button
                 onClick={async () => {
@@ -109,7 +105,7 @@ export function ShareChatSessionModal({
                     setShareLink("");
                     onShare && onShare(false);
                   } else {
-                    alert("Failed to delete share link");
+                    alert(trans("delete-link-fail"));
                   }
 
                   setLinkGenerating(false);
@@ -117,16 +113,13 @@ export function ShareChatSessionModal({
                 size="xs"
                 color="red"
               >
-                Delete Share Link
+                {trans("delete-link")}
               </Button>
             </div>
           ) : (
             <div>
               <Callout title="Warning" color="yellow" className="mb-4">
-                Ensure that all content in the chat is safe to share with the
-                whole organization. The content of the retrieved documents will
-                not be visible, but the names of cited documents as well as the
-                AI and human messages will be visible.
+                {trans("share-security-msg")}
               </Callout>
 
               <Button
@@ -154,7 +147,7 @@ export function ShareChatSessionModal({
                 size="xs"
                 color="green"
               >
-                Generate and Copy Share Link
+                {trans("generate-link")}
               </Button>
             </div>
           )}

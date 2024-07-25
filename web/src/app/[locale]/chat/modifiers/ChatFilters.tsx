@@ -18,7 +18,7 @@ import { ControlledPopup, DefaultDropdownElement } from "@/components/Dropdown";
 import { getXDaysAgo } from "@/lib/dateUtils";
 import { SourceSelectorProps } from "@/components/search/filtering/Filters";
 import { containsObject, objectsAreEquivalent } from "@/lib/contains";
-
+import { useTranslations } from "next-intl";
 enum FilterType {
   Source = "Source",
   KnowledgeSet = "Knowledge Set",
@@ -232,7 +232,7 @@ function TagsSection({
           tags.tag_key.toLowerCase().startsWith(filterValueLower)
       )
     : availableTags;
-
+  const trans = useTranslations("chat");
   return (
     <div className="w-96">
       <div className="max-h-48 overflow-y-auto">
@@ -253,7 +253,7 @@ function TagsSection({
             />
           ))
         ) : (
-          <div className="text-sm px-2 py-2">No matching tags found</div>
+          <div className="text-sm px-2 py-2">{trans("no-matching-tags")}</div>
         )}
       </div>
 

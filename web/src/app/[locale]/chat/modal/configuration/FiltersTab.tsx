@@ -79,7 +79,7 @@ export function FiltersTab({
                     selectValue: value.selectValue,
                   })
                 }
-                selectPlaceholder="Select range"
+                selectPlaceholder={trans("time-range-placeholder")}
                 enableSelect
               >
                 <DateRangePickerItem
@@ -88,7 +88,7 @@ export function FiltersTab({
                   from={getXDaysAgo(30)}
                   to={new Date()}
                 >
-                  Last 30 Days
+                  {trans("last-x-days", { num: "30" })}
                 </DateRangePickerItem>
                 <DateRangePickerItem
                   key="Last 7 Days"
@@ -96,7 +96,7 @@ export function FiltersTab({
                   from={getXDaysAgo(7)}
                   to={new Date()}
                 >
-                  Last 7 Days
+                  {trans("last-x-days", { num: "7" })}
                 </DateRangePickerItem>
                 <DateRangePickerItem
                   key="Today"
@@ -104,7 +104,7 @@ export function FiltersTab({
                   from={getXDaysAgo(1)}
                   to={new Date()}
                 >
-                  Today
+                  {trans("today")}
                 </DateRangePickerItem>
               </DateRangePicker>
             </div>
@@ -138,7 +138,7 @@ export function FiltersTab({
                   );
                 })
               ) : (
-                <li>No knowledge sets available</li>
+                <li>{trans("no-knowledge-sets")}</li>
               )}
             </ul>
           </div>
@@ -146,11 +146,8 @@ export function FiltersTab({
           <Divider />
 
           <div className="mb-4">
-            <h3 className="text-lg font-semibold">Sources</h3>
-            <Text>
-              Choose which sources we should search over. If multiple sources
-              are selected, we will search through all of them.
-            </Text>
+            <h3 className="text-lg font-semibold">{trans("sources-title")}</h3>
+            <Text>{trans("sources-msg")}</Text>
             <ul className="mt-3 flex gap-2">
               {availableSourceMetadata.length > 0 ? (
                 availableSourceMetadata.map((sourceMetadata) => {
@@ -183,7 +180,7 @@ export function FiltersTab({
                   );
                 })
               ) : (
-                <li>No sources available</li>
+                <li>{trans("no-sources")}</li>
               )}
             </ul>
           </div>
@@ -217,7 +214,7 @@ export function FiltersTab({
                   </Bubble>
                 ))
               ) : (
-                <p className="text-xs italic">No selected tags</p>
+                <p className="text-xs italic">{trans("no-tags")}</p>
               )}
             </ul>
 
@@ -227,7 +224,7 @@ export function FiltersTab({
                   <input
                     ref={inputRef}
                     className="w-full border border-border py-0.5 px-2 rounded text-sm h-8"
-                    placeholder="Find a tag"
+                    placeholder={trans("find-tag-placeholder")}
                     value={filterValue}
                     onChange={(event) => setFilterValue(event.target.value)}
                   />
@@ -268,7 +265,7 @@ export function FiltersTab({
                       ))
                   ) : (
                     <div className="text-sm px-2 py-2">
-                      No matching tags found
+                      {trans("no-matching-tags")}
                     </div>
                   )}
                 </div>

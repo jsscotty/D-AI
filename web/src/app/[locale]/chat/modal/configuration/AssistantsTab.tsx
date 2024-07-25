@@ -21,6 +21,7 @@ export function AssistantsTab({
 }: AssistantsTabProps) {
   const [_, llmName] = getFinalLLM(llmProviders, null, null);
   const trans = useTranslations("chat");
+  const transAssistants = useTranslations("assistants");
   return (
     <div className="py-4">
       <h3 className="px-4 text-lg font-semibold">Change Assistant</h3>
@@ -56,10 +57,10 @@ export function AssistantsTab({
                   let toolIcon = null;
 
                   if (tool.name === "SearchTool") {
-                    toolName = "Search";
+                    toolName = transAssistants("search");
                     toolIcon = <FiSearch className="mr-1 my-auto" />;
                   } else if (tool.name === "ImageGenerationTool") {
-                    toolName = "Image Generation";
+                    toolName = transAssistants("image-generation");
                     toolIcon = <FiImage className="mr-1 my-auto" />;
                   }
                   return (
@@ -79,7 +80,9 @@ export function AssistantsTab({
             <div className="mt-2 flex flex-col gap-y-2">
               {assistant.document_sets.length > 0 && (
                 <div className="text-xs text-subtle flex flex-wrap gap-2">
-                  <p className="my-auto font-medium">Document Sets:</p>
+                  <p className="my-auto font-medium">
+                    {trans("document-sets")}:
+                  </p>
                   {assistant.document_sets.map((set) => (
                     <Bubble key={set.id} isSelected={false}>
                       <div className="flex flex-row gap-1">
