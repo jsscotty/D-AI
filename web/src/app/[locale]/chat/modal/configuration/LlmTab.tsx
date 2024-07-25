@@ -7,6 +7,7 @@ import { Text } from "@tremor/react";
 import { Persona } from "@/app/[locale]/admin/assistants/interfaces";
 import { destructureValue, getFinalLLM, structureValue } from "@/lib/llm/utils";
 import { updateModelOverrideForChatSession } from "../../lib";
+import { useTranslations } from "next-intl";
 
 interface LlmTabProps {
   llmOverrideManager: LlmOverrideManager;
@@ -56,17 +57,20 @@ export const LlmTab = forwardRef<HTMLDivElement, LlmTabProps>(
         });
       });
     });
-
+    const trans = useTranslations("chat");
     return (
       <div className="mb-4">
-        <label className="block text-sm font-medium mb-2">Choose Model</label>
+        <label className="block text-sm font-medium mb-2">
+          {trans("assistant-name")}
+        </label>
         <Text className="mb-1">
-          Override the default model for the{" "}
-          <i className="font-medium">{currentAssistant.name}</i> assistant. The
-          override will only apply for the current chat session.
+          {trans("override-model", {
+            assistantName: `<span class="font-medium">${currentAssistant.name}</span>`,
+          })}
         </Text>
         <Text className="mb-3">
-          Default Model: <i className="font-medium">{defaultLlmName}</i>.
+          {trans("default-model")}:{" "}
+          <i className="font-medium">{defaultLlmName}</i>.
         </Text>
 
         <div ref={ref} className="w-96">
@@ -91,15 +95,10 @@ export const LlmTab = forwardRef<HTMLDivElement, LlmTabProps>(
         </div>
 
         <label className="block text-sm font-medium mb-2 mt-4">
-          Temperature
+          {trans("temperature-title")}
         </label>
 
-        <Text className="mb-8">
-          Adjust the temperature of the LLM. Higher temperatures will make the
-          LLM generate more creative and diverse responses, while lower
-          temperature will make the LLM generate more conservative and focused
-          responses.
-        </Text>
+        <Text className="mb-8">{trans("temperature-msg")}</Text>
 
         <div className="relative w-full">
           <input

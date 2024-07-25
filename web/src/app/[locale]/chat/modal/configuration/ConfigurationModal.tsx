@@ -12,7 +12,7 @@ import { Persona } from "@/app/[locale]/admin/assistants/interfaces";
 import { LlmTab } from "./LlmTab";
 import { LLMProviderDescriptor } from "@/app/[locale]/admin/models/llm/interfaces";
 import { AssistantsIcon, IconProps } from "@/components/icons/icons";
-
+import { useTranslations } from "next-intl";
 const TabButton = ({
   label,
   icon: Icon,
@@ -84,7 +84,7 @@ export function ConfigurationModal({
   }, [onClose]);
 
   if (!activeTab) return null;
-
+  const trans = useTranslations("chat");
   return (
     <Modal
       onOutsideClick={onClose}
@@ -100,20 +100,21 @@ export function ConfigurationModal({
         <div className="mb-4">
           <div className="flex border-b border-border bg-background-emphasis">
             <div className="flex px-6 gap-x-2">
+              {/* TODO trans labels */}
               <TabButton
-                label="Assistants"
+                label={trans("assistants")}
                 icon={FaBrain}
                 isActive={activeTab === "assistants"}
                 onClick={() => setActiveTab("assistants")}
               />
               <TabButton
-                label="Models"
+                label={trans("models")}
                 icon={FiCpu}
                 isActive={activeTab === "llms"}
                 onClick={() => setActiveTab("llms")}
               />
               <TabButton
-                label="Filters"
+                label={trans("filters")}
                 icon={FiFilter}
                 isActive={activeTab === "filters"}
                 onClick={() => setActiveTab("filters")}
