@@ -141,14 +141,16 @@ export function AssistantsGallery({
                           if (success) {
                             setPopup({
                               message: trans("remove-success", {
-                                assistantName,
+                                assistantName: assistantName,
                               }),
                               type: "success",
                             });
                             router.refresh();
                           } else {
                             setPopup({
-                              message: trans("remove-error", { assistantName }),
+                              message: trans("remove-error", {
+                                assistantName: assistantName,
+                              }),
                               type: "error",
                             });
                           }
@@ -175,7 +177,7 @@ export function AssistantsGallery({
                           if (success) {
                             setPopup({
                               message: trans("add-assistant", {
-                                assistantName,
+                                assistantName: assistantName,
                               }),
                               type: "success",
                             });
@@ -183,7 +185,7 @@ export function AssistantsGallery({
                           } else {
                             setPopup({
                               message: trans("add-assistant-error", {
-                                assistantName,
+                                assistantName: assistantName,
                               }),
                               type: "error",
                             });
