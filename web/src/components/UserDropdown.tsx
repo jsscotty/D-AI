@@ -110,8 +110,7 @@ export function UserDropdown({
             )}
             {/* LANGS */}
             <div 
-              className="mt-1 flex py-3 px-4 cursor-pointer hover:bg-hover-light"
-              className="border-t border-border my-1"
+              className="mt-1 flex py-3 px-4 cursor-pointer hover:bg-hover-light border-t border-border my-1"
             > 
               <LanguageSwitcher /> 
             </div>
