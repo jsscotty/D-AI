@@ -14,7 +14,6 @@ import { SettingsContext } from "./settings/SettingsProvider";
 import { LightSettingsIcon } from "./icons/icons";
 import { useTranslations } from "next-intl";
 import LanguageSwitcher from "./LanguageSwitcher";
-const transWelcome = useTranslations("general");
 
 export function UserDropdown({
   user,
@@ -26,6 +25,8 @@ export function UserDropdown({
   const [userInfoVisible, setUserInfoVisible] = useState(false);
   const userInfoRef = useRef<HTMLDivElement>(null);
   const router = useRouter();
+  // translation
+  const transWelcome = useTranslations("general");
 
   const combinedSettings = useContext(SettingsContext);
   if (!combinedSettings) {
@@ -41,7 +42,6 @@ export function UserDropdown({
       router.push("/auth/login");
     });
   };
-
   const showAdminPanel = !user || user.role === "admin";
   const showLogout =
     user && !checkUserIsNoAuthUser(user.id) && !LOGOUT_DISABLED;
