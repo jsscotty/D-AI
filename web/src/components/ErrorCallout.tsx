@@ -11,9 +11,9 @@ export function ErrorCallout({
   errorTitle?: string;
   errorMsg?: string;
 }) {
-  
+  const transWelcome = useTranslations("general");
   return (
-    const transWelcome = useTranslations("general");
+  
     <div>
       <Callout
         className="mt-4"
