@@ -70,6 +70,7 @@ export function ConfigurationModal({
   llmOverrideManager: LlmOverrideManager;
   chatSessionId?: number;
 }) {
+  const trans = useTranslations("chat");
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
@@ -84,7 +85,7 @@ export function ConfigurationModal({
   }, [onClose]);
 
   if (!activeTab) return null;
-  const trans = useTranslations("chat");
+
   return (
     <Modal
       onOutsideClick={onClose}
