@@ -622,7 +622,7 @@ export function AssistantEditor({
                                         <>
                                           If this functionality would be useful,
                                           reach out to the administrators of
-                                          Danswer for assistance.
+                                          Blona for assistance.
                                         </>
                                       )}
                                     </Italic>
@@ -725,8 +725,8 @@ export function AssistantEditor({
                             searchToolEnabled()
                           );
                         }}
-                        explanationText="Learn about prompting in our docs!"
-                        explanationLink="https://docs.danswer.dev/guides/assistants"
+                        explanationText="Need help? Text us!"
+                        explanationLink="mailto:sebastian@blona"
                       />
                     </>
                   )}

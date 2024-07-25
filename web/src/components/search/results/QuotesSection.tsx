@@ -3,10 +3,12 @@ import { ResponseSection, StatusOptions } from "./ResponseSection";
 import { CheckmarkIcon, CopyIcon } from "@/components/icons/icons";
 import { useState } from "react";
 import { SourceIcon } from "@/components/SourceIcon";
+import { useTranslations } from "next-intl";
 
 const QuoteDisplay = ({ quoteInfo }: { quoteInfo: Quote }) => {
   const [detailIsOpen, setDetailIsOpen] = useState(false);
   const [copyClicked, setCopyClicked] = useState(false);
+  const transWelcome = useTranslations("results");
 
   return (
     <div
@@ -20,7 +22,7 @@ const QuoteDisplay = ({ quoteInfo }: { quoteInfo: Quote }) => {
         <div className="absolute top-0 mt-9 pt-2 z-50">
           <div className="flex flex-shrink-0 rounded-lg w-96 bg-background border border-border shadow p-3 text-sm leading-relaxed">
             <div>
-              <b>Quote:</b> <i>{quoteInfo.quote}</i>
+              <b>{transWelcome("quote")}</b> <i>{quoteInfo.quote}</i>
             </div>
             <div
               className="my-auto pl-3 ml-auto"
@@ -71,14 +73,14 @@ interface QuotesSectionProps {
 
 const QuotesHeader = ({ quotes, isFetching }: QuotesSectionProps) => {
   if ((!quotes || quotes.length === 0) && isFetching) {
-    return <>Extracting quotes...</>;
+    return <>{transWelcome("extracting-quotes")}</>;
   }
 
   if (!quotes || quotes.length === 0) {
-    return <>No quotes found</>;
+    return <>{transWelcome("no-quotes-found")}</>;
   }
 
-  return <>Quotes</>;
+  return <>{transWelcome("quotes")}</>;
 };
 
 const QuotesBody = ({ quotes, isFetching }: QuotesSectionProps) => {
@@ -91,7 +93,7 @@ const QuotesBody = ({ quotes, isFetching }: QuotesSectionProps) => {
     return (
       <div className="flex">
         <div className="text-error text-sm my-auto">
-          Did not find any exact quotes to support the above answer.
+        {transWelcome("quotes-not-found")}
         </div>
       </div>
     );

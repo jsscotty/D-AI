@@ -1,19 +1,100 @@
 {
+    "general": {
+        "back": "back",
+        "initializing": "Initializing",
+        "delete": "Delete",
+        "deleting": "Deleting",
+        "no-match-found": "No matches found...",
+        "edit": "Edit",
+        "paused": "Paused",
+        "page-not-found": "Page not found",
+        "failed": "Failed",
+        "error": "Error",
+        "succeeded": "Succeeded",
+        "in-progress": "In progress",
+        "scheduled": "Scheduled",
+        "active": "Active",
+        "log-out": "Log out",
+        "admin-panel":"Admin Panel",
+        "failed-logout": "Failed to logout"
+    },
     "home": {
         "title": "Unlock Knowledge",
-        "welcome": "Welcome to danswer"
+        "welcome": "Welcome to Blona"
+    },
+    "AdvancedOptions": {
+        "Advanced-Options": "Advanced Options"
+    },
+    "healthcheck": {
+        "You've-been-logged-out": "You've been logged out",
+        "UserNotice-Session-expired": "Your session has expired. Please login again.",
+        "Log-in": "Log in",
+        "Notice-Backend-Unavailable": "The backend is currently unavailable",
+        "Backend-Unavailable-Reason": "If this is your initial setup or you just updated your Blona deployment, this is likely because the backend is still starting up. Give it a minute or two, and then refresh the page. If that does not work, make sure the backend is setup and/or contact Blona."
     },
     "welcomeModal": {
-        "welcome": "Welcome to Blona - DAI",
+        "Step1":"Step 1: Setup an LLM",
+        "Step2":"Step 2: Connect Data Sources",
+        "Step2-desc":"Connectors are the way that Blona gets data from your organization's various data sources. Once setup, we'&apos;'ll automatically sync data from your apps and docs into Blona, so you can search through all of them in one place.",
+        "ConnectorSetup":"Setup your first connector!",
+        "LLMcomplete": "LLM setup complete!",
+        "Step2Chat":"Step 2: Start Chatting!",
+        "Step2Chat-desc":"Click the button below to start chatting with the LLM setup above! Don't worry, if you do decide later on you want to connect your organization's knowledge, you can always do that in the",
+        "ChangeLater":"If you want to change the key later, you'll be able to easily to do so in the Admin Panel.",
+        "AdminPanel":"Admin Panel",
+        "welcome": "Welcome to Blona",
         "plan": "How are you planning on using Blona?",
         "search-title": "Search/Chat with Knowledge",
         "search-msg": "If you're looking to search through, chat with, or ask direct questions of your organization's knowledge, then this is the option for you!",
         "start": "Get started",
         "chatgpt-title": "Secure ChatGPT",
-        "chatgpt-msg": "If you're looking for a pure ChatGPT-like experience, then this is the option for you!"
+        "chatgpt-msg": "If you're looking for a pure ChatGPT-like experience, then this is the option for you!",
+        "Start-chatting!": "Start chatting!"
     },
     "NotFoundPage" :{
     	"title": "Error with displaying page"
+    },
+    "NoCompleteSourceModal" :{
+    	"Not-fully-synched": "⏳ None of your connectors have finished a full sync yet",
+        "Connected-but-not-synched": "You've connected some sources, but none of them have finished syncing. Depending on the size of the knowledge base(s) you've connected to Blona, it can take anywhere between 30 seconds to a few days for the initial sync to complete. So far we've synced",
+        "documents": "documents.",
+        "connector-status": "To view the status of your syncing connectors, head over to the",
+        "Existing-Connectors-Page": "Existing Connectors page",
+        "Partial-Question": "Or, click here to continue and ask questions on the partially synced knowledge set."
+    },
+    "NoSourcesModal":{
+        "NoSourceConnected":"🧐 No sources connected",
+        "Connect-at-least-one-source": "Before using Search you'll need to connect at least one source. Without any connected knowledge sources, there isn't anything to search over.",
+        "Connect-Source":"Connect a Source!",
+        "Or-without-Source": "Or, if you&apos;re looking for a pure ChatGPT-like experience without any organization specific knowledge, then you can head over to the Chat page and start chatting with Blona right away!",
+        "Start-Chatting": "Start Chatting!"
+    
+    },
+    "filtering":{
+        "clear-all": "Clear all",
+        "no-matching-found": "No matching tags found",
+        "time-range": "Time Range",
+        "tags":"Tags",
+        "filters": "Filters",
+        "sources": "Sources",
+        "description": "Description",
+        "knowledge-sets":"Knowledge Sets",
+        "all-sources": "All Sources",
+        "all-document-sets": "All Document Sets"
+    },
+    "results":{
+        "building-answer": "Building answer...",
+        "ai-answer": "AI answer",
+        "info-not-found": "Information not found.",
+        "error-building-answer": "Error while building answer",
+        "building-best-answer": "Building best effort AI answer...",
+        "warning": "Warning:",
+        "warning-desc": "the AI did not think this question was answerable.",
+        "quote": "Quote:",
+        "quotes": "Quotes",
+        "extracting-quotes":"Extracting quotes...",
+        "no-quotes-found": "No quotes found",
+        "quotes-not-found": "Did not find any exact quotes to support the above answer."
     },
     "locale":{
         "language": "English",
@@ -74,5 +155,11 @@
         "time-range-msg": "Choose the time range we should search over. If only one date is selected, will only search after the specified date.",
         "knowledge-sets-title": "Knowledge Sets",
         "knowledge-sets-msg": "Choose which knowledge sets we should search over. If multiple are selected, we will search through all of them."
-    }
+    },
+    "SwitchModelModal": {
+        "switch-model": "❗ Switch Embedding Model ❗",
+        "switch-model-desc1": "We&apos;ve detected you are using our old default embedding model",
+        "switch-model-desc2": "We believe that search performance can be dramatically improved by a simple model switch.",
+        "switch-model-desc3":"Please click the button below to choose a new model. Don't worry, the re-indexing necessary for the switch will happen in the background - your use of Blona will not be interrupted.",
+        "choose-model":"Choose your Embedding Model" }
 }

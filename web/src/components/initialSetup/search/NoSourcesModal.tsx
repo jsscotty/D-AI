@@ -6,9 +6,11 @@ import Link from "next/link";
 import { FiMessageSquare, FiShare2 } from "react-icons/fi";
 import { useContext, useState } from "react";
 import { SettingsContext } from "@/components/settings/SettingsProvider";
+import { useTranslations } from "next-intl";
 
 export function NoSourcesModal() {
   const settings = useContext(SettingsContext);
+  const transWelcome = useTranslations("NoSourcesModal");
   const [isHidden, setIsHidden] = useState(
     !settings?.settings.search_page_enabled ?? false
   );
@@ -20,31 +22,28 @@ export function NoSourcesModal() {
   return (
     <Modal
       className="max-w-4xl"
-      title="🧐 No sources connected"
+      title={transWelcome("NoSourceConnected")}
       onOutsideClick={() => setIsHidden(true)}
     >
       <div className="text-base">
         <div>
           <Text>
-            Before using Search you&apos;ll need to connect at least one source.
-            Without any connected knowledge sources, there isn&apos;t anything
-            to search over.
+          {transWelcome("Connect-at-least-one-source")}
+            
           </Text>
           <Link href="/admin/add-connector">
             <Button className="mt-3" size="xs" icon={FiShare2}>
-              Connect a Source!
+            {transWelcome("Connect-Source")}
             </Button>
           </Link>
           <Divider />
           <div>
             <Text>
-              Or, if you&apos;re looking for a pure ChatGPT-like experience
-              without any organization specific knowledge, then you can head
-              over to the Chat page and start chatting with Danswer right away!
+            {transWelcome("Or-without-Source")}
             </Text>
             <Link href="/chat">
               <Button className="mt-3" size="xs" icon={FiMessageSquare}>
-                Start Chatting!
+              {transWelcome("Start-Chatting")}
               </Button>
             </Link>
           </div>

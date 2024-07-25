@@ -9,6 +9,7 @@ import { SettingsContext } from "../settings/SettingsProvider";
 import { UserDropdown } from "../UserDropdown";
 import { Logo } from "../Logo";
 import { NEXT_PUBLIC_DO_NOT_USE_TOGGLE_OFF_DANSWER_POWERED } from "@/lib/constants";
+import { TranslateWidget } from "@/components/TranslateWidget";
 
 export function HeaderTitle({ children }: { children: JSX.Element | string }) {
   return (
@@ -51,18 +52,20 @@ export function Header({ user, page }: HeaderProps) {
                     {enterpriseSettings.application_name}
                   </HeaderTitle>
                   {!NEXT_PUBLIC_DO_NOT_USE_TOGGLE_OFF_DANSWER_POWERED && (
-                    <p className="text-xs text-subtle">Powered by Danswer</p>
+                    <p className="text-xs text-subtle">Powered by Blona</p>
                   )}
                 </div>
               ) : (
-                <HeaderTitle>Danswer</HeaderTitle>
+                <HeaderTitle>Blona</HeaderTitle>
               )}
             </div>
           </div>
         </Link>
+    
 
         <div className="ml-auto h-full flex flex-col">
           <div className="my-auto">
+            <TranslateWidget />
             <UserDropdown user={user} page={page} />
           </div>
         </div>

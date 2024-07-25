@@ -269,10 +269,10 @@ def handle_regular_answer(
                 client=client,
                 channel=channel,
                 receiver_ids=receiver_ids,
-                text="Hello! Danswer has some results for you!",
+                text="Hello! Blona has some results for you!",
                 blocks=[
                     SectionBlock(
-                        text="Danswer is down for maintenance.\nWe're working hard on recharging the AI!"
+                        text="Blona is down for maintenance.\nWe're working hard on recharging the AI!"
                     )
                 ],
                 thread_ts=message_ts_to_respond_to,
@@ -440,7 +440,7 @@ def handle_regular_answer(
             client=client,
             channel=channel,
             receiver_ids=receiver_ids,
-            text="Hello! Danswer has some results for you!",
+            text="Hello! Blona has some results for you!",
             blocks=all_blocks,
             thread_ts=message_ts_to_respond_to,
             # don't unfurl, since otherwise we will have 5+ previews which makes the message very long

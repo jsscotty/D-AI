@@ -2,8 +2,10 @@ import { Quote } from "@/lib/search/interfaces";
 import { ResponseSection, StatusOptions } from "./ResponseSection";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
+import { useTranslations } from "next-intl";
 
 const TEMP_STRING = "__$%^TEMP$%^__";
+const transWelcome = useTranslations("results");
 
 function replaceNewlines(answer: string) {
   // Since the one-shot answer is a JSON, GPT adds extra backslashes to the
@@ -32,13 +34,13 @@ interface AnswerSectionProps {
 
 export const AnswerSection = (props: AnswerSectionProps) => {
   let status = "in-progress" as StatusOptions;
-  let header = <>Building answer...</>;
+  let header = <>{transWelcome("building-answer")}</>;
   let body = null;
 
   // finished answer
   if (props.quotes !== null || !props.isFetching) {
     status = "success";
-    header = <>AI answer</>;
+    header = <>{transWelcome("ai-answer")}</>;
     if (props.answer) {
       body = (
         <ReactMarkdown
@@ -49,13 +51,13 @@ export const AnswerSection = (props: AnswerSectionProps) => {
         </ReactMarkdown>
       );
     } else {
-      body = <div>Information not found</div>;
+      body = <div>{transWelcome("info-not-found")}</div>;
     }
     // error while building answer (NOTE: if error occurs during quote generation
     // the above if statement will hit and the error will not be displayed)
   } else if (props.error) {
     status = "failed";
-    header = <>Error while building answer</>;
+    header = <>{transWelcome("error-building-answer")}</>;
     body = (
       <div className="flex">
         <div className="text-error my-auto ml-1">{props.error}</div>
@@ -64,7 +66,7 @@ export const AnswerSection = (props: AnswerSectionProps) => {
     // answer is streaming
   } else if (props.answer) {
     status = "success";
-    header = <>AI answer</>;
+    header = <>{transWelcome("ai-answer")}</>;
     body = (
       <ReactMarkdown
         className="prose text-sm max-w-full"
@@ -76,7 +78,7 @@ export const AnswerSection = (props: AnswerSectionProps) => {
   }
   if (props.nonAnswerableReason) {
     status = "warning";
-    header = <>Building best effort AI answer...</>;
+    header = <>{transWelcome("building-best-answer")}</>;
   }
 
   return (
@@ -92,8 +94,7 @@ export const AnswerSection = (props: AnswerSectionProps) => {
           {body}
           {props.nonAnswerableReason && !props.isFetching && (
             <div className="mt-4 text-sm">
-              <b className="font-medium">Warning:</b> the AI did not think this
-              question was answerable.{" "}
+              <b className="font-medium">{transWelcome("warning")}</b>{transWelcome("warning-desc")}{" "}
               <div className="italic mt-1 ml-2">
                 {props.nonAnswerableReason}
               </div>

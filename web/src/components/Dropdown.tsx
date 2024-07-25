@@ -9,6 +9,7 @@ import {
 import { ChevronDownIcon } from "./icons/icons";
 import { FiCheck, FiChevronDown } from "react-icons/fi";
 import { Popover } from "./popover/Popover";
+import { useTranslations } from "next-intl";
 
 export interface Option<T> {
   name: string;
@@ -85,7 +86,7 @@ export function SearchMultiSelectDropdown({
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
-
+  const transWelcome = useTranslations("general");
   return (
     <div className="relative inline-block text-left w-full" ref={dropdownRef}>
       <div>
@@ -179,7 +180,7 @@ export function SearchMultiSelectDropdown({
                 role="menuitem"
                 onClick={() => setIsOpen(false)}
               >
-                No matches found... {/* // TODO: translation */}
+                {transWelcome("no-match-found")}
               </button>
             )}
           </div>

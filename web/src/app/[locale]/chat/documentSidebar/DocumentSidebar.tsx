@@ -115,7 +115,7 @@ export const DocumentSidebar = forwardRef<HTMLDivElement, DocumentSidebarProps>(
               <p className="text-sm font-semibold flex flex-wrap gap-x-2 text-text-600 mt-1">
                 {trans("documents-msg")}
                 <a
-                  href="https://docs.danswer.dev/introduction"
+                  href="mailto:sebastian@blona.de"
                   className="underline cursor-pointer hover:text-strong"
                 >
                   {trans("learn-more")}

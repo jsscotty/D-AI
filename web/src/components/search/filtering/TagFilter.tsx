@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { FiTag, FiX } from "react-icons/fi";
 import debounce from "lodash/debounce";
 import { getValidTags } from "@/lib/tags/tagUtils";
+import { useTranslations } from "next-intl";
 
 export function TagFilter({
   tags,
@@ -19,6 +20,7 @@ export function TagFilter({
   const [filteredTags, setFilteredTags] = useState<Tag[]>(tags);
   const inputRef = useRef<HTMLInputElement>(null);
   const popupRef = useRef<HTMLDivElement>(null);
+  const transWelcome = useTranslations("filtering");
 
   const onSelectTag = (tag: Tag) => {
     setSelectedTags((prev) => {
@@ -101,7 +103,7 @@ export function TagFilter({
             onClick={() => setSelectedTags([])}
             className="pl-0.5 text-xs text-accent cursor-pointer mt-2 w-fit"
           >
-            Clear all
+            {transWelcome("clear-all")}
           </div>
         </div>
       )}
@@ -141,7 +143,7 @@ export function TagFilter({
                   </div>
                 ))
               ) : (
-                <div className="text-sm px-2 py-2">No matching tags found</div>
+                <div className="text-sm px-2 py-2"> {transWelcome("no-matching-found")}</div>
               )}
             </div>
           </div>

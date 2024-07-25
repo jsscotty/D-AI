@@ -9,6 +9,9 @@ import {
   FiPauseCircle,
 } from "react-icons/fi";
 import { HoverPopup } from "./HoverPopup";
+import { useTranslations } from "next-intl";
+
+const transWelcome = useTranslations("general");
 
 export function IndexAttemptStatus({
   status,
@@ -24,7 +27,7 @@ export function IndexAttemptStatus({
   if (status === "failed") {
     const icon = (
       <Badge size={size} color="red" icon={FiAlertTriangle}>
-        Failed
+        {transWelcome("failed")}
       </Badge>
     );
     if (errorMsg) {
@@ -44,19 +47,19 @@ export function IndexAttemptStatus({
   } else if (status === "success") {
     badge = (
       <Badge size={size} color="green" icon={FiCheckCircle}>
-        Succeeded
+        {transWelcome("succeeded")}
       </Badge>
     );
   } else if (status === "in_progress") {
     badge = (
       <Badge size={size} color="amber" icon={FiClock}>
-        In Progress
+        {transWelcome("in-progress")}
       </Badge>
     );
   } else if (status === "not_started") {
     badge = (
       <Badge size={size} color="fuchsia" icon={FiClock}>
-        Scheduled
+        {transWelcome("scheduled")}
       </Badge>
     );
   }
@@ -80,25 +83,25 @@ export function CCPairStatus({
   if (isDeleting) {
     badge = (
       <Badge size={size} color="red" icon={FiAlertTriangle}>
-        Deleting
+        {transWelcome("deleting")}
       </Badge>
     );
   } else if (disabled) {
     badge = (
       <Badge size={size} color="yellow" icon={FiPauseCircle}>
-        Paused
+        {transWelcome("paused")}
       </Badge>
     );
   } else if (status === "failed") {
     badge = (
       <Badge size={size} color="red" icon={FiAlertTriangle}>
-        Error
+        {transWelcome("error")}
       </Badge>
     );
   } else {
     badge = (
       <Badge size={size} color="green" icon={FiCheckCircle}>
-        Active
+        {transWelcome("active")}
       </Badge>
     );
   }

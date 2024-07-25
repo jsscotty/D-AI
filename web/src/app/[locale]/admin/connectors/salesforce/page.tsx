@@ -237,9 +237,9 @@ const MainSection = () => {
                     {" "}
                     here{" "}
                   </a>
-                  for an example of how Danswer uses the objects. <br />
+                  for an example of how Blona uses the objects. <br />
                   <br />
-                  If unsure, don&apos;t specify any objects and Danswer will
+                  If unsure, don&apos;t specify any objects and Blona will
                   default to indexing by &apos;Account&apos;.
                   <br />
                   <br />

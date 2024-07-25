@@ -115,7 +115,7 @@ export const HistorySidebar = forwardRef<HTMLDivElement, HistorySidebarProps>(
                   )}
                 </div>
               ) : (
-                <HeaderTitle>Danswer</HeaderTitle>
+                <HeaderTitle>Blona</HeaderTitle>
               )}
             </div>
             {toggleSidebar && (

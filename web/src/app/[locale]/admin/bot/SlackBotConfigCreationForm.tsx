@@ -261,7 +261,7 @@ export const SlackBotCreationForm = ({
 
                 <BooleanFormField
                   name="still_need_help_enabled"
-                  label="Should Danswer give a “Still need help?” button?"
+                  label="Should Blona give a “Still need help?” button?"
                   subtext={`If specified, DanswerBot's response will include a button at the bottom 
                   of the response that asks the user if they still need help.`}
                 />
@@ -277,7 +277,7 @@ export const SlackBotCreationForm = ({
                         button. For example, &apos;mark@acme.com&apos;.
                         <br />
                         Or provide a user group by either the name or the
-                        handle. For example, &apos;Danswer Team&apos; or
+                        handle. For example, &apos;Blona Team&apos; or
                         &apos;danswer-team&apos;.
                         <br />
                         <br />

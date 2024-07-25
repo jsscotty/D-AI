@@ -26,7 +26,7 @@ export default function FixedLogo() {
               )}
             </div>
           ) : (
-            <HeaderTitle>Danswer</HeaderTitle>
+            <HeaderTitle>Blona</HeaderTitle>
           )}
         </div>
       </div>

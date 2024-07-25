@@ -42,7 +42,7 @@ export default function Page() {
     (source) => source.category === SourceCategory.AppConnection
   );
 
-  const trans = useTranslations("admin")
+  const trans = useTranslations("admin");
 
   return (
     <div className="mx-auto container">
@@ -51,16 +51,12 @@ export default function Page() {
         title={trans("add-connector")}
       />
 
-      <Text>
-        {trans("connector-text")}
-      </Text>
+      <Text>{trans("connector-text")}</Text>
 
       <div className="flex mt-8">
         <Title>{trans("import-title")}</Title>
       </div>
-      <Text>
-        {trans("import-text")}
-      </Text>
+      <Text>{trans("import-text")}</Text>
       <div className="flex flex-wrap gap-4 p-4">
         {importedKnowledgeSources.map((source) => {
           return (
@@ -72,9 +68,7 @@ export default function Page() {
       <div className="flex mt-8">
         <Title>{trans("setup-title")}</Title>
       </div>
-      <Text>
-        {trans("setup-text")}
-      </Text>
+      <Text>{trans("setup-text")}</Text>
       <div className="flex flex-wrap gap-4 p-4">
         {appConnectionSources.map((source) => {
           return (

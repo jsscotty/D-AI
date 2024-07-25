@@ -3,6 +3,9 @@
 import { Button, Text } from "@tremor/react";
 import { Modal } from "./Modal";
 import Link from "next/link";
+import { useTranslations } from "next-intl";
+
+const transWelcome = useTranslations("SwitchModelModal");
 
 export function SwitchModelModal({
   embeddingModelName,
@@ -14,23 +17,19 @@ export function SwitchModelModal({
     <Modal className="max-w-4xl">
       <div className="text-base">
         <h2 className="text-xl font-bold mb-4 pb-2 border-b border-border flex">
-          ❗ Switch Embedding Model ❗
+        {transWelcome("switch-model")}
         </h2>
         <Text>
-          We&apos;ve detected you are using our old default embedding model (
-          <i>{embeddingModelName || "thenlper/gte-small"}</i>). We believe that
-          search performance can be dramatically improved by a simple model
-          switch.
+        {transWelcome("switch-model-desc1")}(
+          <i>{embeddingModelName || "thenlper/gte-small"}</i>). {transWelcome("switch-model-desc2")}
           <br />
           <br />
-          Please click the button below to choose a new model. Don&apos;t worry,
-          the re-indexing necessary for the switch will happen in the background
-          - your use of Danswer will not be interrupted.
+          {transWelcome("switch-model-desc3")}
         </Text>
 
         <div className="flex mt-4">
           <Link href="/admin/models/embedding" className="w-fit mx-auto">
-            <Button size="xs">Choose your Embedding Model</Button>
+            <Button size="xs">{transWelcome("choose-moddel")}</Button>
           </Link>
         </div>
       </div>
