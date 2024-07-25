@@ -37,7 +37,7 @@ export function UserDropdown({
   const handleLogout = () => {
     logout().then((isSuccess) => {
       if (!isSuccess) {
-        alert(transWelcome("failed-logout"));
+        alert((transWelcome("failed-logout")));
       }
       router.push("/auth/login");
     });
