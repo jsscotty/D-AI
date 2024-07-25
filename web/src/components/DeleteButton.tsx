@@ -1,4 +1,7 @@
 import { FiTrash } from "react-icons/fi";
+import { useTranslations } from "next-intl";
+
+
 
 export function DeleteButton({
   onClick,
@@ -6,7 +9,9 @@ export function DeleteButton({
 }: {
   onClick?: (event: React.MouseEvent<HTMLElement>) => void | Promise<void>;
   disabled?: boolean;
+  
 }) {
+  const transWelcome = useTranslations("general");
   return (
     <div
       className={`
@@ -22,7 +27,7 @@ export function DeleteButton({
       onClick={onClick}
     >
       <FiTrash className="mr-1 my-auto" />
-      Delete
+      {transWelcome("delete")}
     </div>
   );
 }

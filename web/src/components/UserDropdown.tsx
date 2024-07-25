@@ -12,6 +12,9 @@ import { LOGOUT_DISABLED } from "@/lib/constants";
 import { Settings } from "@/app/[locale]/admin/settings/interfaces";
 import { SettingsContext } from "./settings/SettingsProvider";
 import { LightSettingsIcon } from "./icons/icons";
+import { useTranslations } from "next-intl";
+
+const transWelcome = useTranslations("general");
 
 export function UserDropdown({
   user,
@@ -33,7 +36,7 @@ export function UserDropdown({
   const handleLogout = () => {
     logout().then((isSuccess) => {
       if (!isSuccess) {
-        alert("Failed to logout");
+        alert({transWelcome("failed-logout")});
       }
       router.push("/auth/login");
     });
@@ -86,7 +89,7 @@ export function UserDropdown({
                   className="flex py-3 px-4 cursor-pointer rounded hover:bg-hover-light"
                 >
                   <LightSettingsIcon className="h-5 w-5 text-text-200est0 my-auto mr-2" />
-                  Admin Panel
+                  {transWelcome("admin-panel")}
                 </Link>
               </>
             )}
@@ -100,7 +103,7 @@ export function UserDropdown({
                   className="mt-1 flex py-3 px-4 cursor-pointer hover:bg-hover-light"
                 >
                   <FiLogOut className="my-auto mr-2 text-lg" />
-                  Log out
+                  {transWelcome("log-out")}
                 </div>
               </>
             )}

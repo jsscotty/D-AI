@@ -1,5 +1,8 @@
 import { Callout } from "@tremor/react";
 import { FiAlertOctagon } from "react-icons/fi";
+import { useTranslations } from "next-intl";
+
+
 
 export function ErrorCallout({
   errorTitle,
@@ -8,11 +11,12 @@ export function ErrorCallout({
   errorTitle?: string;
   errorMsg?: string;
 }) {
+  const transWelcome = useTranslations("general");
   return (
     <div>
       <Callout
         className="mt-4"
-        title={errorTitle || "Page not found"}
+        title={errorTitle || {transWelcome("page-not-found")}}
         icon={FiAlertOctagon}
         color="rose"
       >

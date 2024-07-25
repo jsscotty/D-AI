@@ -96,15 +96,14 @@ export function _WelcomeModal({ user }: { user: User | null }) {
               {apiKeyVerified && (
                 <FiCheckCircle className="my-auto mr-2 text-success" />
               )}
-              Step 1: Setup an LLM
+              {transWelcome("Step1")}
             </Text>
             <div>
               {apiKeyVerified ? (
                 <Text className="mt-2">
-                  LLM setup complete!
+                  {transWelcome("LLMcomplete")}
                   <br /> <br />
-                  If you want to change the key later, you&apos;ll be able to
-                  easily to do so in the Admin Panel.
+                  {transWelcome("ChangeLater")}
                 </Text>
               ) : (
                 <ApiKeyForm
@@ -114,14 +113,11 @@ export function _WelcomeModal({ user }: { user: User | null }) {
               )}
             </div>
             <Text className="font-bold mt-6 mb-2">
-              Step 2: Connect Data Sources
+            {transWelcome("Step2")}
             </Text>
             <div>
               <Text>
-                Connectors are the way that Blona gets data from your
-                organization&apos;s various data sources. Once setup, we&apos;ll
-                automatically sync data from your apps and docs into Danswer, so
-                you can search through all of them in one place.
+              {transWelcome("Step2-desc")}
               </Text>
 
               <div className="flex mt-3">
@@ -135,7 +131,7 @@ export function _WelcomeModal({ user }: { user: User | null }) {
                   className="w-fit mx-auto"
                 >
                   <Button size="xs" icon={FiShare2} disabled={!apiKeyVerified}>
-                    Setup your first connector!
+                  {transWelcome("ConnectorSetup")}
                   </Button>
                 </Link>
               </div>
@@ -155,15 +151,14 @@ export function _WelcomeModal({ user }: { user: User | null }) {
               {apiKeyVerified && (
                 <FiCheckCircle className="my-auto mr-2 text-success" />
               )}
-              Step 1: Setup an LLM
+              {transWelcome("Step1")}
             </Text>
             <div>
               {apiKeyVerified ? (
                 <Text className="mt-2">
-                  LLM setup complete!
+                 {transWelcome("LLMcomplete")} 
                   <br /> <br />
-                  If you want to change the key later or choose a different LLM,
-                  you&apos;ll be able to easily to do so in the Admin Panel.
+                  {transWelcome("ChangeLater")}
                 </Text>
               ) : (
                 <div>
@@ -176,13 +171,11 @@ export function _WelcomeModal({ user }: { user: User | null }) {
             </div>
 
             <Text className="font-bold mt-6 mb-2 flex">
-              Step 2: Start Chatting!
+            {transWelcome("Step2Chat")}
             </Text>
 
             <Text>
-             Click the button below to start chatting with the LLM setup above!
-              Don&apos;t worry, if you do decide later on you want to connect
-              your organization&apos;s knowledge, you can always do that in the{" "}
+            {transWelcome("Step2Chat-desc")}{" "}
               <Link
                 className="text-link"
                 href="/admin/add-connector"
@@ -192,7 +185,7 @@ export function _WelcomeModal({ user }: { user: User | null }) {
                   router.push("/admin/add-connector");
                 }}
               >
-                Admin Panel
+                {transWelcome("AdminPanel")}
               </Link>
               .
             </Text>

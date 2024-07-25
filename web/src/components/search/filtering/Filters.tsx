@@ -10,10 +10,12 @@ import { FilterDropdown } from "./FilterDropdown";
 import { listSourceMetadata } from "@/lib/sources";
 import { SourceIcon } from "@/components/SourceIcon";
 import { TagFilter } from "./TagFilter";
+import { useTranslations } from "next-intl";
 
 const SectionTitle = ({ children }: { children: string }) => (
   <div className="font-bold text-xs mt-2 flex">{children}</div>
 );
+const transWelcome = useTranslations("filtering");
 
 export interface SourceSelectorProps {
   timeRange: DateRangePickerValue | null;
@@ -75,18 +77,18 @@ export function SourceSelector({
       } duration-1000 ease-out transition-all transform origin-top-right`}
     >
       <div className="flex mb-4 pb-2 border-b border-border text-emphasis">
-        <h2 className="font-bold my-auto">Filters</h2>
+        <h2 className="font-bold my-auto">{transWelcome("filters")}</h2>
         <FiFilter className="my-auto ml-2" size="16" />
       </div>
 
-      <SectionTitle>Time Range</SectionTitle>
+      <SectionTitle>{transWelcome("time-range")}</SectionTitle>
       <div className="mt-2">
         <DateRangeSelector value={timeRange} onValueChange={setTimeRange} />
       </div>
 
       {existingSources.length > 0 && (
         <div className="mt-4">
-          <SectionTitle>Sources</SectionTitle>
+          <SectionTitle>{transWelcome("sources")}</SectionTitle>
           <div className="px-1">
             {listSourceMetadata()
               .filter((source) => existingSources.includes(source.internalName))
@@ -117,7 +119,7 @@ export function SourceSelector({
       {availableDocumentSets.length > 0 && (
         <>
           <div className="mt-4">
-            <SectionTitle>Knowledge Sets</SectionTitle>
+            <SectionTitle>{transWelcome("knowledge-sets")}</SectionTitle>
           </div>
           <div className="px-1">
             {availableDocumentSets.map((documentSet) => (
@@ -141,7 +143,7 @@ export function SourceSelector({
                     }
                     popupContent={
                       <div className="text-sm w-64">
-                        <div className="flex font-medium">Description</div>
+                        <div className="flex font-medium">{transWelcome("description")}</div>
                         <div className="mt-1">{documentSet.description}</div>
                       </div>
                     }
@@ -158,7 +160,7 @@ export function SourceSelector({
       {availableTags.length > 0 && (
         <>
           <div className="mt-4 mb-2">
-            <SectionTitle>Tags</SectionTitle>
+            <SectionTitle>{transWelcome("tags")}</SectionTitle>
           </div>
           <TagFilter
             tags={availableTags}
@@ -258,7 +260,7 @@ export function HorizontalFilters({
               <FiMap size={16} />
             </div>
           }
-          defaultDisplay="All Sources"
+          defaultDisplay={transWelcome("all-sources")}
         />
 
         <FilterDropdown
@@ -282,7 +284,7 @@ export function HorizontalFilters({
               <FiBook size={16} />
             </div>
           }
-          defaultDisplay="All Document Sets"
+          defaultDisplay={transWelcome("all-document-sets")}
         />
       </div>
 

@@ -1,7 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-
+import { useTranslations } from "next-intl";
 import { FiChevronLeft } from "react-icons/fi";
 
 export function BackButton({
@@ -10,6 +10,7 @@ export function BackButton({
   behaviorOverride?: () => void;
 }) {
   const router = useRouter();
+  const transWelcome = useTranslations("general");
 
   return (
     <div
@@ -33,7 +34,7 @@ export function BackButton({
       }}
     >
       <FiChevronLeft className="mr-1 my-auto" />
-      Back
+      {transWelcome("back")}
     </div>
   );
 }
