@@ -72,6 +72,7 @@ interface QuotesSectionProps {
 }
 
 const QuotesHeader = ({ quotes, isFetching }: QuotesSectionProps) => {
+  const transWelcome = useTranslations("results");
   if ((!quotes || quotes.length === 0) && isFetching) {
     return <>{transWelcome("extracting-quotes")}</>;
   }
@@ -84,6 +85,9 @@ const QuotesHeader = ({ quotes, isFetching }: QuotesSectionProps) => {
 };
 
 const QuotesBody = ({ quotes, isFetching }: QuotesSectionProps) => {
+  // translation
+  const transWelcome = useTranslations("results");
+
   if (!quotes && isFetching) {
     // height of quotes section to avoid extra "jumps" from the quotes loading
     return <div className="h-[42px]"></div>;
@@ -93,7 +97,7 @@ const QuotesBody = ({ quotes, isFetching }: QuotesSectionProps) => {
     return (
       <div className="flex">
         <div className="text-error text-sm my-auto">
-        {transWelcome("quotes-not-found")}
+          {transWelcome("quotes-not-found")}
         </div>
       </div>
     );
