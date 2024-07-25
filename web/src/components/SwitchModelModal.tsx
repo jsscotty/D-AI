@@ -5,23 +5,24 @@ import { Modal } from "./Modal";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
 
-const transWelcome = useTranslations("SwitchModelModal");
-
 export function SwitchModelModal({
   embeddingModelName,
 }: {
   embeddingModelName: undefined | null | string;
 }) {
+  const transWelcome = useTranslations("SwitchModelModal");
+
   return (
     // TODO: translation
     <Modal className="max-w-4xl">
       <div className="text-base">
         <h2 className="text-xl font-bold mb-4 pb-2 border-b border-border flex">
-        {transWelcome("switch-model")}
+          {transWelcome("switch-model")}
         </h2>
         <Text>
-        {transWelcome("switch-model-desc1")}(
-          <i>{embeddingModelName || "thenlper/gte-small"}</i>). {transWelcome("switch-model-desc2")}
+          {transWelcome("switch-model-desc1")}(
+          <i>{embeddingModelName || "thenlper/gte-small"}</i>).{" "}
+          {transWelcome("switch-model-desc2")}
           <br />
           <br />
           {transWelcome("switch-model-desc3")}

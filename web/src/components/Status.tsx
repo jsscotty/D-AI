@@ -11,8 +11,6 @@ import {
 import { HoverPopup } from "./HoverPopup";
 import { useTranslations } from "next-intl";
 
-const transWelcome = useTranslations("general");
-
 export function IndexAttemptStatus({
   status,
   errorMsg,
@@ -23,6 +21,7 @@ export function IndexAttemptStatus({
   size?: "xs" | "sm" | "md" | "lg";
 }) {
   let badge;
+  const transWelcome = useTranslations("general");
 
   if (status === "failed") {
     const icon = (
@@ -79,6 +78,7 @@ export function CCPairStatus({
   size?: "xs" | "sm" | "md" | "lg";
 }) {
   let badge;
+  const transWelcome = useTranslations("general");
 
   if (isDeleting) {
     badge = (

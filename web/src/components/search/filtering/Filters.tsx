@@ -15,7 +15,6 @@ import { useTranslations } from "next-intl";
 const SectionTitle = ({ children }: { children: string }) => (
   <div className="font-bold text-xs mt-2 flex">{children}</div>
 );
-const transWelcome = useTranslations("filtering");
 
 export interface SourceSelectorProps {
   timeRange: DateRangePickerValue | null;
@@ -69,6 +68,7 @@ export function SourceSelector({
       }
     });
   };
+  const transWelcome = useTranslations("filtering");
 
   return (
     <div
@@ -143,7 +143,9 @@ export function SourceSelector({
                     }
                     popupContent={
                       <div className="text-sm w-64">
-                        <div className="flex font-medium">{transWelcome("description")}</div>
+                        <div className="flex font-medium">
+                          {transWelcome("description")}
+                        </div>
                         <div className="mt-1">{documentSet.description}</div>
                       </div>
                     }
@@ -229,6 +231,7 @@ export function HorizontalFilters({
   const availableSources = allSources.filter((source) =>
     existingSources.includes(source.internalName)
   );
+  const transWelcome = useTranslations("filtering");
 
   return (
     <div>

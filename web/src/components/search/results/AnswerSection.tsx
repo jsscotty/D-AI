@@ -5,7 +5,6 @@ import remarkGfm from "remark-gfm";
 import { useTranslations } from "next-intl";
 
 const TEMP_STRING = "__$%^TEMP$%^__";
-const transWelcome = useTranslations("results");
 
 function replaceNewlines(answer: string) {
   // Since the one-shot answer is a JSON, GPT adds extra backslashes to the
@@ -34,6 +33,8 @@ interface AnswerSectionProps {
 
 export const AnswerSection = (props: AnswerSectionProps) => {
   let status = "in-progress" as StatusOptions;
+  const transWelcome = useTranslations("results");
+
   let header = <>{transWelcome("building-answer")}</>;
   let body = null;
 
@@ -94,7 +95,8 @@ export const AnswerSection = (props: AnswerSectionProps) => {
           {body}
           {props.nonAnswerableReason && !props.isFetching && (
             <div className="mt-4 text-sm">
-              <b className="font-medium">{transWelcome("warning")}</b>{transWelcome("warning-desc")}{" "}
+              <b className="font-medium">{transWelcome("warning")}</b>
+              {transWelcome("warning-desc")}{" "}
               <div className="italic mt-1 ml-2">
                 {props.nonAnswerableReason}
               </div>
