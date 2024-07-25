@@ -1,6 +1,3 @@
-Here is the complete translation of the JSON data into German:
-
-```json
 {
     "general": {
         "back": "Zurück",
@@ -143,9 +140,7 @@ Here is the complete translation of the JSON data into German:
         "documents-msg": "Wählen Sie, um zum kontinuierlichen Kontext hinzuzufügen",
         "learn-more": "Mehr erfahren",
         "no-documents-found": "Keine Dokumente für die Anfrage gefunden.",
-        "documents-question": "Wenn Sie eine Frage stellen, werden
-
- die abgerufenen Dokumente hier angezeigt!",
+        "documents-question": "Wenn Sie eine Frage stellen, werden die abgerufenen Dokumente hier angezeigt!",
         "save-changes": "Änderungen speichern",
         "delete-context": "Kontext löschen",
         "delete-folder-confirm": "Möchten Sie <i>{folderName}</i> wirklich löschen? Alle Inhalte in diesem Ordner werden ebenfalls gelöscht.",
@@ -200,4 +195,3 @@ Here is the complete translation of the JSON data into German:
         "choose-model": "Wählen Sie Ihr Embedding-Modell"
     }
 }
-```
