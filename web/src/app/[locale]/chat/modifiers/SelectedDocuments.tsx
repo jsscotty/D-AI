@@ -8,10 +8,11 @@ export function SelectedDocuments({
 }: {
   selectedDocuments: DanswerDocument[];
 }) {
+  const trans = useTranslations("chat");
   if (selectedDocuments.length === 0) {
     return null;
   }
-  const trans = useTranslations("chat");
+
   return (
     <BasicClickable>
       <div className="flex text-xs max-w-md overflow-hidden">
