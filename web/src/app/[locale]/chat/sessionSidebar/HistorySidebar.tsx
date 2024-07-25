@@ -146,7 +146,7 @@ export const HistorySidebar = forwardRef<HTMLDivElement, HistorySidebarProps>(
 
               <button
                 onClick={() =>
-                  createFolder("New Folder")
+                  createFolder(trans("new-folder"))
                     .then((folderId) => {
                       console.log(`Folder created with ID: ${folderId}`);
                       router.refresh();
@@ -154,7 +154,7 @@ export const HistorySidebar = forwardRef<HTMLDivElement, HistorySidebarProps>(
                     .catch((error) => {
                       console.error("Failed to create folder:", error);
                       setPopup({
-                        message: `Failed to create folder: ${error.message}`,
+                        message: `${trans("failed-folder")}: ${error.message}`,
                         type: "error",
                       });
                     })

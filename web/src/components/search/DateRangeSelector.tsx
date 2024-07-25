@@ -2,7 +2,7 @@ import { getXDaysAgo } from "@/lib/dateUtils";
 import { DateRangePickerValue } from "@tremor/react";
 import { FiCalendar, FiChevronDown, FiXCircle } from "react-icons/fi";
 import { CustomDropdown, DefaultDropdownElement } from "../Dropdown";
-
+import { useTranslations } from "next-intl";
 function DateSelectorItem({
   children,
   onClick,
@@ -42,6 +42,8 @@ export function DateRangeSelector({
   value: DateRangePickerValue | null;
   onValueChange: (value: DateRangePickerValue | null) => void;
 }) {
+  const trans = useTranslations("chat");
+  const transSearch = useTranslations("search");
   return (
     <div>
       <CustomDropdown
@@ -62,7 +64,7 @@ export function DateRangeSelector({
           >
             <DefaultDropdownElement
               key={LAST_30_DAYS}
-              name={LAST_30_DAYS}
+              name={trans("last-x-days", { num: "30" })}
               onSelect={() =>
                 onValueChange({
                   to: new Date(),
@@ -75,7 +77,7 @@ export function DateRangeSelector({
 
             <DefaultDropdownElement
               key={LAST_7_DAYS}
-              name={LAST_7_DAYS}
+              name={trans("last-x-days", { num: "7" })}
               onSelect={() =>
                 onValueChange({
                   to: new Date(),
@@ -88,7 +90,7 @@ export function DateRangeSelector({
 
             <DefaultDropdownElement
               key={TODAY}
-              name={TODAY}
+              name={trans("today")}
               onSelect={() =>
                 onValueChange({
                   to: new Date(),
@@ -118,7 +120,7 @@ export function DateRangeSelector({
             <div className="text-emphasis">{value.selectValue}</div>
           ) : (
             // TODO: translation
-            "Any time..."
+            transSearch("any-time")
           )}
           {value?.selectValue ? (
             <div

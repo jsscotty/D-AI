@@ -61,7 +61,7 @@ export const LlmTab = forwardRef<HTMLDivElement, LlmTabProps>(
     return (
       <div className="mb-4">
         <label className="block text-sm font-medium mb-2">
-          {trans("assistant-name")}
+          {trans("choose-model")}
         </label>
         <Text className="mb-1">
           {trans("override-model", {

@@ -34,6 +34,7 @@ import { AssistantSharedStatusDisplay } from "../AssistantSharedStatus";
 import useSWR from "swr";
 import { errorHandlingFetcher } from "@/lib/fetcher";
 import { ToolsDisplay } from "../ToolsDisplay";
+import { useTranslations } from "next-intl";
 
 function AssistantListItem({
   assistant,
@@ -59,7 +60,8 @@ function AssistantListItem({
 
   const currentChosenAssistants = user?.preferences?.chosen_assistants;
   const isOwnedByUser = checkUserOwnsAssistant(user, assistant);
-
+  const transGeneral = useTranslations("general");
+  const transAssistants = useTranslations("assistants");
   return (
     <>
       <AssistantSharingModal
@@ -140,19 +142,23 @@ function AssistantListItem({
                       );
                       if (success) {
                         setPopup({
-                          message: `"${assistant.name}" has been moved up.`,
+                          message: transAssistants("move-up-success", {
+                            assistantName: assistant.name,
+                          }),
                           type: "success",
                         });
                         router.refresh();
                       } else {
                         setPopup({
-                          message: `"${assistant.name}" could not be moved up.`,
+                          message: transAssistants("move-up-fail", {
+                            assistantName: assistant.name,
+                          }),
                           type: "error",
                         });
                       }
                     }}
                   >
-                    <FiArrowUp /> Move Up
+                    <FiArrowUp /> {transAssistants("move-up")}
                   </div>,
                 ]
               : []),
@@ -168,19 +174,23 @@ function AssistantListItem({
                       );
                       if (success) {
                         setPopup({
-                          message: `"${assistant.name}" has been moved down.`,
+                          message: transAssistants("move-down-success", {
+                            assistantName: assistant.name,
+                          }),
                           type: "success",
                         });
                         router.refresh();
                       } else {
                         setPopup({
-                          message: `"${assistant.name}" could not be moved down.`,
+                          message: transAssistants("move-down-fail", {
+                            assistantName: assistant.name,
+                          }),
                           type: "error",
                         });
                       }
                     }}
                   >
-                    <FiArrowDown /> Move Down
+                    <FiArrowDown /> {transAssistants("move-down")}
                   </div>,
                 ]
               : []),
@@ -194,7 +204,9 @@ function AssistantListItem({
                     currentChosenAssistants.length === 1
                   ) {
                     setPopup({
-                      message: `Cannot remove "${assistant.name}" - you must have at least one assistant.`,
+                      message: transAssistants("remove-error-no-assistant", {
+                        assistantName: assistant.name,
+                      }),
                       type: "error",
                     });
                     return;
@@ -206,19 +218,26 @@ function AssistantListItem({
                   );
                   if (success) {
                     setPopup({
-                      message: `"${assistant.name}" has been removed from your list.`,
+                      message: transAssistants("remove-success", {
+                        assistantName: assistant.name,
+                      }),
                       type: "success",
                     });
                     router.refresh();
                   } else {
                     setPopup({
-                      message: `"${assistant.name}" could not be removed from your list.`,
+                      message: transAssistants("remove-error", {
+                        assistantName: assistant.name,
+                      }),
                       type: "error",
                     });
                   }
                 }}
               >
-                <FiX /> {isOwnedByUser ? "Hide" : "Remove"}
+                <FiX />{" "}
+                {isOwnedByUser
+                  ? transAssistants("hide")
+                  : transAssistants("remove")}
               </div>
             ) : (
               <div
@@ -231,19 +250,23 @@ function AssistantListItem({
                   );
                   if (success) {
                     setPopup({
-                      message: `"${assistant.name}" has been added to your list.`,
+                      message: transAssistants("add-success", {
+                        assistantName: assistant.name,
+                      }),
                       type: "success",
                     });
                     router.refresh();
                   } else {
                     setPopup({
-                      message: `"${assistant.name}" could not be added to your list.`,
+                      message: transAssistants("add-fail", {
+                        assistantName: assistant.name,
+                      }),
                       type: "error",
                     });
                   }
                 }}
               >
-                <FiPlus /> Add
+                <FiPlus /> {transGeneral("add")}
               </div>
             ),
           ]}
@@ -274,19 +297,21 @@ export function AssistantsList({ user, assistants }: AssistantsListProps) {
     "/api/users",
     errorHandlingFetcher
   );
-
+  const transAssistants = useTranslations("assistants");
   return (
     <>
       {popup}
       <div className="mx-auto w-searchbar-xs 2xl:w-searchbar-sm 3xl:w-searchbar">
-        <AssistantsPageTitle>My Assistants</AssistantsPageTitle>
+        <AssistantsPageTitle>
+          {transAssistants("my-assistants")}
+        </AssistantsPageTitle>
 
         <div className="grid grid-cols-2 gap-4 mt-3">
           <Link href="/assistants/new">
             <NavigationButton>
               <div className="flex justify-center">
                 <FiPlus className="mr-2 my-auto" size={20} />
-                Create New Assistant
+                {transAssistants("create-new-assistant")}
               </div>
             </NavigationButton>
           </Link>
@@ -295,27 +320,23 @@ export function AssistantsList({ user, assistants }: AssistantsListProps) {
             <NavigationButton>
               <div className="flex justify-center">
                 <FiSearch className="mr-2 my-auto" size={20} />
-                View Available Assistants
+                {transAssistants("view-available-assistants")}
               </div>
             </NavigationButton>
           </Link>
         </div>
 
         <p className="mt-6 text-center text-base">
-          Assistants allow you to customize your experience for a specific
-          purpose. Specifically, they combine instructions, extra knowledge, and
-          any combination of tools.
+          {transAssistants("assistants-msg")}
         </p>
 
         <Divider />
 
-        <h3 className="text-xl font-bold mb-4">Active Assistants</h3>
+        <h3 className="text-xl font-bold mb-4">
+          {transAssistants("active-assistants-title")}
+        </h3>
 
-        <Text>
-          The order the assistants appear below will be the order they appear in
-          the Assistants dropdown. The first assistant listed will be your
-          default assistant when you start a new chat.
-        </Text>
+        <Text>{transAssistants("active-assistants-msg")}</Text>
 
         <div className="w-full p-4 mt-3">
           {filteredAssistants.map((assistant, index) => (
@@ -337,12 +358,11 @@ export function AssistantsList({ user, assistants }: AssistantsListProps) {
           <>
             <Divider />
 
-            <h3 className="text-xl font-bold mb-4">Your Hidden Assistants</h3>
+            <h3 className="text-xl font-bold mb-4">
+              {transAssistants("hidden-assistants-title")}
+            </h3>
 
-            <Text>
-              Assistants you&apos;ve created that aren&apos;t currently visible
-              in the Assistants selector.
-            </Text>
+            <Text>{transAssistants("hidden-assistants-msg")}</Text>
 
             <div className="w-full p-4">
               {ownedButHiddenAssistants.map((assistant, index) => (
