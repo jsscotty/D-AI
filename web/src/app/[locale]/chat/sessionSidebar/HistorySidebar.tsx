@@ -67,6 +67,7 @@ export const HistorySidebar = forwardRef<HTMLDivElement, HistorySidebarProps>(
     const { popup, setPopup } = usePopup();
 
     const currentChatId = currentChatSession?.id;
+    const trans = useTranslations("chat");
 
     // prevent the NextJS Router cache from causing the chat sidebar to not
     // update / show an outdated list of chats
@@ -80,7 +81,6 @@ export const HistorySidebar = forwardRef<HTMLDivElement, HistorySidebarProps>(
     }
     const settings = combinedSettings.settings;
     const enterpriseSettings = combinedSettings.enterpriseSettings;
-    const trans = useTranslations("chat");
     return (
       <>
         {popup}
