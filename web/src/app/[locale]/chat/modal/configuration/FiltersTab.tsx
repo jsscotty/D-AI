@@ -15,6 +15,7 @@ import { FiX } from "react-icons/fi";
 import { getValidTags } from "@/lib/tags/tagUtils";
 import debounce from "lodash/debounce";
 import { Tag } from "@/lib/types";
+import { useTranslations } from "next-intl";
 
 export function FiltersTab({
   filterManager,
@@ -52,16 +53,17 @@ export function FiltersTab({
     };
   }, [filterValue, availableTags, debouncedFetchTags]);
 
+  const trans = useTranslations("chat");
+
   return (
     <div className="overflow-hidden flex flex-col">
       <div className="overflow-y-auto">
         <div>
           <div className="pb-4">
-            <h3 className="text-lg font-semibold">Time Range</h3>
-            <Text>
-              Choose the time range we should search over. If only one date is
-              selected, will only search after the specified date.
-            </Text>
+            <h3 className="text-lg font-semibold">
+              {trans("time-range-title")}
+            </h3>
+            <Text>{trans("time-range-msg")}</Text>
             <div className="mt-2">
               <DateRangePicker
                 className="w-96"
@@ -111,11 +113,10 @@ export function FiltersTab({
           <Divider />
 
           <div className="mb-8">
-            <h3 className="text-lg font-semibold">Knowledge Sets</h3>
-            <Text>
-              Choose which knowledge sets we should search over. If multiple are
-              selected, we will search through all of them.
-            </Text>
+            <h3 className="text-lg font-semibold">
+              {trans("knowledge-sets-title")}
+            </h3>
+            <Text>{trans("knowledge-sets-msg")}</Text>
             <ul className="mt-3">
               {availableDocumentSets.length > 0 ? (
                 availableDocumentSets.map((set) => {

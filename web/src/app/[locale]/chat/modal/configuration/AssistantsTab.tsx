@@ -5,7 +5,7 @@ import { AssistantIcon } from "@/components/assistants/AssistantIcon";
 import { getFinalLLM } from "@/lib/llm/utils";
 import React from "react";
 import { FiBookmark, FiImage, FiSearch } from "react-icons/fi";
-
+import { useTranslations } from "next-intl";
 interface AssistantsTabProps {
   selectedAssistant: Persona;
   availableAssistants: Persona[];
@@ -20,7 +20,7 @@ export function AssistantsTab({
   onSelect,
 }: AssistantsTabProps) {
   const [_, llmName] = getFinalLLM(llmProviders, null, null);
-
+  const trans = useTranslations("chat");
   return (
     <div className="py-4">
       <h3 className="px-4 text-lg font-semibold">Change Assistant</h3>
@@ -91,7 +91,7 @@ export function AssistantsTab({
                 </div>
               )}
               <div className="text-xs text-subtle">
-                <span className="font-medium">Default Model:</span>{" "}
+                <span className="font-medium">{trans("default-model")}:</span>{" "}
                 <i>{assistant.llm_model_version_override || llmName}</i>
               </div>
             </div>

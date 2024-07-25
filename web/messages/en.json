@@ -68,6 +68,11 @@
         "no": "No",
         "create-new-assistant": "Create new assistant",
         "message-placeholder": "Send a message or @ to tag an assistant...",
-        "assistants": "Assistants"
+        "assistants": "Assistants",
+        "default-model": "Default Model",
+        "time-range-title": "Time Range",
+        "time-range-msg": "Choose the time range we should search over. If only one date is selected, will only search after the specified date.",
+        "knowledge-sets-title": "Knowledge Sets",
+        "knowledge-sets-msg": "Choose which knowledge sets we should search over. If multiple are selected, we will search through all of them."
     }
 }
