@@ -3,6 +3,10 @@
         "title": "Unlock Knowledge",
         "welcome": "Welcome to Blona"
     },
+    "AdvancedOptions": {
+        "Advanced-Options": "Advanced Options"
+    },
+    
     "welcomeModal": {
         "welcome": "Welcome to Blona",
         "plan": "How are you planning on using Blona?",

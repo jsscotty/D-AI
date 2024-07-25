@@ -12,6 +12,7 @@ import { Tooltip } from "../tooltip/Tooltip";
 import KeyboardSymbol from "@/lib/browserUtilities";
 import Link from "next/link";
 import { SettingsContext } from "../settings/SettingsProvider";
+import { useTranslations } from "next-intl";
 
 export default function FunctionalHeader({
   showSidebar,
@@ -29,7 +30,7 @@ export default function FunctionalHeader({
   const combinedSettings = useContext(SettingsContext);
   const settings = combinedSettings?.settings;
   const enterpriseSettings = combinedSettings?.enterpriseSettings;
-
+  const transWelcome = useTranslations("Chat_search");
   const commandSymbol = KeyboardSymbol();
 
   useEffect(() => {
