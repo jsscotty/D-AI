@@ -16,7 +16,7 @@ export function AssistantSharedStatusDisplay({
   const assistantSharedUsersWithoutOwner = assistant.users?.filter(
     (u) => u.id !== assistant.owner?.id
   );
-  const trans = useTranslations("assistants")
+  const trans = useTranslations("assistants");
 
   if (assistant.is_public) {
     return (
@@ -47,7 +47,7 @@ export function AssistantSharedStatusDisplay({
                 {trans("shared-by")} <i>{assistant.owner?.email}</i>
               </div>
             ) : (
-              {trans("shared-with-you")}
+              trans("shared-with-you")
             )}
           </div>
         )}

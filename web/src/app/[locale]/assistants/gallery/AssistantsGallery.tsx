@@ -40,21 +40,19 @@ export function AssistantsGallery({
 
   const allAssistantIds = assistants.map((assistant) => assistant.id);
   const filteredAssistants = filterAssistants(assistants, searchQuery);
-  const trans = useTranslations("assistants")
+  const trans = useTranslations("assistants");
   return (
     <>
       {popup}
       <div className="mx-auto w-searchbar-xs 2xl:w-searchbar-sm 3xl:w-searchbar">
-        <AssistantsPageTitle>{trans(assistant-gallery)}</AssistantsPageTitle>
+        <AssistantsPageTitle>{trans("assistant-gallery")}</AssistantsPageTitle>
         <div className="flex justify-center mb-6">
           <Link href="/assistants/mine">
             <NavigationButton>{trans("view-assistant")}</NavigationButton>
           </Link>
         </div>
 
-        <p className="text-center mb-6">
-          {trans("view-assistant-text")}
-        </p>
+        <p className="text-center mb-6">{trans("view-assistant-text")}</p>
 
         <div className="mb-6">
           <input
@@ -126,7 +124,9 @@ export function AssistantsGallery({
                           ) {
                             // TODO CHECK
                             setPopup({
-                              message: {trans("remove-error-no-assistant", {assistant.name})},
+                              message: trans("add-assistant-error", {
+                                name: assistant.name,
+                              }),
                               type: "error",
                             });
                             return;
@@ -137,15 +137,18 @@ export function AssistantsGallery({
                             user.preferences?.chosen_assistants ||
                               allAssistantIds
                           );
+                          const assistantName = assistant.name;
                           if (success) {
                             setPopup({
-                              message: {trans("remove-success". {assistant.name})},
+                              message: trans("remove-success", {
+                                assistantName,
+                              }),
                               type: "success",
                             });
                             router.refresh();
                           } else {
                             setPopup({
-                              message: {trans("remove-error", {assistant.name})},
+                              message: trans("remove-error", { assistantName }),
                               type: "error",
                             });
                           }
@@ -165,18 +168,23 @@ export function AssistantsGallery({
                         onClick={async () => {
                           const success = await addAssistantToList(
                             assistant.id,
-                            user.preferences?.chosen_assistants ||
+                            user?.preferences?.chosen_assistants ||
                               allAssistantIds
                           );
+                          const assistantName = assistant.name;
                           if (success) {
                             setPopup({
-                              message: {trans("add-assistant", {assistant.name})},
+                              message: trans("add-assistant", {
+                                assistantName,
+                              }),
                               type: "success",
                             });
                             router.refresh();
                           } else {
                             setPopup({
-                              message: {trans("add-assistant-error", {assistant.name})},
+                              message: trans("add-assistant-error", {
+                                assistantName,
+                              }),
                               type: "error",
                             });
                           }
