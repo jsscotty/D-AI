@@ -8,6 +8,7 @@ import { HoverPopup } from "@/components/HoverPopup";
 import { Modal } from "@/components/Modal";
 import { useState } from "react";
 import { Logo } from "@/components/Logo";
+import { useTranslations } from "next-intl";
 
 const MAX_PERSONAS_TO_DISPLAY = 4;
 
@@ -34,7 +35,8 @@ export function ChatIntro({
   selectedPersona: Persona;
 }) {
   const availableSourceMetadata = getSourceMetadataForSources(availableSources);
-
+  const transFiltering = useTranslations("filtering");
+  const transChat = useTranslations("chat");
   return (
     <>
       <div className="flex justify-center items-center h-full">
@@ -57,7 +59,7 @@ export function ChatIntro({
                 {selectedPersona.document_sets.length > 0 && (
                   <div className="mt-2">
                     <p className="font-bold mb-1 mt-4 text-emphasis">
-                      Knowledge Sets:{" "}
+                      {transFiltering("knowledge-sets")}:{" "}
                     </p>
                     <div className="flex flex-wrap gap-2">
                       {selectedPersona.document_sets.map((documentSet) => (
@@ -90,7 +92,7 @@ export function ChatIntro({
                 {availableSources.length > 0 && (
                   <div className="mt-1">
                     <p className="font-bold mb-1 mt-4 text-emphasis">
-                      Connected Sources:{" "}
+                      {transChat("connected-sources")}:{" "}
                     </p>
                     <div className={`flex flex-wrap gap-2`}>
                       {availableSourceMetadata.map((sourceMetadata) => (

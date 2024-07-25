@@ -19,6 +19,7 @@ import { DefaultDropdownElement } from "@/components/Dropdown";
 import { Popover } from "@/components/popover/Popover";
 import { ShareChatSessionModal } from "../modal/ShareChatSessionModal";
 import { CHAT_SESSION_ID_KEY, FOLDER_ID_KEY } from "@/lib/drag/constants";
+import { useTranslations } from "next-intl";
 
 export function ChatSessionDisplay({
   chatSession,
@@ -41,6 +42,7 @@ export function ChatSessionDisplay({
   const [isShareModalVisible, setIsShareModalVisible] = useState(false);
   const [chatName, setChatName] = useState(chatSession.name);
   const [delayedSkipGradient, setDelayedSkipGradient] = useState(skipGradient);
+  const trans = useTranslations("chat");
 
   useEffect(() => {
     if (skipGradient) {
@@ -59,7 +61,7 @@ export function ChatSessionDisplay({
       setIsRenamingChat(false);
       router.refresh();
     } else {
-      alert("Failed to rename chat session");
+      alert(trans("rename-chat-fail"));
     }
   };
 
@@ -83,7 +85,7 @@ export function ChatSessionDisplay({
               // go back to the main page
               router.push("/chat");
             } else {
-              alert("Failed to delete chat session");
+              alert(trans("delete-chat-fail"));
             }
           }}
           chatSessionName={chatSession.name}
@@ -173,12 +175,12 @@ export function ChatSessionDisplay({
                           popover={
                             <div className="border border-border rounded-lg bg-background z-50 w-32">
                               <DefaultDropdownElement
-                                name="Share"
+                                name={trans("share")}
                                 icon={FiShare2}
                                 onSelect={() => setIsShareModalVisible(true)}
                               />
                               <DefaultDropdownElement
-                                name="Rename"
+                                name={trans("rename")}
                                 icon={FiEdit2}
                                 onSelect={() => setIsRenamingChat(true)}
                               />

@@ -8,6 +8,7 @@ import { CHAT_SESSION_ID_KEY, FOLDER_ID_KEY } from "@/lib/drag/constants";
 import { usePopup } from "@/components/admin/connectors/Popup";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 
 export function PagesTab({
   page,
@@ -47,7 +48,7 @@ export function PagesTab({
         router.refresh(); // Refresh the page to reflect the changes
       } catch (error) {
         setPopup({
-          message: "Failed to remove chat from folder",
+          message: trans("remove-from-folder-fail"),
           type: "error",
         });
       }
@@ -55,13 +56,14 @@ export function PagesTab({
   };
 
   const isHistoryEmpty = !existingChats || existingChats.length === 0;
+  const trans = useTranslations("chat");
 
   return (
     <div className="mb-1 ml-3 relative miniscroll overflow-y-auto h-full">
       {folders && folders.length > 0 && (
         <div className="py-2 border-b border-border">
           <div className="text-xs text-subtle flex pb-0.5 mb-1.5 mt-2 font-bold">
-            Folders
+            {trans("folders")}
           </div>
           <FolderList
             folders={folders}
@@ -85,14 +87,12 @@ export function PagesTab({
           <p className="my-2 text-xs text-subtle flex font-bold">
             {page == "chat" && "Chat "}
             {page == "search" && "Search "}
-            History
+            {trans("history")}
           </p>
         )}
         {isHistoryEmpty ? (
           <p className="text-sm text-subtle mt-2 w-[250px]">
-            {page === "search"
-              ? "Try running a search! Your search history will appear here."
-              : "Try sending a message! Your chat history will appear here."}
+            {page === "search" ? trans("empty-search") : trans("empty-chat")}
           </p>
         ) : (
           Object.entries(groupedChatSessions).map(
