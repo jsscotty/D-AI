@@ -47,11 +47,27 @@
         "view-assistant": "View Your Assistants",
         "view-assistant-text": "Discover and create custom assistants that combine instructions, extra knowledge, and any combination of tools.",
         "search-assistants": "Search assistants...",
-        "remove-error-no-assistant": "Cannot remove {assistant.name} - you must have at least one assistant.",
-        "remove-success": "{assistant.name} has been removed from your list.",
-        "remove-error": "{assistant.name} could not be removed from your list.",
-        "add-assistant": "{assistant.name} has been removed to your list.",
-        "add-assistant-error": "{assistant.name} could not be added to your list."
-
+        "remove-error-no-assistant": "Cannot remove {assistantName} - you must have at least one assistant.",
+        "remove-success": "{assistantName} has been removed from your list.",
+        "remove-error": "{assistantName} could not be removed from your list.",
+        "add-assistant": "{assistantName} has been removed to your list.",
+        "add-assistant-error": "{assistantName} could not be added to your list."
+    },
+    "chat": {
+        "like": "The AI liked this doc!",
+        "llm-context-limit": "LLM context limit reached 😔 If you want to chat with this document, please de-select others to free up space.",
+        "documents": "Documents",
+        "documents-msg": "Select to add to continuous context",
+        "learn-more": "Learn more",
+        "no-documents-found": "No documents found for the query.",
+        "documents-question": "When you run ask a question, the retrieved documents will show up here!",
+        "save-changes": "Save Changes",
+        "delete-context": "Delete Context",
+        "delete-folder-confirm": "Are you sure you want to delete <i>{folderName}</i>? All the content inside this folder will also be deleted",
+        "yes": "Yes",
+        "no": "No",
+        "create-new-assistant": "Create new assistant",
+        "message-placeholder": "Send a message or @ to tag an assistant...",
+        "assistants": "Assistants"
     }
 }

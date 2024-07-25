@@ -9,7 +9,7 @@ import {
   buildDocumentSummaryDisplay,
 } from "@/components/search/DocumentDisplay";
 import { InternetSearchIcon } from "@/components/InternetSearchIcon";
-
+import { useTranslations } from "next-intl";
 interface DocumentDisplayProps {
   document: DanswerDocument;
   queryEventId: number | null;
@@ -30,6 +30,7 @@ export function ChatDocumentDisplay({
   tokenLimitReached,
 }: DocumentDisplayProps) {
   const isInternet = document.is_internet;
+  const trans = useTranslations("chat");
   // Consider reintroducing null scored docs in the future
 
   if (document.score === null) {
@@ -71,7 +72,7 @@ export function ChatDocumentDisplay({
                         <div className="w-3 h-3 flex flex-col my-auto mr-1">
                           <FiInfo className="my-auto" />
                         </div>
-                        <div className="my-auto">The AI liked this doc!</div>
+                        <div className="my-auto">{trans("like")}</div>
                       </div>
                     </div>
                   }

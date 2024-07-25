@@ -25,6 +25,7 @@ import Cookies from "js-cookie";
 import { CustomTooltip } from "@/components/tooltip/CustomTooltip";
 import { Tooltip } from "@/components/tooltip/Tooltip";
 import { Popover } from "@/components/popover/Popover";
+import { useTranslations } from "next-intl";
 
 const FolderItem = ({
   folder,
@@ -155,6 +156,8 @@ const FolderItem = ({
     return a.time_created.localeCompare(b.time_created);
   });
 
+  const trans = useTranslations("chat");
+
   return (
     <div
       key={folder.folder_id}
@@ -174,21 +177,20 @@ const FolderItem = ({
           className="absolute max-w-xs border z-[100] border-neutral-300 top-0 right-0 w-[250px] -bo-0 top-2 mt-4 p-2 bg-background-100 rounded shadow-lg z-10"
         >
           <p className="text-sm mb-2">
-            Are you sure you want to delete <i>{folder.folder_name}</i>? All the
-            content inside this folder will also be deleted
+            {trans("delete-folder-confirm", { folderName: folder.folder_name })}
           </p>
           <div className="flex justify-end">
             <button
               onClick={confirmDelete}
               className="bg-red-500 hover:bg-red-600 text-white px-2 py-1 rounded text-xs mr-2"
             >
-              Yes
+              {trans("yes")}
             </button>
             <button
               onClick={cancelDelete}
               className="bg-gray-300 hover:bg-gray-200 px-2 py-1 rounded text-xs"
             >
-              No
+              {trans("no")}
             </button>
           </div>
         </div>

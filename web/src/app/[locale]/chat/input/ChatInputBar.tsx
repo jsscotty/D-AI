@@ -26,6 +26,7 @@ import { DanswerDocument } from "@/lib/search/interfaces";
 import { AssistantIcon } from "@/components/assistants/AssistantIcon";
 import { Tooltip } from "@/components/tooltip/Tooltip";
 import { Hoverable } from "@/components/Hoverable";
+import { useTranslations } from "next-intl";
 const MAX_INPUT_HEIGHT = 200;
 
 export function ChatInputBar({
@@ -205,6 +206,8 @@ export function ChatInputBar({
     }
   };
 
+  const trans = useTranslations("chat");
+
   return (
     <div>
       <div className="flex justify-center pb-2 max-w-screen-lg mx-auto mb-2">
@@ -252,7 +255,7 @@ export function ChatInputBar({
                   href="/assistants/new"
                 >
                   <FiPlus size={17} />
-                  <p>Create a new assistant</p>
+                  <p>{trans("create-new-assistant")}</p>
                 </a>
               </div>
             </div>
@@ -388,7 +391,7 @@ export function ChatInputBar({
               style={{ scrollbarWidth: "thin" }}
               role="textarea"
               aria-multiline
-              placeholder="Send a message or @ to tag an assistant..."
+              placeholder={trans("message-placeholder")}
               value={message}
               onKeyDown={(event) => {
                 if (
@@ -423,7 +426,9 @@ export function ChatInputBar({
                 <ChatInputOption
                   flexPriority="shrink"
                   name={
-                    selectedAssistant ? selectedAssistant.name : "Assistants"
+                    selectedAssistant
+                      ? selectedAssistant.name
+                      : trans("assistants")
                   }
                   Icon={AssistantsIconSkeleton as IconType}
                 />

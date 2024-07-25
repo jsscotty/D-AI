@@ -1,5 +1,6 @@
 import { HoverPopup } from "@/components/HoverPopup";
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 
 export function DocumentSelector({
   isSelected,
@@ -11,6 +12,7 @@ export function DocumentSelector({
   isDisabled?: boolean;
 }) {
   const [popupDisabled, setPopupDisabled] = useState(false);
+  const trans = useTranslations("chat");
 
   function onClick() {
     if (!isDisabled) {
@@ -50,10 +52,7 @@ export function DocumentSelector({
         <HoverPopup
           mainContent={Main()}
           popupContent={
-            <div className="w-48">
-              LLM context limit reached 😔 If you want to chat with this
-              document, please de-select others to free up space.
-            </div>
+            <div className="w-48">{trans("llm-context-limit")}</div>
           }
           direction="left-top"
         />
