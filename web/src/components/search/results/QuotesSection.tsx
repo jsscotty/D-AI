@@ -85,7 +85,7 @@ const QuotesHeader = ({ quotes, isFetching }: QuotesSectionProps) => {
 };
 
 const QuotesBody = ({ quotes, isFetching }: QuotesSectionProps) => {
-  // translation
+  // translations
   const transWelcome = useTranslations("results");
 
   if (!quotes && isFetching) {
