@@ -60,6 +60,8 @@ import { UserDropdown } from "../UserDropdown";
 import LanguageSwitcher from "../LanguageSwitcher";
 import { VStack } from "@chakra-ui/react";
 import { useTranslations } from "next-intl";
+import { HealthCheckBanner } from "../health/healthcheck";
+import { getSecondsUntilExpiration } from "@/lib/time";
 
 export async function Layout({ children }: { children: React.ReactNode }) {
   const tasks = [getAuthTypeMetadataSS(), getCurrentUserSS()];
@@ -91,10 +93,13 @@ export async function Layout({ children }: { children: React.ReactNode }) {
     }
   }
 
+  const secondsUntilExpiration = getSecondsUntilExpiration(user);
+
   return (
     <div className="h-screen overflow-y-hidden">
+      <HealthCheckBanner secondsUntilExpiration={secondsUntilExpiration} />
       <div className="flex h-full">
-        <div className="w-64 z-20 bg-background-100 pt-4 pb-8 h-full border-r border-border miniscroll overflow-auto">
+        <div className="w-64 z-20 bg-background-100 pt-3 pb-8 h-full border-r border-border miniscroll overflow-auto">
           <AdminSidebar
             collections={[
               {
@@ -332,17 +337,10 @@ export async function Layout({ children }: { children: React.ReactNode }) {
           />
         </div>
         <div className="pb-8 relative h-full overflow-y-auto w-full">
-          <div className="fixed bg-background left-0 border-b gap-x-4 mb-8 px-4 py-2 w-full items-center flex justify-end">
-            <a
-              href="/chat"
-              className="transition-all duration-150 cursor-pointer p-1 text-sm items-center flex gap-x-1 px-2 py-1 rounded-lg hover:shadow-sm hover:ring-1 hover:ring-ingio-900/40 hover:bg-opacity-90 text-neutral-100 bg-accent"
-            >
-              <BackIcon size={20} className="text-neutral" />
-              Back to Danswer
-            </a>
+          <div className="fixed bg-background left-0 gap-x-4 mb-8 px-4 py-2 w-full items-center flex justify-end">
             <UserDropdown user={user} />
           </div>
-          <div className="pt-20 flex overflow-y-auto h-full px-4 md:px-12">
+          <div className="pt-12 flex overflow-y-auto h-full px-4 md:px-12">
             {children}
           </div>
         </div>

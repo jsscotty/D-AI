@@ -114,7 +114,9 @@ class DocumentBase(BaseModel):
     title: str | None = None
     from_ingestion_api: bool = False
 
-    def get_title_for_document_index(self) -> str | None:
+    def get_title_for_document_index(
+        self,
+    ) -> str | None:
         # If title is explicitly empty, return a None here for embedding purposes
         if self.title == "":
             return None

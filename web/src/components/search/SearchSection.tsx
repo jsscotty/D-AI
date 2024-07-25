@@ -29,7 +29,7 @@ import { HistorySidebar } from "@/app/[locale]/chat/sessionSidebar/HistorySideba
 import { ChatSession, SearchSession } from "@/app/[locale]/chat/interfaces";
 import FunctionalHeader from "../chat_search/Header";
 import { useSidebarVisibility } from "../chat_search/hooks";
-import { SIDEBAR_TOGGLED_COOKIE_NAME } from "../resizable/contants";
+import { SIDEBAR_TOGGLED_COOKIE_NAME } from "../resizable/constants";
 import { AGENTIC_SEARCH_TYPE_COOKIE_NAME } from "@/lib/constants";
 import Cookies from "js-cookie";
 import FixedLogo from "@/app/[locale]/chat/shared_chat_search/FixedLogo";
