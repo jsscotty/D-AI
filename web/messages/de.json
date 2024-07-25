@@ -1,23 +1,109 @@
 {
+    "general": {
+        "back": "Zurück",
+        "initializing": "Initialisierung",
+        "delete": "Löschen",
+        "deleting": "Wird gelöscht",
+        "no-match-found": "Keine Übereinstimmungen gefunden...",
+        "edit": "Bearbeiten",
+        "paused": "Pausiert",
+        "page-not-found": "Seite nicht gefunden",
+        "failed": "Fehlgeschlagen",
+        "error": "Fehler",
+        "succeeded": "Erfolgreich",
+        "in-progress": "In Bearbeitung",
+        "scheduled": "Geplant",
+        "active": "Aktiv",
+        "log-out": "Abmelden",
+        "admin-panel": "Administrationsbereich",
+        "failed-logout": "Abmeldung fehlgeschlagen"
+    },
     "home": {
-        "title": "Unlock Wissen",
+        "title": "Wissen erschließen",
         "welcome": "Willkommen bei Blona"
     },
+    "AdvancedOptions": {
+        "Advanced-Options": "Erweiterte Optionen"
+    },
+    "healthcheck": {
+        "You've-been-logged-out": "Sie wurden abgemeldet",
+        "UserNotice-Session-expired": "Ihre Sitzung ist abgelaufen. Bitte melden Sie sich erneut an.",
+        "Log-in": "Anmelden",
+        "Notice-Backend-Unavailable": "Das Backend ist derzeit nicht verfügbar",
+        "Backend-Unavailable-Reason": "Wenn dies Ihre erste Einrichtung ist oder Sie gerade Ihre Blona-Bereitstellung aktualisiert haben, liegt dies wahrscheinlich daran, dass das Backend noch gestartet wird. Warten Sie ein oder zwei Minuten und aktualisieren Sie dann die Seite. Wenn das nicht funktioniert, stellen Sie sicher, dass das Backend eingerichtet ist und/oder kontaktieren Sie Blona."
+    },
     "welcomeModal": {
+        "Step1": "Schritt 1: LLM einrichten",
+        "Step2": "Schritt 2: Datenquellen verbinden",
+        "Step2-desc": "Konnektoren sind die Art und Weise, wie Blona Daten aus den verschiedenen Datenquellen Ihrer Organisation bezieht. Nach der Einrichtung synchronisieren wir automatisch Daten aus Ihren Apps und Dokumenten in Blona, sodass Sie alle an einem Ort durchsuchen können.",
+        "ConnectorSetup": "Richten Sie Ihren ersten Konnektor ein!",
+        "LLMcomplete": "LLM-Einrichtung abgeschlossen!",
+        "Step2Chat": "Schritt 2: Starten Sie den Chat!",
+        "Step2Chat-desc": "Klicken Sie auf den Button unten, um mit dem oben eingerichteten LLM zu chatten! Keine Sorge, wenn Sie sich später entscheiden, das Wissen Ihrer Organisation zu verbinden, können Sie das jederzeit im",
+        "ChangeLater": "Wenn Sie den Schlüssel später ändern möchten, können Sie dies einfach im Administrationsbereich tun.",
+        "AdminPanel": "Administrationsbereich",
         "welcome": "Willkommen bei Blona",
-        "plan": "Wie werden Sie Blona benutzen?",
-        "search-title": "Suche/Chatte mit Wissen",
-        "search-msg": "Wenn Sie in den Wissensressourcen Ihrer Organisation suchen, sich darüber unterhalten oder direkte Fragen stellen möchten, dann ist dies die richtige Option für Sie!",
-        "start": "Los gehts",
-        "chatgpt-title": "Sicher chatgpt",
-        "chatgpt-msg":"Wenn Sie eine reine ChatGPT-ähnliche Erfahrung suchen, dann ist dies die richtige Option für Sie!",
-        "Start-chatting!": "Starte zu chatten!"
+        "plan": "Wie planen Sie, Blona zu nutzen?",
+        "search-title": "Suche/Chat mit Wissen",
+        "search-msg": "Wenn Sie das Wissen Ihrer Organisation durchsuchen, damit chatten oder direkte Fragen dazu stellen möchten, dann ist dies die richtige Option für Sie!",
+        "start": "Loslegen",
+        "chatgpt-title": "Sicheres ChatGPT",
+        "chatgpt-msg": "Wenn Sie eine reine ChatGPT-ähnliche Erfahrung suchen, dann ist dies die richtige Option für Sie!",
+        "Start-chatting!": "Starten Sie den Chat!"
     },
-    "NotFoundPage" :{
-    	"title": "Fehler beim Laden der Seite."
+    "NotFoundPage": {
+        "title": "Fehler beim Anzeigen der Seite"
     },
-    "locale":{
+    "NoCompleteSourceModal": {
+        "Not-fully-synched": "⏳ Keiner Ihrer Konnektoren hat eine vollständige Synchronisierung abgeschlossen",
+        "Connected-but-not-synched": "Sie haben einige Quellen verbunden, aber keine davon hat die Synchronisierung abgeschlossen. Je nach Größe der Wissensbasis(en), die Sie mit Danswer verbunden haben, kann die erste Synchronisierung zwischen 30 Sekunden und einigen Tagen dauern. Bisher haben wir synchronisiert",
+        "documents": "Dokumente.",
+        "connector-status": "Um den Status Ihrer synchronisierenden Konnektoren anzuzeigen, gehen Sie zur",
+        "Existing-Connectors-Page": "Seite der bestehenden Konnektoren",
+        "Partial-Question": "Oder klicken Sie hier, um fortzufahren und Fragen zum teilweise synchronisierten Wissensbestand zu stellen."
+    },
+    "NoSourcesModal": {
+        "NoSourceConnected": "🧐 Keine Quellen verbunden",
+        "Connect-at-least-one-source": "Bevor Sie die Suche verwenden können, müssen Sie mindestens eine Quelle verbinden. Ohne verbundene Wissensquellen gibt es nichts zu durchsuchen.",
+        "Connect-Source": "Quelle verbinden!",
+        "Or-without-Source": "Oder, wenn Sie eine reine ChatGPT-ähnliche Erfahrung ohne organisationsspezifisches Wissen suchen, können Sie direkt zur Chat-Seite gehen und sofort mit Blona chatten!",
+        "Start-Chatting": "Chat starten!"
+    },
+    "filtering": {
+        "clear-all": "Alles löschen",
+        "no-matching-found": "Keine passenden Tags gefunden",
+        "time-range": "Zeitraum",
+        "tags": "Tags",
+        "filters": "Filter",
+        "sources": "Quellen",
+        "description": "Beschreibung",
+        "knowledge-sets": "Wissenssammlungen",
+        "all-sources": "Alle Quellen",
+        "all-document-sets": "Alle Dokumentensammlungen"
+    },
+    "results": {
+        "building-answer": "Antwort wird erstellt...",
+        "ai-answer": "KI-Antwort",
+        "info-not-found": "Information nicht gefunden.",
+        "error-building-answer": "Fehler beim Erstellen der Antwort",
+        "building-best-answer": "Bestmögliche KI-Antwort wird erstellt...",
+        "warning": "Warnung:",
+        "warning-desc": "die KI hielt diese Frage für nicht beantwortbar.",
+        "quote": "Zitat:",
+        "quotes": "Zitate",
+        "extracting-quotes": "Zitate werden extrahiert...",
+        "no-quotes-found": "Keine Zitate gefunden",
+        "quotes-not-found": "Es wurden keine exakten Zitate zur Unterstützung der obigen Antwort gefunden."
+    },
+    "locale": {
         "language": "Deutsch",
         "locale": "de"
+    },
+    "SwitchModelModal": {
+        "switch-model": "❗ Embedding-Modell wechseln ❗",
+        "switch-model-desc1": "Wir haben festgestellt, dass Sie unser altes Standard-Embedding-Modell verwenden",
+        "switch-model-desc2": "Wir glauben, dass die Suchleistung durch einen einfachen Modellwechsel dramatisch verbessert werden kann.",
+        "switch-model-desc3": "Bitte klicken Sie auf den Button unten, um ein neues Modell auszuwählen. Keine Sorge, die für den Wechsel notwendige Neuindizierung erfolgt im Hintergrund - Ihre Nutzung von Blona wird nicht unterbrochen.",
+        "choose-model": "Wählen Sie Ihr Embedding-Modell"
     }
 }
