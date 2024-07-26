@@ -83,10 +83,7 @@ export function UserDropdown({
                 overscroll-contain
               `}
           >
-            {/* LANGS */}
-            <>
-              <LanguageSwitcher />
-            </>
+            
             {showAdminPanel && (
               <>
                 <Link

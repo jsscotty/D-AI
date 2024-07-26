@@ -42,13 +42,13 @@ export function NoCompleteSourcesModal({
       <div className="text-sm">
         <div>
           <div>
-          title={transWelcome("Connected-but-not-synched")}{" "}
-            <b>{totalDocs}</b> {transWelcome("documents")}
+            {transWelcome("Connected-but-not-synched")} <b>{totalDocs}</b>{" "}
+            {transWelcome("documents")}
             <br />
             <br />
             {transWelcome("connector-status")}{" "}
             <Link className="text-link" href="admin/indexing/status">
-            {transWelcome("Existing-Connectors-Page")}
+              {transWelcome("Existing-Connectors-Page")}
             </Link>
             .
             <br />
@@ -59,7 +59,7 @@ export function NoCompleteSourcesModal({
                 setIsHidden(true);
               }}
             >
-               {transWelcome("Partial-Question")}
+              {transWelcome("Partial-Question")}
             </p>
           </div>
         </div>

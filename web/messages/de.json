@@ -112,7 +112,8 @@
     "setup-title": "Einrichtung der automatischen Synchronisierung aus Apps",
     "setup-text": "Richten Sie die automatische Synchronisierung aus den am häufigsten verwendeten Apps und Diensten Ihrer Organisation ein. Sofern während der Konnektoreinrichtung nicht anders angegeben, ziehen wir alle 10 Minuten die neuesten Updates aus der Quelle.",
     "delete-fail": "Löschen des Assistenten fehlgeschlagen",
-    "delete-assistant": "Assistent löschen"
+    "delete-assistant": "Assistent löschen",
+    "add-connector": "Assistent hinzufügen"
   },
   "assistants": {
     "public": "Öffentlich",
@@ -201,7 +202,8 @@
     "current-status": "Aktueller Status.",
     "control-user-access": "Steuern Sie, welche anderen Benutzer Zugriff auf diesen Assistenten haben sollen.",
     "share-assistant": "Assistent teilen:",
-    "add-new": "Neu hinzufügen"
+    "add-new": "Neu hinzufügen",
+    "add": "Hinzufügen"
   },
   "chat": {
     "like": "Die KI mochte dieses Dokument!",
@@ -238,7 +240,8 @@
     "models": "Modelle",
     "filters": "Filter",
     "choose-model": "Modell auswählen",
-    "override-model": "Überschreiben Sie das Standardmodell für den <i>{assistantName}</i> Assistenten. Die Überschreibung gilt nur für die aktuelle Chat-Sitzung.",
+    "override-model-1": "Überschreiben Sie das Standardmodell für den",
+    "override-model-2": "Assistenten. Die Überschreibung gilt nur für die aktuelle Chat-Sitzung.",
     "temperature-title": "Temperatur",
     "temperature-msg": "Passen Sie die Temperatur des LLM an. Höhere Temperaturen lassen das LLM kreativere und vielfältigere Antworten generieren, während niedrigere Temperaturen konservativere und fokussiertere Antworten erzeugen.",
     "delete-confirm": "Klicken Sie unten, um zu bestätigen, dass Sie löschen möchten",

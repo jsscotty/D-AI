@@ -91,8 +91,8 @@ export function PagesTab({
       >
         {(page == "chat" || page == "search") && (
           <p className="my-2 text-xs text-subtle flex font-bold">
-            {page == "chat" && "Chat "}
-            {page == "search" && "Search "}
+            {page == "chat" && trans("chat")}
+            {page == "search" && trans("search")}
             {trans("history")}
           </p>
         )}
