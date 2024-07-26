@@ -64,9 +64,9 @@ export const LlmTab = forwardRef<HTMLDivElement, LlmTabProps>(
           {trans("choose-model")}
         </label>
         <Text className="mb-1">
-          {trans("override-model", {
-            assistantName: `<span class="font-medium">${currentAssistant.name}</span>`,
-          })}
+          {trans("override-model")}{" "}
+          <i className="font-medium">{currentAssistant.name}</i>
+          {trans("override-model-2")}
         </Text>
         <Text className="mb-3">
           {trans("default-model")}:{" "}

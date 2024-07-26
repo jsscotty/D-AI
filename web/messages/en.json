@@ -39,7 +39,7 @@
     "welcomeModal": {
         "Step1":"Step 1: Setup an LLM",
         "Step2":"Step 2: Connect Data Sources",
-        "Step2-desc":"Connectors are the way that Blona gets data from your organization's various data sources. Once setup, we'&apos;'ll automatically sync data from your apps and docs into Blona, so you can search through all of them in one place.",
+        "Step2-desc":"Connectors are the way that Blona gets data from your organization's various data sources. Once setup, we'll automatically sync data from your apps and docs into Blona, so you can search through all of them in one place.",
         "ConnectorSetup":"Setup your first connector!",
         "LLMcomplete": "LLM setup complete!",
         "Step2Chat":"Step 2: Start Chatting!",
@@ -70,7 +70,7 @@
         "NoSourceConnected":"🧐 No sources connected",
         "Connect-at-least-one-source": "Before using Search you'll need to connect at least one source. Without any connected knowledge sources, there isn't anything to search over.",
         "Connect-Source":"Connect a Source!",
-        "Or-without-Source": "Or, if you&apos;re looking for a pure ChatGPT-like experience without any organization specific knowledge, then you can head over to the Chat page and start chatting with Blona right away!",
+        "Or-without-Source": "Or, if you're looking for a pure ChatGPT-like experience without any organization specific knowledge, then you can head over to the Chat page and start chatting with Blona right away!",
         "Start-Chatting": "Start Chatting!"
     
     },
@@ -107,11 +107,11 @@
     "admin": {
         "connectors": "Connectors",
         "connector-title": "Add Connector",
-        "connector-text": "Connect Danswer to your organization&apos;s knowledge sources. We&apos;ll automatically sync your data into Danswer, so you can find exactly what you&apos;re looking for in one place.",
+        "connector-text": "Connect Danswer to your organization's knowledge sources. We'll automatically sync your data into Danswer, so you can find exactly what you&apos;re looking for in one place.",
         "import-title": "Import Knowledge",
-        "import-text": "Connect to pieces of knowledge that live outside your apps. Upload files, scrape websites, or connect to your organization&apos;s Google Site.",
+        "import-text": "Connect to pieces of knowledge that live outside your apps. Upload files, scrape websites, or connect to your organization's Google Site.",
         "setup-title": "Setup Auto-Syncing from Apps",
-        "setup-text": "Setup auto-syncing from your organization&apos;s most used apps and services. Unless otherwise specified during the connector setup, we will pull in the latest updates from the source every 10 minutes.",
+        "setup-text": "Setup auto-syncing from your organization's most used apps and services. Unless otherwise specified during the connector setup, we will pull in the latest updates from the source every 10 minutes.",
         "delete-fail": "Failed to delete persona",
         "delete-assistant": "Delete Assistant",
         "add-connector": "Add Connector"
@@ -147,7 +147,7 @@
         "active-assistants-title": "Active Assistants",
         "active-assistants-msg": "The order the assistants appear below will be the order they appear in the Assistants dropdown. The first assistant listed will be your default assistant when you start a new chat.",
         "hidden-assistants-title": "Your Hidden Assistants",
-        "hidden-assistants-msg": "Assistants you&apos;ve created that aren&apos;t currently visible in the Assistants selector.",
+        "hidden-assistants-msg": "Assistants you've created that aren't currently visible in the Assistants selector.",
         "move-up-success": "{assistantName} has been moved up",
         "move-up-fail": "{assistantName} could not be moved up",
         "move-up": "Move Up",
@@ -241,7 +241,8 @@
         "models":"Models",
         "filters" : "Filters",
         "choose-model": "Choose Model",
-        "override-model": "Override the default model for the <i>{assistantName}</i> assistant. The override will only apply for the current chat session.",
+        "override-model-1": "Override the default model for the ",
+        "override-model-2": "assistant. The override will only apply for the current chat session.",
         "temperature-title": "Temperature",
         "temperature-msg": "Adjust the temperature of the LLM. Higher temperatures will make the LLM generate more creative and diverse responses, while lower temperature will make the LLM generate more conservative and focused responses.",
         "delete-confirm": "Click below to confirm that you want to delete",
@@ -282,14 +283,14 @@
     },
     "SwitchModelModal": {
         "switch-model": "❗ Switch Embedding Model ❗",
-        "switch-model-desc1": "We&apos;ve detected you are using our old default embedding model",
+        "switch-model-desc1": "We've detected you are using our old default embedding model",
         "switch-model-desc2": "We believe that search performance can be dramatically improved by a simple model switch.",
         "switch-model-desc3":"Please click the button below to choose a new model. Don't worry, the re-indexing necessary for the switch will happen in the background - your use of Blona will not be interrupted.",
         "choose-model":"Choose your Embedding Model" },
     "search": {
         "any-time": "Any time...",
         "agentic-search-title": "Agentic Search",
-        "agentic-search-msg-1": "Our most powerful search, have an AI agent guide you to pinpoint exactly what you&apos;re looking for.",
+        "agentic-search-msg-1": "Our most powerful search, have an AI agent guide you to pinpoint exactly what you're looking for.",
         "fast-search-title": "Fast Search",
         "fast-search-msg": "Get quality results immediately, best suited for instant access to your documents.",
         "shortcut": "Shortcut",
@@ -301,9 +302,9 @@
         "generating-analysis": "Generating Analysis..."
     },
     "auth":{
-        "verification-email": "Hey <i>{currentUserEmail}</i> - it looks like you haven&apos;t verified your email yet.",
+        "verification-email": "Hey <i>{currentUserEmail}</i> - it looks like you haven't verified your email yet.",
         "check-inbox": "Check your inbox for an email from us to get started!",
-        "dont-see": "If you don&apos;t see anything, click",
+        "dont-see": "If you don't see anything, click",
         "here": "here",
         "request-new-email": "to request a new email."
     }
