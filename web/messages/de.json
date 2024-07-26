@@ -202,7 +202,8 @@
     "current-status": "Aktueller Status.",
     "control-user-access": "Steuern Sie, welche anderen Benutzer Zugriff auf diesen Assistenten haben sollen.",
     "share-assistant": "Assistent teilen:",
-    "add-new": "Neu hinzufügen"
+    "add-new": "Neu hinzufügen",
+    "add": "Hinzufügen"
   },
   "chat": {
     "like": "Die KI mochte dieses Dokument!",

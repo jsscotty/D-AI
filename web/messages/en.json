@@ -279,7 +279,6 @@
         "previous-30-days": "Previous 30 Days",
         "over-30-days-ago": "Over 30 days ago",
         "failed-folder": "Failed to create folder"
-
     },
     "SwitchModelModal": {
         "switch-model": "❗ Switch Embedding Model ❗",
@@ -300,7 +299,6 @@
         "searching": "Searching...",
         "reading-docs": "Reading Documents...",
         "generating-analysis": "Generating Analysis..."
-
     },
     "auth":{
         "verification-email": "Hey <i>{currentUserEmail}</i> - it looks like you haven&apos;t verified your email yet.",
