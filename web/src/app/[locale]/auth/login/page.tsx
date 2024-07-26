@@ -14,14 +14,14 @@ import Link from "next/link";
 import { Logo } from "@/components/Logo";
 import { LoginText } from "./LoginText";
 import { getSecondsUntilExpiration } from "@/lib/time";
-
+import { getTranslations } from "next-intl/server";
 const Page = async ({
   searchParams,
 }: {
   searchParams?: { [key: string]: string | string[] | undefined };
 }) => {
   const autoRedirectDisabled = searchParams?.disableAutoRedirect === "true";
-
+  const trans = await getTranslations("auth");
   // catch cases where the backend is completely unreachable here
   // without try / catch, will just raise an exception and the page
   // will not render
@@ -99,9 +99,9 @@ const Page = async ({
               <EmailPasswordForm />
               <div className="flex">
                 <Text className="mt-4 mx-auto">
-                  Don&apos;t have an account?{" "}
+                  {trans("dont-have-account")}{" "}
                   <Link href="/auth/signup" className="text-link font-medium">
-                    Create an account
+                    {trans("create-account")}
                   </Link>
                 </Text>
               </div>

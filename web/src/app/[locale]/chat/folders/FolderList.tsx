@@ -177,7 +177,8 @@ const FolderItem = ({
           className="absolute max-w-xs border z-[100] border-neutral-300 top-0 right-0 w-[250px] -bo-0 top-2 mt-4 p-2 bg-background-100 rounded shadow-lg z-10"
         >
           <p className="text-sm mb-2">
-            {trans("delete-folder-confirm", { folderName: folder.folder_name })}
+            {trans("delete-folder-confirm-1")} <i>{folder.folder_name}</i>
+            {trans("delete-folder-confirm-2")}
           </p>
           <div className="flex justify-end">
             <button

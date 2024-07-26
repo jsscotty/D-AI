@@ -10,6 +10,7 @@ import { EmailPasswordForm } from "../login/EmailPasswordForm";
 import { Card, Title, Text } from "@tremor/react";
 import Link from "next/link";
 import { Logo } from "@/components/Logo";
+import { getTranslations } from "next-intl/server";
 
 const Page = async () => {
   // catch cases where the backend is completely unreachable here
@@ -17,6 +18,7 @@ const Page = async () => {
   // will not render
   let authTypeMetadata: AuthTypeMetadata | null = null;
   let currentUser: User | null = null;
+  const trans = await getTranslations("auth");
   try {
     [authTypeMetadata, currentUser] = await Promise.all([
       getAuthTypeMetadataSS(),
@@ -56,7 +58,7 @@ const Page = async () => {
           <Card className="mt-4 w-96">
             <div className="flex">
               <Title className="mb-2 mx-auto font-bold">
-                Sign Up for Blona
+                {trans("sign-up-for")}
               </Title>
             </div>
             <EmailPasswordForm
@@ -66,9 +68,9 @@ const Page = async () => {
 
             <div className="flex">
               <Text className="mt-4 mx-auto">
-                Already have an account?{" "}
+                {trans("already-have-account")}{" "}
                 <Link href="/auth/login" className="text-link font-medium">
-                  Log In
+                  {trans("log-in")}
                 </Link>
               </Text>
             </div>
