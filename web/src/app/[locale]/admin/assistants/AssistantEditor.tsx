@@ -44,6 +44,7 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from "@radix-ui/react-tooltip";
+import { useTranslations } from "next-intl";
 
 function findSearchTool(tools: ToolSnapshot[]) {
   return tools.find((tool) => tool.in_code_tool_id === "SearchTool");
@@ -110,6 +111,8 @@ export function AssistantEditor({
 
   const isUpdate = existingPersona !== undefined && existingPersona !== null;
   const existingPrompt = existingPersona?.prompts[0] ?? null;
+  const transAssistants = useTranslations("assistants");
+  const transChat = useTranslations("chat");
 
   useEffect(() => {
     if (isUpdate && existingPrompt) {
@@ -210,11 +213,9 @@ export function AssistantEditor({
         initialValues={initialValues}
         validationSchema={Yup.object()
           .shape({
-            name: Yup.string().required(
-              "Must provide a name for the Assistant"
-            ),
+            name: Yup.string().required(transAssistants("provide-name")),
             description: Yup.string().required(
-              "Must provide a description for the Assistant"
+              transAssistants("provide-description")
             ),
             system_prompt: Yup.string(),
             task_prompt: Yup.string(),
@@ -250,8 +251,7 @@ export function AssistantEditor({
 
               return this.createError({
                 path: "system_prompt",
-                message:
-                  "Must provide either System Prompt or Additional Instructions",
+                message: transAssistants("system-prompt-or-task-prompt"),
               });
             }
           )}
@@ -259,7 +259,7 @@ export function AssistantEditor({
           if (finalPromptError) {
             setPopup({
               type: "error",
-              message: "Cannot submit while there are errors in the form",
+              message: transAssistants("form-errors"),
             });
             return;
           }
@@ -270,8 +270,7 @@ export function AssistantEditor({
           ) {
             setPopup({
               type: "error",
-              message:
-                "Must select a model if a non-default LLM provider is chosen.",
+              message: transAssistants("non-default-llm"),
             });
             return;
           }
@@ -341,7 +340,7 @@ export function AssistantEditor({
             error = await promptResponse.text();
           }
           if (!personaResponse) {
-            error = "Failed to create Assistant - no response received";
+            error = transAssistants("create-assistant-no-response");
           } else if (!personaResponse.ok) {
             error = await personaResponse.text();
           }
@@ -349,7 +348,9 @@ export function AssistantEditor({
           if (error || !personaResponse) {
             setPopup({
               type: "error",
-              message: `Failed to create Assistant - ${error}`,
+              message: `${transAssistants(
+                "create-assistant-error"
+              )} - ${error}`,
             });
             formikHelpers.setSubmitting(false);
           } else {
@@ -365,13 +366,17 @@ export function AssistantEditor({
               );
               if (success) {
                 setPopup({
-                  message: `"${assistant.name}" has been added to your list.`,
+                  message: transAssistants("add-success", {
+                    assistantName: assistant.name,
+                  }),
                   type: "success",
                 });
                 router.refresh();
               } else {
                 setPopup({
-                  message: `"${assistant.name}" could not be added to your list.`,
+                  message: transAssistants("add-fail", {
+                    assistantName: assistant.name,
+                  }),
                   type: "error",
                 });
               }
@@ -404,23 +409,23 @@ export function AssistantEditor({
               <div className="pb-6">
                 <TextFormField
                   name="name"
-                  tooltip="Used to identify the Assistant in the UI."
-                  label="Name"
+                  tooltip={transAssistants("name-tooltip")}
+                  label={transAssistants("name")}
                   disabled={isUpdate}
-                  placeholder="e.g. 'Email Assistant'"
+                  placeholder={transAssistants("name-placeholder")}
                 />
                 <TextFormField
-                  tooltip="Used for identifying assistants and their use cases."
+                  tooltip={transAssistants("description-tooltip")}
                   name="description"
-                  label="Description"
-                  placeholder="e.g. 'Use this Assistant to help draft professional emails'"
+                  label={transAssistants("description")}
+                  placeholder={transAssistants("description-placeholder")}
                 />
                 <TextFormField
-                  tooltip="Gives your assistant a prime directive"
+                  tooltip={transAssistants("system-prompt-tooltip")}
                   name="system_prompt"
-                  label="System Prompt"
+                  label={transAssistants("system-prompt")}
                   isTextArea={true}
-                  placeholder="e.g. 'You are a professional email writing assistant that always uses a polite enthusiastic tone, emphasizes action items, and leaves blanks for the human to fill in when you have unknowns'"
+                  placeholder={transAssistants("system-prompt-placeholder")}
                   //
                   onChange={(e) => {
                     setFieldValue("system_prompt", e.target.value);
@@ -436,7 +441,7 @@ export function AssistantEditor({
                 <div className="mb-6">
                   <div className="flex gap-x-2 items-center">
                     <div className="block font-medium text-base">
-                      LLM Override{" "}
+                      {transAssistants("llm-override")}{" "}
                     </div>
                     <TooltipProvider delayDuration={50}>
                       <Tooltip>
@@ -445,21 +450,23 @@ export function AssistantEditor({
                         </TooltipTrigger>
                         <TooltipContent side="top" align="center">
                           <p className="bg-neutral-900 max-w-[200px] mb-1 text-sm rounded-lg p-1.5 text-white">
-                            Select a Large Language Model (Generative AI model)
-                            to power this Assistant
+                            {transAssistants("llm-override-tooltip")}
                           </p>
                         </TooltipContent>
                       </Tooltip>
                     </TooltipProvider>
                   </div>
                   <p className="my-1 text-text-600">
-                    You assistant will use your system default (currently{" "}
-                    {defaultModelName}) unless otherwise specified below.
+                    {transAssistants("llm-override-msg", {
+                      defaultModelName: defaultModelName,
+                    })}
                   </p>
                   <div className="mb-2 flex items-starts">
                     <div className="w-96">
                       <SelectorFormField
-                        defaultValue={`Default (${defaultModelName})`}
+                        defaultValue={`${transAssistants(
+                          "default"
+                        )} (${defaultModelName})`}
                         name="llm_model_provider_override"
                         options={llmProviders.map((llmProvider) => ({
                           name: llmProvider.name,
@@ -498,7 +505,7 @@ export function AssistantEditor({
                 <div className="mb-6">
                   <div className="flex gap-x-2 items-center">
                     <div className="block font-medium text-base">
-                      Capabilities{" "}
+                      {transAssistants("capabilities")}{" "}
                     </div>
                     <TooltipProvider delayDuration={50}>
                       <Tooltip>
@@ -507,14 +514,13 @@ export function AssistantEditor({
                         </TooltipTrigger>
                         <TooltipContent side="top" align="center">
                           <p className="bg-neutral-900 max-w-[200px] mb-1 text-sm rounded-lg p-1.5 text-white">
-                            You can give your assistant advanced capabilities
-                            like image generation
+                            {transAssistants("capabilities-tooltip")}
                           </p>
                         </TooltipContent>
                       </Tooltip>
                     </TooltipProvider>
                     <div className="block text-sm font-medium text-subtle">
-                      Advanced
+                      {transAssistants("advanced")}
                     </div>
                   </div>
 
@@ -533,7 +539,9 @@ export function AssistantEditor({
                         <BooleanFormField
                           noPadding
                           name={`enabled_tools_map.${imageGenerationTool.id}`}
-                          label="Image Generation Tool"
+                          label={`${transAssistants(
+                            "image-geneartion"
+                          )} ${transAssistants("tool")}`}
                           onChange={() => {
                             toggleToolInValues(imageGenerationTool.id);
                           }}
@@ -544,7 +552,9 @@ export function AssistantEditor({
                       <>
                         <BooleanFormField
                           name={`enabled_tools_map.${searchTool.id}`}
-                          label="Search Tool"
+                          label={`${transAssistants(
+                            "search"
+                          )} ${transAssistants("tool")}`}
                           noPadding
                           onChange={() => {
                             setFieldValue("num_chunks", null);
@@ -557,27 +567,26 @@ export function AssistantEditor({
                             <div>
                               {ccPairs.length > 0 && (
                                 <>
-                                  <Label small>Document Sets</Label>
+                                  {/* trans in chats */}
+                                  <Label small>
+                                    {transChat("document-sets")}
+                                  </Label>
                                   <div>
                                     <SubLabel>
                                       <>
-                                        Select which{" "}
+                                        {transAssistants("select-which")}{" "}
                                         {!user || user.role === "admin" ? (
                                           <Link
                                             href="/admin/documents/sets"
                                             className="text-blue-500"
                                             target="_blank"
                                           >
-                                            Document Sets
+                                            {transChat("document-sets")}
                                           </Link>
                                         ) : (
-                                          "Document Sets"
+                                          transChat("document-sets")
                                         )}{" "}
-                                        that this Assistant should search
-                                        through. If none are specified, the
-                                        Assistant will search through all
-                                        available documents in order to try and
-                                        respond to queries.
+                                        {transAssistants("search-through")}
                                       </>
                                     </SubLabel>
                                   </div>
@@ -617,13 +626,9 @@ export function AssistantEditor({
                                     />
                                   ) : (
                                     <Italic className="text-sm">
-                                      No Document Sets available.{" "}
+                                      {transAssistants("no-sets-available")}.{" "}
                                       {user?.role !== "admin" && (
-                                        <>
-                                          If this functionality would be useful,
-                                          reach out to the administrators of
-                                          Blona for assistance.
-                                        </>
+                                        <>{transAssistants("reach-out")}</>
                                       )}
                                     </Italic>
                                   )}
@@ -632,9 +637,13 @@ export function AssistantEditor({
                                     <TextFormField
                                       small={true}
                                       name="num_chunks"
-                                      label="Number of Chunks"
-                                      tooltip="How many chunks to feed the LLM"
-                                      placeholder="Defaults to 10 chunks."
+                                      label={transAssistants("number-chunks")}
+                                      tooltip={transAssistants(
+                                        "number-chunks-tooltip"
+                                      )}
+                                      placeholder={transAssistants(
+                                        "number-chunks-placeholder"
+                                      )}
                                       onChange={(e) => {
                                         const value = e.target.value;
                                         if (
@@ -651,10 +660,10 @@ export function AssistantEditor({
                                       noPadding
                                       alignTop
                                       name="llm_relevance_filter"
-                                      label="Apply LLM Relevance Filter"
-                                      subtext={
-                                        "If enabled, the LLM will filter out chunks that are not relevant to the user query."
-                                      }
+                                      label={transAssistants("llm-relevance")}
+                                      subtext={transAssistants(
+                                        "llm-relevance-msg"
+                                      )}
                                     />
 
                                     <BooleanFormField
@@ -662,12 +671,12 @@ export function AssistantEditor({
                                       noPadding
                                       alignTop
                                       name="include_citations"
-                                      label="Include Citations"
-                                      subtext={`
-                                      If set, the response will include bracket citations ([1], [2], etc.) 
-                                      for each document used by the LLM to help inform the response. This is 
-                                      the same technique used by the default Assistants. In general, we recommend 
-                                      to leave this enabled in order to increase trust in the LLM answer.`}
+                                      label={transAssistants(
+                                        "include-citations"
+                                      )}
+                                      subtext={transAssistants(
+                                        "include-citations-msg"
+                                      )}
                                     />
                                   </div>
                                 </>
@@ -714,9 +723,11 @@ export function AssistantEditor({
 
                       <TextFormField
                         name="task_prompt"
-                        label="Additional instructions (Optional)"
+                        label={transAssistants("additional-instructions")}
                         isTextArea={true}
-                        placeholder="e.g. 'Remember to reference all of the points mentioned in my message to you and focus on identifying action items that can move things forward'"
+                        placeholder={transAssistants(
+                          "additional-instructions-placeholder"
+                        )}
                         onChange={(e) => {
                           setFieldValue("task_prompt", e.target.value);
                           triggerFinalPromptUpdate(
@@ -725,7 +736,7 @@ export function AssistantEditor({
                             searchToolEnabled()
                           );
                         }}
-                        explanationText="Need help? Text us!"
+                        explanationText={transAssistants("need-help")}
                         explanationLink="mailto:sebastian@blona"
                       />
                     </>
@@ -733,7 +744,7 @@ export function AssistantEditor({
                   <div className="mb-6">
                     <div className="flex gap-x-2 items-center">
                       <div className="block font-medium text-base">
-                        Add Starter Messages (Optional){" "}
+                        {transAssistants("add-starter")}{" "}
                       </div>
                     </div>
                     <FieldArray
@@ -753,11 +764,11 @@ export function AssistantEditor({
                                   <div className="flex">
                                     <div className="w-full mr-6 border border-border p-3 rounded">
                                       <div>
-                                        <Label small>Name</Label>
+                                        <Label small>
+                                          {transAssistants("name")}
+                                        </Label>
                                         <SubLabel>
-                                          Shows up as the &quot;title&quot; for
-                                          this Starter Message. For example,
-                                          &quot;Write an email&quot;.
+                                          {transAssistants("starter-name-msg")}
                                         </SubLabel>
                                         <Field
                                           name={`starter_messages[${index}].name`}
@@ -781,13 +792,13 @@ export function AssistantEditor({
                                       </div>
 
                                       <div className="mt-3">
-                                        <Label small>Description</Label>
+                                        <Label small>
+                                          {transAssistants("description")}
+                                        </Label>
                                         <SubLabel>
-                                          A description which tells the user
-                                          what they might want to use this
-                                          Starter Message for. For example
-                                          &quot;to a client about a new
-                                          feature&quot;
+                                          {transAssistants(
+                                            "starter-description-msg"
+                                          )}
                                         </SubLabel>
                                         <Field
                                           name={`starter_messages.${index}.description`}
@@ -811,14 +822,13 @@ export function AssistantEditor({
                                       </div>
 
                                       <div className="mt-3">
-                                        <Label small>Message</Label>
+                                        <Label small>
+                                          {transAssistants("starter-message")}
+                                        </Label>
                                         <SubLabel>
-                                          The actual message to be sent as the
-                                          initial user message if a user selects
-                                          this starter prompt. For example,
-                                          &quot;Write me an email to a client
-                                          about a new billing feature we just
-                                          released.&quot;
+                                          {transAssistants(
+                                            "starter-message-msg"
+                                          )}
                                         </SubLabel>
                                         <Field
                                           name={`starter_messages[${index}].message`}
@@ -869,7 +879,7 @@ export function AssistantEditor({
                             type="button"
                             icon={FiPlus}
                           >
-                            Add New
+                            {transAssistants("add-new")}
                           </Button>
                         </div>
                       )}

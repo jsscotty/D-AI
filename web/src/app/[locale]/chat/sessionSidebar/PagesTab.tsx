@@ -57,6 +57,12 @@ export function PagesTab({
 
   const isHistoryEmpty = !existingChats || existingChats.length === 0;
   const trans = useTranslations("chat");
+  const dateRanges = {
+    TODAY: "today",
+    PREVIOUS_7_DAYS: "previous-7-days",
+    PREVIOUS_30_DAYS: "previous-30-days",
+    OVER_30_DAYS_AGO: "over-30-days-ago",
+  };
 
   return (
     <div className="mb-1 ml-3 relative miniscroll overflow-y-auto h-full">
@@ -105,7 +111,7 @@ export function PagesTab({
                         ind != 0 && "mt-5"
                       } flex pb-0.5 mb-1.5 font-medium`}
                     >
-                      {dateRange}
+                      {trans(dateRanges[dateRange as keyof typeof dateRanges])}
                     </div>
                     {chatSessions
                       .filter((chat) => chat.folder_id === null)

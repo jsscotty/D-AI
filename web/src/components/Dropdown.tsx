@@ -86,13 +86,13 @@ export function SearchMultiSelectDropdown({
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
-  const transWelcome = useTranslations("general");
+  const transGeneral = useTranslations("general");
   return (
     <div className="relative inline-block text-left w-full" ref={dropdownRef}>
       <div>
         <input
           type="text"
-          placeholder="Search..." // TODO: translation
+          placeholder={`${transGeneral("search")}...`}
           value={searchTerm}
           onChange={(e: ChangeEvent<HTMLInputElement>) => {
             if (!searchTerm) {
@@ -180,7 +180,7 @@ export function SearchMultiSelectDropdown({
                 role="menuitem"
                 onClick={() => setIsOpen(false)}
               >
-                {transWelcome("no-match-found")}
+                {transGeneral("no-match-found")}
               </button>
             )}
           </div>
@@ -317,7 +317,7 @@ export const DefaultDropdown = forwardRef<HTMLDivElement, DefaultDropdownProps>(
   ) => {
     const selectedOption = options.find((option) => option.value === selected);
     const [isOpen, setIsOpen] = useState(false);
-
+    const transGeneral = useTranslations("general");
     const Content = (
       <div
         className={`
@@ -334,8 +334,8 @@ export const DefaultDropdown = forwardRef<HTMLDivElement, DefaultDropdownProps>(
         <p className="line-clamp-1">
           {selectedOption?.name ||
             (includeDefault
-              ? defaultValue || "Default"
-              : "Select an option...")}
+              ? defaultValue || transGeneral("default")
+              : `${transGeneral("select-option")}...`)}
         </p>
         <FiChevronDown className="my-auto ml-auto" />
       </div>
@@ -358,7 +358,7 @@ export const DefaultDropdown = forwardRef<HTMLDivElement, DefaultDropdownProps>(
         {includeDefault && (
           <DefaultDropdownElement
             key={-1}
-            name="Default"
+            name={transGeneral("default")}
             onSelect={() => {
               onSelect(null);
             }}

@@ -23,6 +23,7 @@ export function UserDropdown({
   page?: "search" | "chat" | "assistants";
 }) {
   const [userInfoVisible, setUserInfoVisible] = useState(false);
+  const [langClicked, setLangClicked] = useState(false);
   const userInfoRef = useRef<HTMLDivElement>(null);
   const router = useRouter();
   // translation
@@ -82,7 +83,10 @@ export function UserDropdown({
                 overscroll-contain
               `}
           >
-            
+            {/* LANGS */}
+            <>
+              <LanguageSwitcher />
+            </>
             {showAdminPanel && (
               <>
                 <Link
@@ -101,7 +105,9 @@ export function UserDropdown({
                 )}
                 <div
                   onClick={handleLogout}
-                  className="mt-1 flex py-3 px-4 cursor-pointer hover:bg-hover-light"
+                  className={`mt-1 flex py-3 px-4 cursor-pointer hover:bg-hover-light ${
+                    langClicked ? "mt-4" : ""
+                  }`}
                 >
                   <FiLogOut className="my-auto mr-2 text-lg" />
                   {transWelcome("log-out")}

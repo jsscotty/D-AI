@@ -17,6 +17,7 @@ import { SendIcon } from "../icons/icons";
 import { Divider } from "@tremor/react";
 import { CustomTooltip } from "../tooltip/CustomTooltip";
 import KeyboardSymbol from "@/lib/browserUtilities";
+import { useTranslations } from "next-intl";
 
 export const AnimatedToggle = ({
   isOn,
@@ -43,7 +44,7 @@ export const AnimatedToggle = ({
     window.addEventListener("resize", updateWidth);
     return () => window.removeEventListener("resize", updateWidth);
   }, [isOn]);
-
+  const trans = useTranslations("search");
   return (
     <CustomTooltip
       light
@@ -51,19 +52,21 @@ export const AnimatedToggle = ({
       content={
         <div className="bg-white my-auto p-6 rounded-lg w-full">
           <h2 className="text-xl text-text-800 font-bold mb-2">
-            Agentic Search
+            {trans("agentic-search-title")}
           </h2>
           <p className="text-text-700 text-sm mb-4">
-            Our most powerful search, have an AI agent guide you to pinpoint
-            exactly what you&apos;re looking for.
+            {trans("agentic-search-msg-1")}
           </p>
           <Divider />
-          <h2 className="text-xl text-text-800 font-bold mb-2">Fast Search</h2>
+          <h2 className="text-xl text-text-800 font-bold mb-2">
+            {trans("fast-search-title")}
+          </h2>
           <p className="text-text-700 text-sm mb-4">
-            Get quality results immediately, best suited for instant access to
-            your documents.
+            {trans("fast-search-msg")}
           </p>
-          <p className="mt-2 text-xs">Shortcut: ({commandSymbol}/)</p>
+          <p className="mt-2 text-xs">
+            {trans("shortcut")}: ({commandSymbol}/)
+          </p>
         </div>
       }
     >
@@ -96,14 +99,14 @@ export const AnimatedToggle = ({
                 isOn ? "opacity-0  translate-y-10 w-0" : "opacity-100"
               }`}
             >
-              Fast
+              {trans("fast")}
             </span>
             <span
               className={`text-sm transition-all duration-300 ease-in-out ${
                 isOn ? "opacity-100 " : "opacity-0 -translate-y-10 w-0"
               }`}
             >
-              Agentic
+              {trans("agentic")}
             </span>
           </p>
         </div>
@@ -138,7 +141,7 @@ export const FullSearchBar = ({
       event.preventDefault();
     }
   };
-
+  const trans = useTranslations("search");
   return (
     <div
       className="
@@ -182,7 +185,7 @@ export const FullSearchBar = ({
         style={{ scrollbarWidth: "thin" }}
         role="textarea"
         aria-multiline
-        placeholder="Search for something..."
+        placeholder={trans("search-for")}
         value={query}
         onChange={handleChange}
         onKeyDown={(event) => {}}
@@ -192,19 +195,19 @@ export const FullSearchBar = ({
       <div className="flex justify-end w-full items-center space-x-3 mr-12 px-4 pb-2">
         {searchState == "searching" && (
           <div key={"Reading"} className="mr-auto relative inline-block">
-            <span className="loading-text">Searching...</span>
+            <span className="loading-text">{trans("searching")}</span>
           </div>
         )}
 
         {searchState == "reading" && (
           <div key={"Reading"} className="mr-auto relative inline-block">
-            <span className="loading-text">Reading Documents...</span>
+            <span className="loading-text">{trans("reading-docs")}</span>
           </div>
         )}
 
         {searchState == "analyzing" && (
           <div key={"Generating"} className="mr-auto relative inline-block">
-            <span className="loading-text">Generating Analysis...</span>
+            <span className="loading-text">{trans("generating-analysis")}</span>
           </div>
         )}
 
