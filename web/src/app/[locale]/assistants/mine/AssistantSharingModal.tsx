@@ -16,6 +16,7 @@ import { Bubble } from "@/components/Bubble";
 import { useRouter } from "next/navigation";
 import { AssistantIcon } from "@/components/assistants/AssistantIcon";
 import { Spinner } from "@/components/Spinner";
+import { useTranslations } from "next-intl";
 
 interface AssistantSharingModalProps {
   assistant: Persona;
@@ -42,6 +43,7 @@ export function AssistantSharingModal({
     (u) => u.id !== assistant.owner?.id
   );
 
+  const transAssistants = useTranslations("assistants");
   if (!show) {
     return null;
   }
@@ -132,16 +134,18 @@ export function AssistantSharingModal({
       >
         <div className="px-4">
           {isUpdating && <Spinner />}
-          <Text className="mb-5">
-            Control which other users should have access to this assistant.
-          </Text>
+          <Text className="mb-5">{transAssistants("control-user-access")}</Text>
 
           <div>
-            <p className="font-bold mb-2">Current status:</p>
+            <p className="font-bold mb-2">
+              {transAssistants("current-status")}
+            </p>
             {sharedStatus}
           </div>
 
-          <h3 className="text-default font-bold mb-4 mt-3">Share Assistant:</h3>
+          <h3 className="text-default font-bold mb-4 mt-3">
+            {transAssistants("share-assistant")}
+          </h3>
           <div className="mt-4">
             <SearchMultiSelectDropdown
               options={allUsers
@@ -216,7 +220,7 @@ export function AssistantSharingModal({
                 size="xs"
                 color="blue"
               >
-                Add
+                {transAssistants("add")}
               </Button>
             )}
           </div>

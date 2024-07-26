@@ -144,7 +144,7 @@
         "view-available-assistants": "View Available Assistants",
         "assistants-msg": "Assistants allow you to customize your experience for a specific purpose. Specifically, they combine instructions, extra knowledge, and any combination of tools.",
         "active-assistants-title": "Active Assistants",
-        "acitve-assistants-msg": "The order the assistants appear below will be the order they appear in the Assistants dropdown. The first assistant listed will be your default assistant when you start a new chat.",
+        "active-assistants-msg": "The order the assistants appear below will be the order they appear in the Assistants dropdown. The first assistant listed will be your default assistant when you start a new chat.",
         "hidden-assistants-title": "Your Hidden Assistants",
         "hidden-assistants-msg": "Assistants you&apos;ve created that aren&apos;t currently visible in the Assistants selector.",
         "move-up-success": "{assistantName} has been moved up",
@@ -199,7 +199,11 @@
         "starter-description-msg":"A description which tells the user what they might want to use this Starter Message for. For example &quot;to a client about a new feature&quot;",
         "starter-message": "Message",
         "starter-message-msg": "The actual message to be sent as the initial user message if a user selects this starter prompt. For example, &quot;Write me an email to a client about a new billing feature we just released.&quot;",
-        "add-new": "Add New"
+        "add-new": "Add New",
+        "current-status": "Current status.",
+        "control-user-access": "Control which other users should have access to this assistant.",
+        "share-assistant": "Share Assistant:",
+        "add": "Add"
     },
     "chat": {
         "like": "The AI liked this doc!",
@@ -296,5 +300,12 @@
         "reading-docs": "Reading Documents...",
         "generating-analysis": "Generating Analysis..."
 
+    },
+    "auth":{
+        "verification-email": "Hey <i>{currentUserEmail}</i> - it looks like you haven&apos;t verified your email yet.",
+        "check-inbox": "Check your inbox for an email from us to get started!",
+        "dont-see": "If you don&apos;t see anything, click",
+        "here": "here",
+        "request-new-email": "to request a new email."
     }
 }

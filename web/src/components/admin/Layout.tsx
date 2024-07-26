@@ -57,8 +57,6 @@ import {
   FiTool,
 } from "react-icons/fi";
 import { UserDropdown } from "../UserDropdown";
-import LanguageSwitcher from "../LanguageSwitcher";
-import { VStack } from "@chakra-ui/react";
 import { getTranslations } from "next-intl/server";
 import { HealthCheckBanner } from "../health/healthcheck";
 import { getSecondsUntilExpiration } from "@/lib/time";
@@ -345,10 +343,7 @@ export async function Layout({ children }: { children: React.ReactNode }) {
               <BackIcon size={20} className="text-neutral" />
               Back to Blona
             </a>
-            <VStack>
-              <LanguageSwitcher />
-              <UserDropdown user={user} />
-            </VStack>
+            <UserDropdown user={user} />
           </div>
           <div className="pt-12 flex overflow-y-auto h-full px-4 md:px-12">
             {children}

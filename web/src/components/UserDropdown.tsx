@@ -46,6 +46,7 @@ export function UserDropdown({
   const showLogout =
     user && !checkUserIsNoAuthUser(user.id) && !LOGOUT_DISABLED;
 
+  const [langClicked, setLangClicked] = useState(false);
   return (
     <div className="group relative" ref={userInfoRef}>
       <Popover
@@ -83,9 +84,12 @@ export function UserDropdown({
               `}
           >
             {/* LANGS */}
-            <>
+            <div
+              onClick={() => setLangClicked(!langClicked)}
+              className="flex py-3 px-4 cursor-pointer rounded hover:bg-hover-light"
+            >
               <LanguageSwitcher />
-            </>
+            </div>
             {showAdminPanel && (
               <>
                 <Link
@@ -104,7 +108,9 @@ export function UserDropdown({
                 )}
                 <div
                   onClick={handleLogout}
-                  className="mt-1 flex py-3 px-4 cursor-pointer hover:bg-hover-light"
+                  className={`mt-1 flex py-3 px-4 cursor-pointer hover:bg-hover-light ${
+                    langClicked ? "mt-4" : ""
+                  }`}
                 >
                   <FiLogOut className="my-auto mr-2 text-lg" />
                   {transWelcome("log-out")}
