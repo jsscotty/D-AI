@@ -23,6 +23,7 @@ export function UserDropdown({
   page?: "search" | "chat" | "assistants";
 }) {
   const [userInfoVisible, setUserInfoVisible] = useState(false);
+  const [langClicked, setLangClicked] = useState(false);
   const userInfoRef = useRef<HTMLDivElement>(null);
   const router = useRouter();
   // translation
@@ -46,7 +47,6 @@ export function UserDropdown({
   const showLogout =
     user && !checkUserIsNoAuthUser(user.id) && !LOGOUT_DISABLED;
 
-  const [langClicked, setLangClicked] = useState(false);
   return (
     <div className="group relative" ref={userInfoRef}>
       <Popover
