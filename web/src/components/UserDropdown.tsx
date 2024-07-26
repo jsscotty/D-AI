@@ -84,10 +84,7 @@ export function UserDropdown({
               `}
           >
             {/* LANGS */}
-            <div
-              onClick={() => setLangClicked(!langClicked)}
-              className="flex py-3 px-4 cursor-pointer rounded hover:bg-hover-light"
-            >
+            <div className="flex py-3 px-4 cursor-pointer rounded hover:bg-hover-light">
               <LanguageSwitcher />
             </div>
             {showAdminPanel && (

@@ -113,7 +113,8 @@
         "setup-title": "Setup Auto-Syncing from Apps",
         "setup-text": "Setup auto-syncing from your organization&apos;s most used apps and services. Unless otherwise specified during the connector setup, we will pull in the latest updates from the source every 10 minutes.",
         "delete-fail": "Failed to delete persona",
-        "delete-assistant": "Delete Assistant"
+        "delete-assistant": "Delete Assistant",
+        "add-connector": "Add Connector"
     },
     "assistants": {
         "public": "Public",

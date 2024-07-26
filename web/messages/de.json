@@ -112,7 +112,8 @@
     "setup-title": "Einrichtung der automatischen Synchronisierung aus Apps",
     "setup-text": "Richten Sie die automatische Synchronisierung aus den am häufigsten verwendeten Apps und Diensten Ihrer Organisation ein. Sofern während der Konnektoreinrichtung nicht anders angegeben, ziehen wir alle 10 Minuten die neuesten Updates aus der Quelle.",
     "delete-fail": "Löschen des Assistenten fehlgeschlagen",
-    "delete-assistant": "Assistent löschen"
+    "delete-assistant": "Assistent löschen",
+    "add-connector": "Assistent hinzufügen"
   },
   "assistants": {
     "public": "Öffentlich",

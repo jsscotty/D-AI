@@ -29,7 +29,7 @@ export default function LanguageSwitcher() {
   const menuButtonRef = useRef(null);
 
   return (
-    <Menu>
+    <Menu placement={"right-start"}>
       <MenuButton
         as={Button}
         rightIcon={<ChevronDownIcon />}
