@@ -10,6 +10,7 @@ import * as Yup from "yup";
 import { requestEmailVerification } from "../lib";
 import { useState } from "react";
 import { Spinner } from "@/components/Spinner";
+import { useTranslations } from "next-intl";
 
 export function EmailPasswordForm({
   isSignup = false,
@@ -21,7 +22,7 @@ export function EmailPasswordForm({
   const router = useRouter();
   const { popup, setPopup } = usePopup();
   const [isWorking, setIsWorking] = useState(false);
-
+  const trans = useTranslations("auth");
   return (
     <>
       {isWorking && <Spinner />}
@@ -84,14 +85,14 @@ export function EmailPasswordForm({
           <Form>
             <TextFormField
               name="email"
-              label="Email"
+              label={trans("email")}
               type="email"
               placeholder="email@yourcompany.com"
             />
 
             <TextFormField
               name="password"
-              label="Password"
+              label={trans("password")}
               type="password"
               placeholder="**************"
             />
@@ -102,7 +103,7 @@ export function EmailPasswordForm({
                 disabled={isSubmitting}
                 className="mx-auto w-full"
               >
-                {isSignup ? "Sign Up" : "Log In"}
+                {isSignup ? trans("sign-up") : trans("log-in")}
               </Button>
             </div>
           </Form>

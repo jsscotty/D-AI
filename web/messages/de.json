@@ -215,7 +215,8 @@
     "documents-question": "Wenn Sie eine Frage stellen, werden die abgerufenen Dokumente hier angezeigt!",
     "save-changes": "Änderungen speichern",
     "delete-context": "Kontext löschen",
-    "delete-folder-confirm": "Möchten Sie <i>{folderName}</i> wirklich löschen? Alle Inhalte in diesem Ordner werden ebenfalls gelöscht.",
+    "delete-folder-confirm-1": "Möchten Sie ",
+    "delete-folder-confirm-2":" wirklich löschen? Alle Inhalte in diesem Ordner werden ebenfalls gelöscht.",
     "yes": "Ja",
     "no": "Nein",
     "create-new-assistant": "Neuen Assistenten erstellen",
@@ -306,6 +307,15 @@
     "check-inbox": "Überprüfe deinen Posteingang auf eine E-Mail von uns, um loszulegen!",
     "dont-see": "Wenn du nichts siehst, klicke",
     "here": "hier",
-    "request-new-email": "um eine neue E-Mail anzufordern."
+    "request-new-email": "um eine neue E-Mail anzufordern.",
+    "log-in": "Einloggen",
+    "to": "in",
+    "sign-up-for": "Registrieren Sie sich für Blona",
+    "sign-up": "Sich registrieren",
+    "already-have-account": "Besitzen Sie bereits ein Konto?",
+    "dont-have-account": "Besitzen Sie kein Konto??",
+    "create-account": "Konto erstellen",
+    "email": "Email",
+    "password": "Passwort"
   }
 }
