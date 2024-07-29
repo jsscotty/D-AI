@@ -70,7 +70,7 @@ export async function createChatSession(
     console.log(
       `Failed to create chat session - ${createChatSessionResponse.status}`
     );
-    throw Error({transWelcome("create_error")});
+    throw Error(({transWelcome("create_error")}));
   }
   const chatSessionResponseJson = await createChatSessionResponse.json();
   return chatSessionResponseJson.chat_session_id;

@@ -679,7 +679,7 @@ export function ChatPage({
       : null;
     if (!messageToResend && messageIdToResend !== undefined) {
       setPopup({
-        message: {transWelcome("failed_resend")},
+        message: ({transWelcome("failed_resend")}),
         type: "error",
       });
       return;
