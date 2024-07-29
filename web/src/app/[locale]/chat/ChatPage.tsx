@@ -970,7 +970,7 @@ export function ChatPage({
       const responseJson = await response.json();
       const errorMsg = responseJson.detail || responseJson.message;
       setPopup({
-        message: ({transWelcome("feedback_thx")} ${errorMsg}),
+        message: (transWelcome("feedback_thx") ,{errorMsg}),
         type: "error",
       });
     }

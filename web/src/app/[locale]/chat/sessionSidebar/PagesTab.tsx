@@ -30,6 +30,7 @@ export function PagesTab({
   const { setPopup } = usePopup();
   const router = useRouter();
   const [isDragOver, setIsDragOver] = useState<boolean>(false);
+  const trans = useTranslations("chat");
 
   const handleDropToRemoveFromFolder = async (
     event: React.DragEvent<HTMLDivElement>
@@ -56,7 +57,7 @@ export function PagesTab({
   };
 
   const isHistoryEmpty = !existingChats || existingChats.length === 0;
-  const trans = useTranslations("chat");
+ 
   const dateRanges = {
     TODAY: "today",
     PREVIOUS_7_DAYS: "previous-7-days",

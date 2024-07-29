@@ -275,7 +275,7 @@
     "new-chat": "Neuer Chat",
     "new-folder": "Neuer Ordner",
     "folders": "Ordner",
-    "history": "Verlauf",
+    "history": " Verlauf",
     "remove-from-folder-fail": "Chat konnte nicht aus dem Ordner entfernt werden",
     "shared-chat-not-found": "Es wurde kein geteilter Chat mit der angegebenen ID gefunden.",
     "empty-search": "Versuchen Sie eine Suche durchzuführen! Ihr Suchverlauf wird hier erscheinen.",
