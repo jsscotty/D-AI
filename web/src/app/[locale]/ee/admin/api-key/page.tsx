@@ -167,14 +167,14 @@ function Main() {
 
       <Divider />
 
-      <Title className="mt-6">{transWelcome("existing_keys")}</Title>
+      <Title className="mt-6">Existing API Keys</Title>
       <Table className="overflow-visible">
         <TableHead>
           <TableRow>
-            <TableHeaderCell>{transWelcome("name")}</TableHeaderCell>
-            <TableHeaderCell>{transWelcome("api_key")}</TableHeaderCell>
-            <TableHeaderCell>{transWelcome("regenerate")}</TableHeaderCell>
-            <TableHeaderCell>{transWelcome("delete")}</TableHeaderCell>
+            <TableHeaderCell>Name</TableHeaderCell>
+            <TableHeaderCell>API Key</TableHeaderCell>
+            <TableHeaderCell>Regenerate</TableHeaderCell>
+            <TableHeaderCell>Delete</TableHeaderCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -231,7 +231,7 @@ function Main() {
                   }}
                 >
                   <FiRefreshCw className="mr-1 my-auto" />
-                  {transWelcome("refresh")}
+                  Refresh
                 </div>
               </TableCell>
               <TableCell>
@@ -242,7 +242,7 @@ function Main() {
                       const errorMsg = await response.text();
                       setPopup({
                         type: "error",
-                        message: ({transWelcome("failed_delete")}) ${errorMsg}),
+                        message: `Failed to delete API Key: ${errorMsg}`,
                       });
                       return;
                     }
@@ -276,7 +276,7 @@ function Main() {
 export default function Page() {
   return (
     <div className="mx-auto container">
-      <AdminPageTitle title={transWelcome("api_keys")} icon={<KeyIcon size={32} />} />
+      <AdminPageTitle title="API Keys" icon={<KeyIcon size={32} />} />
 
       <Main />
     </div>
