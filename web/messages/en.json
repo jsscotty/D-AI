@@ -21,12 +21,16 @@
         "select-option": "Select an option", 
         "default": "Default",
         "add": "Add",
-         "desc": "Question answering for your documents"
+        "desc": "Question answering for your documents",
+        "powered": "Powered by Blona"
     },
     "home": {
         "title": "Unlock Knowledge",
         "welcome": "Welcome to Blona",
         "start": "Get started!"
+    },
+    "shared": {
+        "fetch_failed": "Some fetch failed for the main search page -"
     },
     "AdvancedOptions": {
         "Advanced-Options": "Advanced Options"
@@ -233,7 +237,6 @@
         "document-sets": "Document Sets",
         "time-range-placeholder": "Select range",
         "last-x-days": "Last {num} days",
-        "today": "Today",
         "no-knowledge-sets": "No knowledge sets available",
         "sources-title": "Sources",
         "no-sources": "No sources available",
@@ -290,10 +293,14 @@
         "query_edit_error":"Cannot edit query of first message - please refresh the page and try again.",
         "query_edit_error2":"Cannot edit query of a pending message - please wait a few seconds and try again.",
         "failed_force":"Failed to force search - please refresh the page and try again.",
-         
-
-
-
+        "chat_intro":"How can I help you today?",
+        "create_error":"Failed to create chat session",
+        "send_error": "Failed to send message - ",
+        "today": "Today",
+        "prev_7": "Previous 7 days",
+        "prev_30": "Previous 30 days",
+        "over_30": "Over 30 days ago",
+        "upload_error":"Failed to upload files - "
     },
     "SwitchModelModal": {
         "switch-model": "❗ Switch Embedding Model ❗",
@@ -355,13 +362,5 @@
         "refresh": "Refresh",
         "failed_delete": "Failed to delete API Key:"      
     }
-    "chat": {
-        "create_error":"Failed to create chat session",
-        "send_error": "Failed to send message - ",
-        "today": "Today",
-        "prev_7": "Previous 7 days",
-        "prev_30": "Previous 30 days",
-        "over_30": "Over 30 days ago",
-        "upload_error":"Failed to upload files - "
-    },
+    
 }
