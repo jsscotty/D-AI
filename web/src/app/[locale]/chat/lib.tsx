@@ -325,10 +325,10 @@ export function groupSessionsByDateRange(chatSessions: ChatSession[]) {
   today.setHours(0, 0, 0, 0); // Set to start of today for accurate comparison
 
   const groups: Record<string, ChatSession[]> = {
-    {transWelcome("today")}: [],
-    {transWelcome("prev_7")}: [],
-    {transWelcome("prev_30")}: [],
-    {transWelcome("over_30")}: [],
+    transWelcome("today"): [],
+    transWelcome("prev_7"): [],
+    transWelcome("prev_30"): [],
+    transWelcome("over_30"): [],
   };
 
   chatSessions.forEach((chatSession) => {
@@ -338,13 +338,13 @@ export function groupSessionsByDateRange(chatSessions: ChatSession[]) {
     const diffDays = diffTime / (1000 * 3600 * 24); // Convert time difference to days
 
     if (diffDays < 1) {
-      groups[{transWelcome("today")}].push(chatSession);
+      groups[transWelcome("today")].push(chatSession);
     } else if (diffDays <= 7) {
-      groups[{transWelcome("prev_7")}].push(chatSession);
+      groups[transWelcome("prev_7")].push(chatSession);
     } else if (diffDays <= 30) {
-      groups[{transWelcome("prev_30")}].push(chatSession);
+      groups[transWelcome("prev_30")].push(chatSession);
     } else {
-      groups[{transWelcome("over_30")}].push(chatSession);
+      groups[transWelcome("over_30")].push(chatSession);
     }
   });
 
@@ -593,7 +593,7 @@ export async function uploadFilesForChat(
     body: formData,
   });
   if (!response.ok) {
-    return [[], ({transWelcome("upload_error")} ${(await response.json()).detail})];
+    return [[], (transWelcome("upload_error") ,{(await response.json()).detail})];
   }
   const responseJson = await response.json();
 

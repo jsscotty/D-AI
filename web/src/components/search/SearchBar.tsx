@@ -103,7 +103,7 @@ export const AnimatedToggle = ({
             </span>
             <span
               className={`text-sm transition-all duration-300 ease-in-out ${
-                isOn ? "opacity-100 " : "opacity-0 -translate-y-10 w-0"
+                isOn ? "opacity-100 p-4 " : "opacity-0 -translate-y-10 w-0"
               }`}
             >
               {trans("agentic")}

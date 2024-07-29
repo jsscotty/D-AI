@@ -1001,7 +1001,7 @@ export function ChatPage({
       setPopup({
         type: "error",
         message:
-          {transWelcome("no_image_input")},
+          transWelcome("no_image_input"),
       });
       return;
     }
@@ -1405,7 +1405,7 @@ export function ChatPage({
                                               setPopup({
                                                 type: "error",
                                                 message:
-                                                  {transWelcome("query_edit_error")},
+                                                  transWelcome("query_edit_error"),
                                               });
                                               return;
                                             }
@@ -1416,7 +1416,7 @@ export function ChatPage({
                                               setPopup({
                                                 type: "error",
                                                 message:
-                                                  {transWelcome("query_edit_error2")},
+                                                  transWelcome("query_edit_error2"),
                                               });
                                               return;
                                             }
@@ -1462,7 +1462,7 @@ export function ChatPage({
                                         setPopup({
                                           type: "error",
                                           message:
-                                          {transWelcome("faild_force")},
+                                          transWelcome("faild_force"),
                                         });
                                       }
                                     }}
