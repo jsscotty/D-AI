@@ -29,7 +29,7 @@ import { DanswerApiKeyForm } from "./DanswerApiKeyForm";
 import { useTranslations } from "next-intl";
 
 const transWelcome = useTranslations("api");
-const API_KEY_TEXT = [{transWelcome("api_desc")}];
+const API_KEY_TEXT = transWelcome("api_desc");
 
 
 function NewApiKeyModal({
