@@ -20,11 +20,13 @@
         "back-to": "Back to",
         "select-option": "Select an option", 
         "default": "Default",
-        "add": "Add"
+        "add": "Add",
+         "desc": "Question answering for your documents"
     },
     "home": {
         "title": "Unlock Knowledge",
-        "welcome": "Welcome to Blona"
+        "welcome": "Welcome to Blona",
+        "start": "Get started!"
     },
     "AdvancedOptions": {
         "Advanced-Options": "Advanced Options"
@@ -280,14 +282,26 @@
         "previous-7-days": "Previous 7 Days",
         "previous-30-days": "Previous 30 Days",
         "over-30-days-ago": "Over 30 days ago",
-        "failed-folder": "Failed to create folder"
+        "failed-folder": "Failed to create folder",
+        "failed_resend":"Failed to re-send message - please refresh the page and try again.",
+        "feedback_thx":"Thanks for your feedback!",
+        "feedback_submit_error":"Failed to submit feedback -",
+        "no_image_input":"The current Assistant does not support image input. Please select an assistant with Vision support.",
+        "query_edit_error":"Cannot edit query of first message - please refresh the page and try again.",
+        "query_edit_error2":"Cannot edit query of a pending message - please wait a few seconds and try again.",
+        "failed_force":"Failed to force search - please refresh the page and try again.",
+         
+
+
+
     },
     "SwitchModelModal": {
         "switch-model": "❗ Switch Embedding Model ❗",
         "switch-model-desc1": "We've detected you are using our old default embedding model",
         "switch-model-desc2": "We believe that search performance can be dramatically improved by a simple model switch.",
         "switch-model-desc3":"Please click the button below to choose a new model. Don't worry, the re-indexing necessary for the switch will happen in the background - your use of Blona will not be interrupted.",
-        "choose-model":"Choose your Embedding Model" },
+        "choose-model":"Choose your Embedding Model" 
+    },
     "search": {
         "any-time": "Any time...",
         "agentic-search-title": "Agentic Search",
@@ -318,4 +332,36 @@
         "email": "Email",
         "password": "Password"
     }
+    "api":{
+        "Update": "Update API Key",
+        "Update_Success": "Successfully updated API key!",
+        "Update_Error": "Error updating API key -",
+        "Create": "Create a new API Key",
+        "Create_Success": "Successfully created API key!",
+        "Create_Error": "Error creating API key -",
+        "API_Name": "Choose a memorable name for your API key. This is optional and can be added or changed later!",
+        "api_desc": "API Keys allow you to access Blona APIs programmatically. Click the button below to generate a new API Key.",
+        "new_key": "New API Key",
+        "new_key_desc": "Make sure you copy your new API key. You won’t be able to see this key again.",
+        "key_copied": "API Key copied!",
+        "api_fetch_fail": "Failed to fetch API Keys",
+        "create_another": "Create API Key",
+        "existing_keys": "Existing API Keys",
+        "name": "Name",
+        "api_key": "API Key",
+        "api_keys": "API Keys",
+        "regenerate": "Regenerate",
+        "delete": "Delete",
+        "refresh": "Refresh",
+        "failed_delete": "Failed to delete API Key:"      
+    }
+    "chat": {
+        "create_error":"Failed to create chat session",
+        "send_error": "Failed to send message - ",
+        "today": "Today",
+        "prev_7": "Previous 7 days",
+        "prev_30": "Previous 30 days",
+        "over_30": "Over 30 days ago",
+        "upload_error":"Failed to upload files - "
+    },
 }

@@ -26,10 +26,11 @@ import { Modal } from "@/components/Modal";
 import { Spinner } from "@/components/Spinner";
 import { deleteApiKey, regenerateApiKey } from "./lib";
 import { DanswerApiKeyForm } from "./DanswerApiKeyForm";
+import { useTranslations } from "next-intl";
 
-const API_KEY_TEXT = `
-API Keys allow you to access Blona APIs programmatically. Click the button below to generate a new API Key.
-`;
+const transWelcome = useTranslations("api");
+const API_KEY_TEXT = {transWelcome("api_desc")};
+
 
 function NewApiKeyModal({
   apiKey,
@@ -44,15 +45,14 @@ function NewApiKeyModal({
     <Modal onOutsideClick={onClose}>
       <div className="px-8 py-8">
         <div className="flex w-full border-b border-border mb-4 pb-4">
-          <Title>New API Key</Title>
+          <Title>{transWelcome("new_key")}</Title>
           <div onClick={onClose} className="ml-auto p-1 rounded hover:bg-hover">
             <FiX size={18} />
           </div>
         </div>
         <div className="h-32">
           <Text className="mb-4">
-            Make sure you copy your new API key. You won’t be able to see this
-            key again.
+          {transWelcome("new_key_desc")}
           </Text>
 
           <div className="flex mt-2">
@@ -72,7 +72,7 @@ function NewApiKeyModal({
           </div>
           {copyClicked && (
             <Text className="text-success text-xs font-medium mt-1">
-              API Key copied!
+              {transWelcome("key_copied")}
             </Text>
           )}
         </div>
@@ -107,7 +107,7 @@ function Main() {
   if (!apiKeys || error) {
     return (
       <ErrorCallout
-        errorTitle="Failed to fetch API Keys"
+        errorTitle={transWelcome("api_fetch_fail")}
         errorMsg={error?.info?.detail || error.toString()}
       />
     );
@@ -120,7 +120,7 @@ function Main() {
       className="mt-3"
       onClick={() => setShowCreateUpdateForm(true)}
     >
-      Create API Key
+      {transWelcome("create_another")}
     </Button>
   );
 
@@ -167,14 +167,14 @@ function Main() {
 
       <Divider />
 
-      <Title className="mt-6">Existing API Keys</Title>
+      <Title className="mt-6">{transWelcome("existing_keys")}</Title>
       <Table className="overflow-visible">
         <TableHead>
           <TableRow>
-            <TableHeaderCell>Name</TableHeaderCell>
-            <TableHeaderCell>API Key</TableHeaderCell>
-            <TableHeaderCell>Regenerate</TableHeaderCell>
-            <TableHeaderCell>Delete</TableHeaderCell>
+            <TableHeaderCell>{transWelcome("name")}</TableHeaderCell>
+            <TableHeaderCell>{transWelcome("api_key")}</TableHeaderCell>
+            <TableHeaderCell>{transWelcome("regenerate")}</TableHeaderCell>
+            <TableHeaderCell>{transWelcome("delete")}</TableHeaderCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -231,7 +231,7 @@ function Main() {
                   }}
                 >
                   <FiRefreshCw className="mr-1 my-auto" />
-                  Refresh
+                  {transWelcome("refresh")}
                 </div>
               </TableCell>
               <TableCell>
@@ -242,7 +242,7 @@ function Main() {
                       const errorMsg = await response.text();
                       setPopup({
                         type: "error",
-                        message: `Failed to delete API Key: ${errorMsg}`,
+                        message: ({transWelcome("failed_delete")}) ${errorMsg}),
                       });
                       return;
                     }
@@ -276,7 +276,7 @@ function Main() {
 export default function Page() {
   return (
     <div className="mx-auto container">
-      <AdminPageTitle title="API Keys" icon={<KeyIcon size={32} />} />
+      <AdminPageTitle title={transWelcome("api_keys")} icon={<KeyIcon size={32} />} />
 
       <Main />
     </div>

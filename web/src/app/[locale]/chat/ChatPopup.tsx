@@ -6,9 +6,13 @@ import { Button } from "@tremor/react";
 import { useContext, useEffect, useState } from "react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
+import { useTranslations } from "next-intl";
+
+
 
 const ALL_USERS_INITIAL_POPUP_FLOW_COMPLETED =
   "allUsersInitialPopupFlowCompleted";
+const transWelcome = useTranslations("home");
 
 export function ChatPopup() {
   const [completedFlow, setCompletedFlow] = useState(true);
@@ -26,9 +30,7 @@ export function ChatPopup() {
 
   let popupTitle = settings.enterpriseSettings.custom_popup_header;
   if (!popupTitle) {
-    popupTitle = `Welcome to ${
-      settings.enterpriseSettings.application_name || "Blona"
-    }!`;
+    popupTitle = `{transWelcome("welcome")}}!`;
   }
 
   return (
@@ -64,7 +66,7 @@ export function ChatPopup() {
               setCompletedFlow(true);
             }}
           >
-            Get started!
+            {transWelcome("start")}
           </Button>
         </div>
       </>

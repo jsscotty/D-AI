@@ -27,6 +27,9 @@ import {
 import { Persona } from "../admin/assistants/interfaces";
 import { ReadonlyURLSearchParams } from "next/navigation";
 import { SEARCH_PARAM_NAMES } from "./searchParams";
+import { useTranslations } from "next-intl";
+
+
 
 export async function updateModelOverrideForChatSession(
   chatSessionId: number,
@@ -42,6 +45,7 @@ export async function updateModelOverrideForChatSession(
       new_alternate_model: newAlternateModel,
     }),
   });
+  const transWelcome = useTranslations("chat");
   return response;
 }
 
@@ -66,7 +70,7 @@ export async function createChatSession(
     console.log(
       `Failed to create chat session - ${createChatSessionResponse.status}`
     );
-    throw Error("Failed to create chat session");
+    throw Error({transWelcome("create_error")});
   }
   const chatSessionResponseJson = await createChatSessionResponse.json();
   return chatSessionResponseJson.chat_session_id;
@@ -166,7 +170,7 @@ export async function* sendMessage({
   if (!sendMessageResponse.ok) {
     const errorJson = await sendMessageResponse.json();
     const errorMsg = errorJson.message || errorJson.detail || "";
-    throw Error(`Failed to send message - ${errorMsg}`);
+    throw Error({transWelcome("send_error")} ${errorMsg});
   }
 
   yield* handleStream<PacketType>(sendMessageResponse);
@@ -321,10 +325,10 @@ export function groupSessionsByDateRange(chatSessions: ChatSession[]) {
   today.setHours(0, 0, 0, 0); // Set to start of today for accurate comparison
 
   const groups: Record<string, ChatSession[]> = {
-    Today: [],
-    "Previous 7 Days": [],
-    "Previous 30 Days": [],
-    "Over 30 days ago": [],
+    {transWelcome("today")}: [],
+    {transWelcome("prev_7")}: [],
+    {transWelcome("prev_30")}: [],
+    {transWelcome("over_30")}: [],
   };
 
   chatSessions.forEach((chatSession) => {
@@ -334,13 +338,13 @@ export function groupSessionsByDateRange(chatSessions: ChatSession[]) {
     const diffDays = diffTime / (1000 * 3600 * 24); // Convert time difference to days
 
     if (diffDays < 1) {
-      groups["Today"].push(chatSession);
+      groups[{transWelcome("today")}].push(chatSession);
     } else if (diffDays <= 7) {
-      groups["Previous 7 Days"].push(chatSession);
+      groups[{transWelcome("prev_7")}].push(chatSession);
     } else if (diffDays <= 30) {
-      groups["Previous 30 Days"].push(chatSession);
+      groups[{transWelcome("prev_30")}].push(chatSession);
     } else {
-      groups["Over 30 days ago"].push(chatSession);
+      groups[{transWelcome("over_30")}].push(chatSession);
     }
   });
 
@@ -589,7 +593,7 @@ export async function uploadFilesForChat(
     body: formData,
   });
   if (!response.ok) {
-    return [[], `Failed to upload files - ${(await response.json()).detail}`];
+    return [[], ({transWelcome("upload_error")} ${(await response.json()).detail})];
   }
   const responseJson = await response.json();
 

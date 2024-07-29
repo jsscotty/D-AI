@@ -5,6 +5,7 @@ import { createApiKey, updateApiKey } from "./lib";
 import { Modal } from "@/components/Modal";
 import { XIcon } from "@/components/icons/icons";
 import { Button, Divider, Text } from "@tremor/react";
+import { useTranslations } from "next-intl";
 
 interface DanswerApiKeyFormProps {
   onClose: () => void;
@@ -20,12 +21,14 @@ export const DanswerApiKeyForm = ({
   apiKey,
 }: DanswerApiKeyFormProps) => {
   const isUpdate = apiKey !== undefined;
+  const transWelcome = useTranslations("api");
+
 
   return (
     <Modal onOutsideClick={onClose} width="w-2/6">
       <div className="px-8 py-6 bg-background">
         <h2 className="text-xl font-bold flex">
-          {isUpdate ? "Update API Key" : "Create a new API Key"}
+          {isUpdate ? {transWelcome("Update")} : {transWelcome("Create")}}
           <div
             onClick={onClose}
             className="ml-auto hover:bg-hover p-1.5 rounded"
@@ -55,8 +58,8 @@ export const DanswerApiKeyForm = ({
             if (response.ok) {
               setPopup({
                 message: isUpdate
-                  ? "Successfully updated API key!"
-                  : "Successfully created API key!",
+                  ? ({transWelcome("Update_Success")})
+                  : ({transWelcome("Create_Success")}),
                 type: "success",
               });
               if (!isUpdate) {
@@ -68,8 +71,8 @@ export const DanswerApiKeyForm = ({
               const errorMsg = responseJson.detail || responseJson.message;
               setPopup({
                 message: isUpdate
-                  ? `Error updating API key - ${errorMsg}`
-                  : `Error creating API key - ${errorMsg}`,
+                  ? ({transWelcome("Update_Error")} - ${errorMsg})
+                  : ({transWelcome("Create_Error")} - ${errorMsg}),
                 type: "error",
               });
             }
@@ -78,8 +81,7 @@ export const DanswerApiKeyForm = ({
           {({ isSubmitting, values, setFieldValue }) => (
             <Form>
               <Text className="mb-4 text-lg">
-                Choose a memorable name for your API key. This is optional and
-                can be added or changed later!
+              {transWelcome("API_Name")}
               </Text>
 
               <TextFormField

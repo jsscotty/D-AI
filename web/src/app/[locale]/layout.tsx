@@ -7,6 +7,9 @@ import { Metadata } from "next";
 import { buildClientUrl } from "@/lib/utilsSS";
 import { Inter } from "next/font/google";
 import { NextIntlClientProvider } from "next-intl";
+import { useTranslations } from "next-intl";
+
+
 
 const inter = Inter({
   subsets: ["latin"],
@@ -16,6 +19,7 @@ const inter = Inter({
 
 export async function generateMetadata(): Promise<Metadata> {
   const dynamicSettings = await getCombinedSettings({ forceRetrieval: true });
+  const transWelcome = useTranslations("general");
   const logoLocation =
     dynamicSettings.enterpriseSettings &&
     dynamicSettings.enterpriseSettings?.use_custom_logo
@@ -24,7 +28,7 @@ export async function generateMetadata(): Promise<Metadata> {
 
   return {
     title: dynamicSettings.enterpriseSettings?.application_name ?? "Blona",
-    description: "Question answering for your documents",
+    description: {transWelcome("desc")},
     icons: {
       icon: logoLocation,
     },
