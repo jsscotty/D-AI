@@ -1,30 +1,36 @@
 {
   "general": {
-    "back": "Zurück",
-    "initializing": "Initialisierung",
-    "delete": "Löschen",
-    "deleting": "Wird gelöscht",
-    "no-match-found": "Keine Übereinstimmungen gefunden...",
-    "edit": "Bearbeiten",
-    "paused": "Pausiert",
-    "page-not-found": "Seite nicht gefunden",
-    "failed": "Fehlgeschlagen",
-    "error": "Fehler",
-    "succeeded": "Erfolgreich",
-    "in-progress": "In Bearbeitung",
-    "scheduled": "Geplant",
-    "active": "Aktiv",
-    "log-out": "Abmelden",
-    "admin-panel": "Administrationsbereich",
-    "failed-logout": "Abmeldung fehlgeschlagen",
-    "back-to": "Zurück zu",
-    "select-option": "Option auswählen",
-    "default": "Standard",
-    "add": "Hinzufügen"
+      "back": "zurück",
+      "initializing": "Initialisierung",
+      "delete": "Löschen",
+      "deleting": "Wird gelöscht",
+      "no-match-found": "Keine Übereinstimmungen gefunden...",
+      "edit": "Bearbeiten",
+      "paused": "Pausiert",
+      "page-not-found": "Seite nicht gefunden",
+      "failed": "Fehlgeschlagen",
+      "error": "Fehler",
+      "succeeded": "Erfolgreich",
+      "in-progress": "In Bearbeitung",
+      "scheduled": "Geplant",
+      "active": "Aktiv",
+      "log-out": "Abmelden",
+      "admin-panel": "Admin-Panel",
+      "failed-logout": "Abmeldung fehlgeschlagen",
+      "back-to": "Zurück zu",
+      "select-option": "Option wählen", 
+      "default": "Standard",
+      "add": "Hinzufügen",
+      "desc": "Frage-Antwort für Ihre Dokumente",
+      "powered": "Bereitgestellt von Blona"
   },
   "home": {
-    "title": "Wissen erschließen",
-    "welcome": "Willkommen bei Blona"
+      "title": "Wissen freischalten",
+      "welcome": "Willkommen bei Blona",
+      "start": "Loslegen!"
+  },
+  "shared": {
+      "fetch_failed": "Einige Abrufe für die Hauptsuchseite sind fehlgeschlagen -"
   },
   "AdvancedOptions": {
     "Advanced-Options": "Erweiterte Optionen"
@@ -230,7 +236,6 @@
     "document-sets": "Dokumentensammlungen",
     "time-range-placeholder": "Zeitraum auswählen",
     "last-x-days": "Letzte {num} Tage",
-    "today": "Heute",
     "no-knowledge-sets": "Keine Wissenssammlungen verfügbar",
     "sources-title": "Quellen",
     "no-sources": "Keine Quellen verfügbar",
@@ -279,8 +284,24 @@
     "previous-7-days": "Vorherige 7 Tage",
     "previous-30-days": "Vorherige 30 Tage",
     "over-30-days-ago": "Vor über 30 Tagen",
-    "failed-folder": "Ordner konnte nicht erstellt werden"
+    "failed-folder": "Ordner konnte nicht erstellt werden",
+    "failed_resend": "Nachricht konnte nicht erneut gesendet werden - bitte aktualisieren Sie die Seite und versuchen Sie es erneut.",
+    "feedback_thx": "Danke für Ihr Feedback!",
+    "feedback_submit_error": "Feedback konnte nicht gesendet werden -",
+    "no_image_input": "Der aktuelle Assistent unterstützt keine Bildeingabe. Bitte wählen Sie einen Assistenten mit Vision-Unterstützung.",
+    "query_edit_error": "Die Anfrage der ersten Nachricht kann nicht bearbeitet werden - bitte aktualisieren Sie die Seite und versuchen Sie es erneut.",
+    "query_edit_error2": "Die Anfrage einer ausstehenden Nachricht kann nicht bearbeitet werden - bitte warten Sie ein paar Sekunden und versuchen Sie es erneut.",
+    "failed_force": "Erzwungene Suche fehlgeschlagen - bitte aktualisieren Sie die Seite und versuchen Sie es erneut.",
+    "chat_intro": "Wie kann ich Ihnen heute helfen?",
+    "create_error": "Fehler beim Erstellen der Chat-Sitzung",
+    "send_error": "Fehler beim Senden der Nachricht -",
+    "today": "Heute",
+    "prev_7": "Die letzten 7 Tage",
+    "prev_30": "Die letzten 30 Tage",
+    "over_30": "Vor über 30 Tagen",
+    "upload_error": "Fehler beim Hochladen der Dateien -"
   },
+  
   "SwitchModelModal": {
     "switch-model": "❗ Embedding-Modell wechseln ❗",
     "switch-model-desc1": "Wir haben festgestellt, dass Sie unser altes Standard-Embedding-Modell verwenden",
@@ -317,5 +338,28 @@
     "create-account": "Konto erstellen",
     "email": "Email",
     "password": "Passwort"
-  }
+  },
+  "api": {
+    "Update": "API-Schlüssel aktualisieren",
+    "Update_Success": "API-Schlüssel erfolgreich aktualisiert!",
+    "Update_Error": "Fehler beim Aktualisieren des API-Schlüssels -",
+    "Create": "Einen neuen API-Schlüssel erstellen",
+    "Create_Success": "API-Schlüssel erfolgreich erstellt!",
+    "Create_Error": "Fehler beim Erstellen des API-Schlüssels -",
+    "API_Name": "Wählen Sie einen einprägsamen Namen für Ihren API-Schlüssel. Dies ist optional und kann später hinzugefügt oder geändert werden!",
+    "api_desc": "API-Schlüssel ermöglichen Ihnen den programmatischen Zugriff auf Blona-APIs. Klicken Sie auf die Schaltfläche unten, um einen neuen API-Schlüssel zu generieren.",
+    "new_key": "Neuer API-Schlüssel",
+    "new_key_desc": "Stellen Sie sicher, dass Sie Ihren neuen API-Schlüssel kopieren. Sie werden diesen Schlüssel später nicht mehr sehen können.",
+    "key_copied": "API-Schlüssel kopiert!",
+    "api_fetch_fail": "Fehler beim Abrufen der API-Schlüssel",
+    "create_another": "API-Schlüssel erstellen",
+    "existing_keys": "Vorhandene API-Schlüssel",
+    "name": "Name",
+    "api_key": "API-Schlüssel",
+    "api_keys": "API-Schlüssel",
+    "regenerate": "Erneuern",
+    "delete": "Löschen",
+    "refresh": "Aktualisieren",
+    "failed_delete": "Fehler beim Löschen des API-Schlüssels:"
+    }
 }
