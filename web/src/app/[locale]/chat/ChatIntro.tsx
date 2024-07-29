@@ -44,7 +44,7 @@ export function ChatIntro({
           <div className="flex">
             <div className="mx-auto">
               <div className="m-auto text-3xl font-strong font-bold text-strong w-fit">
-                {selectedPersona?.name || {transWelcome("chat_intro")} }
+                {selectedPersona?.name || transWelcome("chat_intro") }
               </div>
               {selectedPersona && (
                 <div className="mt-1">{selectedPersona.description}</div>

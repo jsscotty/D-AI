@@ -71,8 +71,8 @@ export const DanswerApiKeyForm = ({
               const errorMsg = responseJson.detail || responseJson.message;
               setPopup({
                 message: isUpdate
-                  ? ({transWelcome("Update_Error")} - ${errorMsg})
-                  : ({transWelcome("Create_Error")} - ${errorMsg}),
+                  ? (transWelcome("Update_Error") - ,{errorMsg})
+                  : (transWelcome("Create_Error") - ,{errorMsg}),
                 type: "error",
               });
             }
