@@ -28,7 +28,7 @@ export async function generateMetadata(): Promise<Metadata> {
 
   return {
     title: dynamicSettings.enterpriseSettings?.application_name ?? "Blona",
-    description: ({transWelcome("desc")}),
+    description: [{transWelcome("desc")}],
     icons: {
       icon: logoLocation,
     },
