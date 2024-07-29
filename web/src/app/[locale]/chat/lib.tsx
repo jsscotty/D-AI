@@ -170,7 +170,7 @@ export async function* sendMessage({
   if (!sendMessageResponse.ok) {
     const errorJson = await sendMessageResponse.json();
     const errorMsg = errorJson.message || errorJson.detail || "";
-    throw Error(transWelcome("send_error") ${errorMsg});
+    throw Error(transWelcome("send_error") {errorMsg});
   }
 
   yield* handleStream<PacketType>(sendMessageResponse);

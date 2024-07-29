@@ -149,7 +149,7 @@ function Main() {
     );
   }
 
-  return {(
+  return {
     <div>
       {popup}
 
@@ -268,7 +268,7 @@ function Main() {
           setPopup={setPopup}
           apiKey={selectedApiKey}
         />
-      )}
+      }
     </div>
   );
 }

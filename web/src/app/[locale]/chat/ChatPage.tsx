@@ -963,7 +963,7 @@ export function ChatPage({
 
     if (response.ok) {
       setPopup({
-        message: {transWelcome("feedback_thx")},
+        message: transWelcome("feedback_thx"),
         type: "success",
       });
     } else {
