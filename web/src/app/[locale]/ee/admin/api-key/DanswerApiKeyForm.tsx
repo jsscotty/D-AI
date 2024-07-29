@@ -28,7 +28,7 @@ export const DanswerApiKeyForm = ({
     <Modal onOutsideClick={onClose} width="w-2/6">
       <div className="px-8 py-6 bg-background">
         <h2 className="text-xl font-bold flex">
-          {isUpdate ? {transWelcome("Update")} : {transWelcome("Create")}}
+          {isUpdate ? transWelcome("Update") : transWelcome("Create")}
           <div
             onClick={onClose}
             className="ml-auto hover:bg-hover p-1.5 rounded"
