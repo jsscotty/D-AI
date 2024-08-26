@@ -2,34 +2,6 @@ import { getXDaysAgo } from "@/lib/dateUtils";
 import { DateRangePickerValue } from "@tremor/react";
 import { FiCalendar, FiChevronDown, FiXCircle } from "react-icons/fi";
 import { CustomDropdown, DefaultDropdownElement } from "../Dropdown";
-import { useTranslations } from "next-intl";
-function DateSelectorItem({
-  children,
-  onClick,
-  skipBottomBorder,
-}: {
-  children: string | JSX.Element;
-  onClick?: () => void;
-  skipBottomBorder?: boolean;
-}) {
-  return (
-    <div
-      className={`
-      px-3 
-      text-sm 
-      bg-background
-      hover:bg-hover 
-      py-2.5 
-      select-none 
-      cursor-pointer 
-      ${skipBottomBorder ? "" : "border-b border-border"} 
-      `}
-      onClick={onClick}
-    >
-      {children}
-    </div>
-  );
-}
 
 export const LAST_30_DAYS = "Last 30 days";
 export const LAST_7_DAYS = "Last 7 days";
@@ -38,9 +10,11 @@ export const TODAY = "Today";
 export function DateRangeSelector({
   value,
   onValueChange,
+  isHorizontal,
 }: {
   value: DateRangePickerValue | null;
   onValueChange: (value: DateRangePickerValue | null) => void;
+  isHorizontal?: boolean;
 }) {
   const trans = useTranslations("chat");
   const transSearch = useTranslations("search");
@@ -105,23 +79,28 @@ export function DateRangeSelector({
       >
         <div
           className={`
-              flex 
-              text-sm  
-              px-3
-              py-1.5 
-              rounded-lg 
-              border 
-              border-border 
-              cursor-pointer 
-              hover:bg-hover`}
+            flex 
+            text-sm  
+            px-3
+            line-clamp-1
+            py-1.5 
+            rounded-lg 
+            border 
+            border-border 
+            cursor-pointer 
+            hover:bg-hover`}
         >
-          <FiCalendar className="my-auto mr-2" />{" "}
-          {value?.selectValue ? (
-            <div className="text-emphasis">{value.selectValue}</div>
-          ) : (
-            // TODO: translation
+          <FiCalendar className="flex-none my-auto mr-2" />{" "}
+          <p className="line-clamp-1">
+            {isHorizontal ? (
+              "Date"
+            ) : value?.selectValue ? (
+              <div className="text-emphasis">{value.selectValue}</div>
+            ) : (
+              // TODO: translation
             transSearch("any-time")
-          )}
+            )}
+          </p>
           {value?.selectValue ? (
             <div
               className="my-auto ml-auto p-0.5 rounded-full w-fit"

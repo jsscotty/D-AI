@@ -187,11 +187,6 @@ class DefaultMultiLLM(LLM):
     """Uses Litellm library to allow easy configuration to use a multitude of LLMs
     See https://python.langchain.com/docs/integrations/chat/litellm"""
 
-    DEFAULT_MODEL_PARAMS: dict[str, Any] = {
-        "frequency_penalty": 0,
-        "presence_penalty": 0,
-    }
-
     def __init__(
         self,
         api_key: str | None,
@@ -224,16 +219,14 @@ class DefaultMultiLLM(LLM):
             for k, v in custom_config.items():
                 os.environ[k] = v
 
-        model_kwargs = (
-            DefaultMultiLLM.DEFAULT_MODEL_PARAMS if model_provider == "openai" else {}
-        )
+        model_kwargs: dict[str, Any] = {}
         if extra_headers:
             model_kwargs.update({"extra_headers": extra_headers})
 
         self._model_kwargs = model_kwargs
 
     def log_model_configs(self) -> None:
-        logger.info(f"Config: {self.config}")
+        logger.debug(f"Config: {self.config}")
 
     def _completion(
         self,
@@ -266,8 +259,14 @@ class DefaultMultiLLM(LLM):
                 stream=stream,
                 # model params
                 temperature=self._temperature,
-                max_tokens=self._max_output_tokens,
+                max_tokens=self._max_output_tokens
+                if self._max_output_tokens > 0
+                else None,
                 timeout=self._timeout,
+                # For now, we don't support parallel tool calls
+                # NOTE: we can't pass this in if tools are not specified
+                # or else OpenAI throws an error
+                **({"parallel_tool_calls": False} if tools else {}),
                 **self._model_kwargs,
             )
         except Exception as e:

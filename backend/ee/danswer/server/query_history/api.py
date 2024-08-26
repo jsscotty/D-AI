@@ -12,7 +12,6 @@ from fastapi.responses import StreamingResponse
 from pydantic import BaseModel
 from sqlalchemy.orm import Session
 
-import danswer.db.models as db_models
 from danswer.auth.users import current_admin_user
 from danswer.auth.users import get_display_email
 from danswer.chat.chat_utils import create_chat_chain
@@ -22,8 +21,8 @@ from danswer.db.chat import get_chat_session_by_id
 from danswer.db.engine import get_session
 from danswer.db.models import ChatMessage
 from danswer.db.models import ChatSession
+from danswer.db.models import User
 from ee.danswer.db.query_history import fetch_chat_sessions_eagerly_by_time
-
 
 router = APIRouter()
 
@@ -103,6 +102,10 @@ class ChatSessionSnapshot(BaseModel):
 
 
 class QuestionAnswerPairSnapshot(BaseModel):
+    chat_session_id: int
+    # 1-indexed message number in the chat_session
+    # e.g. the first message pair in the chat_session is 1, the second is 2, etc.
+    message_pair_num: int
     user_message: str
     ai_response: str
     retrieved_documents: list[AbridgedSearchDoc]
@@ -128,6 +131,8 @@ class QuestionAnswerPairSnapshot(BaseModel):
 
         return [
             cls(
+                chat_session_id=chat_session_snapshot.id,
+                message_pair_num=ind + 1,
                 user_message=user_message.message,
                 ai_response=ai_message.message,
                 retrieved_documents=ai_message.documents,
@@ -137,11 +142,13 @@ class QuestionAnswerPairSnapshot(BaseModel):
                 user_email=get_display_email(chat_session_snapshot.user_email),
                 time_created=user_message.time_created,
             )
-            for user_message, ai_message in message_pairs
+            for ind, (user_message, ai_message) in enumerate(message_pairs)
         ]
 
     def to_json(self) -> dict[str, str]:
         return {
+            "chat_session_id": str(self.chat_session_id),
+            "message_pair_num": str(self.message_pair_num),
             "user_message": self.user_message,
             "ai_response": self.ai_response,
             "retrieved_documents": "|".join(
@@ -303,7 +310,7 @@ def get_chat_session_history(
     feedback_type: QAFeedbackType | None = None,
     start: datetime | None = None,
     end: datetime | None = None,
-    _: db_models.User | None = Depends(current_admin_user),
+    _: User | None = Depends(current_admin_user),
     db_session: Session = Depends(get_session),
 ) -> list[ChatSessionMinimal]:
     return fetch_and_process_chat_session_history_minimal(
@@ -320,7 +327,7 @@ def get_chat_session_history(
 @router.get("/admin/chat-session-history/{chat_session_id}")
 def get_chat_session_admin(
     chat_session_id: int,
-    _: db_models.User | None = Depends(current_admin_user),
+    _: User | None = Depends(current_admin_user),
     db_session: Session = Depends(get_session),
 ) -> ChatSessionSnapshot:
     try:
@@ -349,7 +356,7 @@ def get_chat_session_admin(
 
 @router.get("/admin/query-history-csv")
 def get_query_history_as_csv(
-    _: db_models.User | None = Depends(current_admin_user),
+    _: User | None = Depends(current_admin_user),
     db_session: Session = Depends(get_session),
 ) -> StreamingResponse:
     complete_chat_session_history = fetch_and_process_chat_session_history(

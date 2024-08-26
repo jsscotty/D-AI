@@ -1,12 +1,17 @@
+import uuid
 from uuid import UUID
 
 from fastapi import APIRouter
 from fastapi import Depends
+from fastapi import Query
+from fastapi import UploadFile
 from pydantic import BaseModel
 from sqlalchemy.orm import Session
 
 from danswer.auth.users import current_admin_user
+from danswer.auth.users import current_curator_or_admin_user
 from danswer.auth.users import current_user
+from danswer.configs.constants import FileOrigin
 from danswer.db.engine import get_session
 from danswer.db.models import User
 from danswer.db.persona import create_update_persona
@@ -17,12 +22,15 @@ from danswer.db.persona import mark_persona_as_not_deleted
 from danswer.db.persona import update_all_personas_display_priority
 from danswer.db.persona import update_persona_shared_users
 from danswer.db.persona import update_persona_visibility
+from danswer.file_store.file_store import get_default_file_store
+from danswer.file_store.models import ChatFileType
 from danswer.llm.answering.prompts.utils import build_dummy_prompt
 from danswer.server.features.persona.models import CreatePersonaRequest
 from danswer.server.features.persona.models import PersonaSnapshot
 from danswer.server.features.persona.models import PromptTemplateResponse
 from danswer.server.models import DisplayPriorityRequest
 from danswer.utils.logger import setup_logger
+
 
 logger = setup_logger()
 
@@ -39,13 +47,14 @@ class IsVisibleRequest(BaseModel):
 def patch_persona_visibility(
     persona_id: int,
     is_visible_request: IsVisibleRequest,
-    _: User | None = Depends(current_admin_user),
+    user: User | None = Depends(current_curator_or_admin_user),
     db_session: Session = Depends(get_session),
 ) -> None:
     update_persona_visibility(
         persona_id=persona_id,
         is_visible=is_visible_request.is_visible,
         db_session=db_session,
+        user=user,
     )
 
 
@@ -63,16 +72,19 @@ def patch_persona_display_priority(
 
 @admin_router.get("")
 def list_personas_admin(
-    _: User | None = Depends(current_admin_user),
+    user: User | None = Depends(current_curator_or_admin_user),
     db_session: Session = Depends(get_session),
     include_deleted: bool = False,
+    get_editable: bool = Query(False, description="If true, return editable personas"),
 ) -> list[PersonaSnapshot]:
     return [
         PersonaSnapshot.from_model(persona)
         for persona in get_personas(
             db_session=db_session,
-            user_id=None,  # user_id = None -> give back all personas
+            user=user,
+            get_editable=get_editable,
             include_deleted=include_deleted,
+            joinedload_all=True,
         )
     ]
 
@@ -88,6 +100,26 @@ def undelete_persona(
         user=user,
         db_session=db_session,
     )
+
+
+# used for assistat profile pictures
+@admin_router.post("/upload-image")
+def upload_file(
+    file: UploadFile,
+    db_session: Session = Depends(get_session),
+    _: User | None = Depends(current_user),
+) -> dict[str, str]:
+    file_store = get_default_file_store(db_session)
+    file_type = ChatFileType.IMAGE
+    file_id = str(uuid.uuid4())
+    file_store.save_file(
+        file_name=file_id,
+        content=file.file,
+        display_name=file.filename,
+        file_origin=FileOrigin.CHAT_UPLOAD,
+        file_type=file.content_type or file_type.value,
+    )
+    return {"file_id": file_id}
 
 
 """Endpoints for all"""
@@ -160,11 +192,14 @@ def list_personas(
     db_session: Session = Depends(get_session),
     include_deleted: bool = False,
 ) -> list[PersonaSnapshot]:
-    user_id = user.id if user is not None else None
     return [
         PersonaSnapshot.from_model(persona)
         for persona in get_personas(
-            user_id=user_id, include_deleted=include_deleted, db_session=db_session
+            user=user,
+            include_deleted=include_deleted,
+            db_session=db_session,
+            get_editable=False,
+            joinedload_all=True,
         )
     ]
 

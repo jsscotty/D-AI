@@ -1,65 +1,13 @@
-import { Header } from "@/components/header/Header";
-import { AdminSidebar } from "@/components/admin/connectors/AdminSidebar";
-import {
-  NotebookIcon,
-  UsersIcon,
-  ThumbsUpIcon,
-  BookmarkIcon,
-  ZoomInIcon,
-  RobotIcon,
-  ConnectorIcon,
-  GroupsIcon,
-  DatabaseIcon,
-  KeyIcon,
-  ClipboardIcon,
-  ChatIcon,
-  SearchIcon,
-  NotebookIconSkeleton,
-  ConnectorIconSkeleton,
-  ThumbsUpIconSkeleton,
-  ToolIconSkeleton,
-  CpuIconSkeleton,
-  UsersIconSkeleton,
-  GroupsIconSkeleton,
-  KeyIconSkeleton,
-  ShieldIconSkeleton,
-  DatabaseIconSkeleton,
-  SettingsIconSkeleton,
-  PaintingIconSkeleton,
-  BookmarkIconSkeleton,
-  ZoomInIconSkeleton,
-  StarIconSkeleton,
-  SlackIconSkeleton,
-  DocumentSetIconSkeleton,
-  EmbeddingIcon,
-  EmbeddingIconSkeleton,
-  BackIcon,
-  AssistantsIcon,
-  AssistantsIconSkeleton,
-} from "@/components/icons/icons";
-import { User } from "@/lib/types";
+import { User, UserRole } from "@/lib/types";
 import {
   AuthTypeMetadata,
   getAuthTypeMetadataSS,
   getCurrentUserSS,
 } from "@/lib/userSS";
-import { SERVER_SIDE_ONLY__PAID_ENTERPRISE_FEATURES_ENABLED } from "@/lib/constants";
 import { redirect } from "next/navigation";
-import {
-  FiActivity,
-  FiBarChart2,
-  FiCpu,
-  FiImage,
-  FiPackage,
-  FiSettings,
-  FiShield,
-  FiSlack,
-  FiTool,
-} from "react-icons/fi";
-import { UserDropdown } from "../UserDropdown";
-import { getTranslations } from "next-intl/server";
-import { HealthCheckBanner } from "../health/healthcheck";
-import { getSecondsUntilExpiration } from "@/lib/time";
+import { ClientLayout } from "./ClientLayout";
+import { SERVER_SIDE_ONLY__PAID_ENTERPRISE_FEATURES_ENABLED } from "@/lib/constants";
+import { AnnouncementBanner } from "../header/AnnouncementBanner";
 
 export async function Layout({ children }: { children: React.ReactNode }) {
   const tasks = [getAuthTypeMetadataSS(), getCurrentUserSS()];
@@ -79,19 +27,18 @@ export async function Layout({ children }: { children: React.ReactNode }) {
 
   const authDisabled = authTypeMetadata?.authType === "disabled";
   const requiresVerification = authTypeMetadata?.requiresVerification;
+
   if (!authDisabled) {
     if (!user) {
       return redirect("/auth/login");
     }
-    if (user.role !== "admin") {
+    if (user.role === UserRole.BASIC) {
       return redirect("/");
     }
     if (!user.is_verified && requiresVerification) {
       return redirect("/auth/waiting-on-verification");
     }
   }
-
-  const secondsUntilExpiration = getSecondsUntilExpiration(user);
 
   return (
     <div className="h-screen overflow-y-hidden">
@@ -101,7 +48,7 @@ export async function Layout({ children }: { children: React.ReactNode }) {
           <AdminSidebar
             collections={[
               {
-                name: trans("connectors"),
+                name: "Connectors",
                 items: [
                   {
                     name: (
@@ -335,14 +282,7 @@ export async function Layout({ children }: { children: React.ReactNode }) {
           />
         </div>
         <div className="pb-8 relative h-full overflow-y-auto w-full">
-          <div className="fixed bg-background left-0 border-b gap-x-4 mb-8 px-4 py-2 w-full items-center flex justify-end">
-            <a
-              href="/chat"
-              className="transition-all duration-150 cursor-pointer p-1 text-sm items-center flex gap-x-1 px-2 py-1 rounded-lg hover:shadow-sm hover:ring-1 hover:ring-ingio-900/40 hover:bg-opacity-90 text-neutral-100 bg-accent"
-            >
-              <BackIcon size={20} className="text-neutral" />
-              Back to Blona
-            </a>
+          <div className="fixed bg-background left-0 gap-x-4 mb-8 px-4 py-2 w-full items-center flex justify-end">
             <UserDropdown user={user} />
           </div>
           <div className="pt-12 flex overflow-y-auto h-full px-4 md:px-12">

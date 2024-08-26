@@ -35,14 +35,19 @@ def llm_doc_from_inference_section(inference_section: InferenceSection) -> LlmDo
 def create_chat_chain(
     chat_session_id: int,
     db_session: Session,
+    prefetch_tool_calls: bool = True,
+    # Optional id at which we finish processing
+    stop_at_message_id: int | None = None,
 ) -> tuple[ChatMessage, list[ChatMessage]]:
     """Build the linear chain of messages without including the root message"""
     mainline_messages: list[ChatMessage] = []
+
     all_chat_messages = get_chat_messages_by_session(
         chat_session_id=chat_session_id,
         user_id=None,
         db_session=db_session,
         skip_permission_check=True,
+        prefetch_tool_calls=prefetch_tool_calls,
     )
     id_to_msg = {msg.id: msg for msg in all_chat_messages}
 
@@ -58,7 +63,12 @@ def create_chat_chain(
     current_message: ChatMessage | None = root_message
     while current_message is not None:
         child_msg = current_message.latest_child_message
-        if not child_msg:
+
+        # Break if at the end of the chain
+        # or have reached the `final_id` of the submitted message
+        if not child_msg or (
+            stop_at_message_id and current_message.id == stop_at_message_id
+        ):
             break
         current_message = id_to_msg.get(child_msg)
 

@@ -44,11 +44,9 @@ export default async function Page({ params }: { params: { id: string } }) {
   }
 
   return (
-    <div>
+    <div className="w-full">
       <BackButton />
-
       <AdminPageTitle title="Edit Assistant" icon={<RobotIcon size={32} />} />
-
       {body}
     </div>
   );

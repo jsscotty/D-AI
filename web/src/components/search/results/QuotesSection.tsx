@@ -50,7 +50,7 @@ const QuoteDisplay = ({ quoteInfo }: { quoteInfo: Quote }) => {
       )}
       <button className="text-sm flex w-fit">
         <a
-          className="flex max-w-[300px] shrink box-border p-2 border border-border rounded-lg hover:bg-hover-light"
+          className="flex max-w-[250px] shrink box-border p-2 border border-border rounded-lg hover:bg-hover-light"
           href={quoteInfo.link || undefined}
           target="_blank"
           rel="noopener noreferrer"
@@ -67,7 +67,6 @@ const QuoteDisplay = ({ quoteInfo }: { quoteInfo: Quote }) => {
 
 interface QuotesSectionProps {
   quotes: Quote[] | null;
-  isAnswerable: boolean | null;
   isFetching: boolean;
 }
 
@@ -75,10 +74,6 @@ const QuotesHeader = ({ quotes, isFetching }: QuotesSectionProps) => {
   const transWelcome = useTranslations("results");
   if ((!quotes || quotes.length === 0) && isFetching) {
     return <>{transWelcome("extracting-quotes")}</>;
-  }
-
-  if (!quotes || quotes.length === 0) {
-    return <>{transWelcome("no-quotes-found")}</>;
   }
 
   return <>{transWelcome("quotes")}</>;
@@ -91,16 +86,6 @@ const QuotesBody = ({ quotes, isFetching }: QuotesSectionProps) => {
   if (!quotes && isFetching) {
     // height of quotes section to avoid extra "jumps" from the quotes loading
     return <div className="h-[42px]"></div>;
-  }
-
-  if (!isFetching && (!quotes || !quotes.length)) {
-    return (
-      <div className="flex">
-        <div className="text-error text-sm my-auto">
-          {transWelcome("quotes-not-found")}
-        </div>
-      </div>
-    );
   }
 
   return (
@@ -116,11 +101,7 @@ export const QuotesSection = (props: QuotesSectionProps) => {
   let status: StatusOptions = "in-progress";
   if (!props.isFetching) {
     if (props.quotes && props.quotes.length > 0) {
-      if (props.isAnswerable === false) {
-        status = "warning";
-      } else {
-        status = "success";
-      }
+      status = "success";
     } else {
       status = "failed";
     }
@@ -130,7 +111,9 @@ export const QuotesSection = (props: QuotesSectionProps) => {
     <ResponseSection
       status={status}
       header={
-        <div className="ml-2 text-emphasis">{<QuotesHeader {...props} />}</div>
+        <div className="ml-2 text-emphasis font-bold">
+          {<QuotesHeader {...props} />}
+        </div>
       }
       body={<QuotesBody {...props} />}
       desiredOpenStatus={true}

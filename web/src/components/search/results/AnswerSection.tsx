@@ -27,21 +27,18 @@ interface AnswerSectionProps {
   answer: string | null;
   quotes: Quote[] | null;
   error: string | null;
-  nonAnswerableReason: string | null;
   isFetching: boolean;
 }
 
 export const AnswerSection = (props: AnswerSectionProps) => {
   let status = "in-progress" as StatusOptions;
-  const transWelcome = useTranslations("results");
-
-  let header = <>{transWelcome("building-answer")}</>;
+  let header = <></>;
   let body = null;
 
   // finished answer
   if (props.quotes !== null || !props.isFetching) {
     status = "success";
-    header = <>{transWelcome("ai-answer")}</>;
+    header = <>AI answer</>;
     if (props.answer) {
       body = (
         <ReactMarkdown
@@ -52,7 +49,7 @@ export const AnswerSection = (props: AnswerSectionProps) => {
         </ReactMarkdown>
       );
     } else {
-      body = <div>{transWelcome("info-not-found")}</div>;
+      body = <div>Information not found</div>;
     }
     // error while building answer (NOTE: if error occurs during quote generation
     // the above if statement will hit and the error will not be displayed)
@@ -67,7 +64,7 @@ export const AnswerSection = (props: AnswerSectionProps) => {
     // answer is streaming
   } else if (props.answer) {
     status = "success";
-    header = <>{transWelcome("ai-answer")}</>;
+    header = <>AI answer</>;
     body = (
       <ReactMarkdown
         className="prose text-sm max-w-full"
@@ -79,7 +76,7 @@ export const AnswerSection = (props: AnswerSectionProps) => {
   }
   if (props.nonAnswerableReason) {
     status = "warning";
-    header = <>{transWelcome("building-best-answer")}</>;
+    header = <>Building best effort AI answer...</>;
   }
 
   return (
@@ -95,8 +92,8 @@ export const AnswerSection = (props: AnswerSectionProps) => {
           {body}
           {props.nonAnswerableReason && !props.isFetching && (
             <div className="mt-4 text-sm">
-              <b className="font-medium">{transWelcome("warning")}</b>
-              {transWelcome("warning-desc")}{" "}
+              <b className="font-medium">Warning:</b> the AI did not think this
+              question was answerable.{" "}
               <div className="italic mt-1 ml-2">
                 {props.nonAnswerableReason}
               </div>

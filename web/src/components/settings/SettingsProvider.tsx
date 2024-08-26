@@ -1,7 +1,7 @@
 "use client";
 
 import { CombinedSettings } from "@/app/[locale]/admin/settings/interfaces";
-import { createContext, ReactNode, useContext } from "react";
+import { createContext, useEffect, useState, ReactNode, useContext } from "react";
 
 export const SettingsContext = createContext<CombinedSettings | null>(null);
 
@@ -15,8 +15,20 @@ export const SettingsProvider = ({
   children,
   settings,
 }: SettingsProviderProps): JSX.Element => {
+  const [isMobile, setIsMobile] = useState<boolean | undefined>();
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
+
   return (
-    <SettingsContext.Provider value={settings}>
+    <SettingsContext.Provider value={{ ...settings, isMobile }}>
       {children}
     </SettingsContext.Provider>
   );

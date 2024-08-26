@@ -1,20 +1,14 @@
 "use client";
 
 import React, { createContext, useContext } from "react";
-import {
-  CCPairBasicInfo,
-  DocumentSet,
-  Tag,
-  User,
-  ValidSources,
-} from "@/lib/types";
+import { DocumentSet, Tag, User, ValidSources } from "@/lib/types";
 import { ChatSession } from "@/app/[locale]/chat/interfaces";
 import { Persona } from "@/app/[locale]/admin/assistants/interfaces";
-import { LLMProviderDescriptor } from "@/app/[locale]/admin/models/llm/interfaces";
+import { LLMProviderDescriptor } from "@/app/[locale]/admin/configuration/llm/interfaces";
 import { Folder } from "@/app/[locale]/chat/folders/interfaces";
+import { InputPrompt } from "@/app/admin/prompt-library/interfaces";
 
 interface ChatContextProps {
-  user: User | null;
   chatSessions: ChatSession[];
   availableSources: ValidSources[];
   availableDocumentSets: DocumentSet[];
@@ -23,6 +17,7 @@ interface ChatContextProps {
   llmProviders: LLMProviderDescriptor[];
   folders: Folder[];
   openedFolders: Record<string, boolean>;
+  userInputPrompts: InputPrompt[];
 }
 
 const ChatContext = createContext<ChatContextProps | undefined>(undefined);

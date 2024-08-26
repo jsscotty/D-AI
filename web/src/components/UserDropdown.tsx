@@ -1,17 +1,20 @@
 "use client";
 
 import { useState, useRef, useContext } from "react";
-import { FiSearch, FiMessageSquare, FiTool, FiLogOut } from "react-icons/fi";
+import { FiLogOut } from "react-icons/fi";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { User } from "@/lib/types";
+import { User, UserRole } from "@/lib/types";
 import { checkUserIsNoAuthUser, logout } from "@/lib/user";
-import { BasicSelectable } from "@/components/BasicClickable";
 import { Popover } from "./popover/Popover";
 import { LOGOUT_DISABLED } from "@/lib/constants";
-import { Settings } from "@/app/[locale]/admin/settings/interfaces";
 import { SettingsContext } from "./settings/SettingsProvider";
-import { LightSettingsIcon } from "./icons/icons";
+import {
+  AssistantsIconSkeleton,
+  LightSettingsIcon,
+  UsersIcon,
+} from "./icons/icons";
+import { pageType } from "@/app/chat/sessionSidebar/types";
 import { useTranslations } from "next-intl";
 import LanguageSwitcher from "./LanguageSwitcher";
 
@@ -20,7 +23,7 @@ export function UserDropdown({
   page,
 }: {
   user: User | null;
-  page?: "search" | "chat" | "assistants";
+  page?: pageType;
 }) {
   const [userInfoVisible, setUserInfoVisible] = useState(false);
   const [langClicked, setLangClicked] = useState(false);
@@ -43,7 +46,10 @@ export function UserDropdown({
       router.push("/auth/login");
     });
   };
-  const showAdminPanel = !user || user.role === "admin";
+  const showAdminPanel = !user || user.role === UserRole.ADMIN;
+  const showCuratorPanel =
+    user &&
+    (user.role === UserRole.CURATOR || user.role === UserRole.GLOBAL_CURATOR);
   const showLogout =
     user && !checkUserIsNoAuthUser(user.id) && !LOGOUT_DISABLED;
 
@@ -57,7 +63,22 @@ export function UserDropdown({
             onClick={() => setUserInfoVisible(!userInfoVisible)}
             className="flex cursor-pointer"
           >
-            <div className="my-auto bg-background-strong ring-2 ring-transparent group-hover:ring-background-300/50 transition-ring duration-150 rounded-lg inline-block flex-none px-2 text-base font-normal">
+            <div
+              className="
+                my-auto
+                bg-background-strong
+                ring-2
+                ring-transparent
+                group-hover:ring-background-300/50
+                transition-ring
+                duration-150
+                rounded-lg
+                inline-block
+                flex-none
+                px-2
+                text-base
+              "
+            >
               {user && user.email ? user.email[0].toUpperCase() : "A"}
             </div>
           </div>
@@ -65,8 +86,8 @@ export function UserDropdown({
         popover={
           <div
             className={`
-              p-2
-              min-w-[200px]
+                p-2
+                min-w-[200px]
                 text-strong 
                 text-sm
                 border 
@@ -91,13 +112,27 @@ export function UserDropdown({
               <>
                 <Link
                   href="/admin/indexing/status"
-                  className="flex py-3 px-4 cursor-pointer rounded hover:bg-hover-light"
+                  className="flex py-3 px-4 cursor-pointer !
+                   rounded hover:bg-hover-light"
                 >
-                  <LightSettingsIcon className="h-5 w-5 text-text-200est0 my-auto mr-2" />
+                  <LightSettingsIcon className="h-5 w-5 my-auto mr-2" />
                   {transWelcome("admin-panel")}
                 </Link>
               </>
             )}
+            {showCuratorPanel && (
+              <>
+                <Link
+                  href="/admin/indexing/status"
+                  className="flex py-3 px-4 cursor-pointer !
+                   rounded hover:bg-hover-light"
+                >
+                  <LightSettingsIcon className="h-5 w-5 my-auto mr-2" />
+                  Curator Panel
+                </Link>
+              </>
+            )}
+
             {showLogout && (
               <>
                 {(!(page == "search" || page == "chat") || showAdminPanel) && (

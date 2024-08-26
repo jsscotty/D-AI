@@ -4,13 +4,21 @@ import React, { useContext } from "react";
 import Link from "next/link";
 import { Logo } from "@/components/Logo";
 import { NEXT_PUBLIC_DO_NOT_USE_TOGGLE_OFF_DANSWER_POWERED } from "@/lib/constants";
-import { HeaderTitle } from "@/components/header/Header";
+import { HeaderTitle } from "@/components/header/HeaderTitle";
 import { SettingsContext } from "@/components/settings/SettingsProvider";
 import { BackIcon } from "@/components/icons/icons";
+import { WarningCircle, WarningDiamond } from "@phosphor-icons/react";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@radix-ui/react-tooltip";
 
 interface Item {
   name: string | JSX.Element;
   link: string;
+  error?: boolean;
 }
 
 interface Collection {
@@ -23,14 +31,15 @@ export function AdminSidebar({ collections }: { collections: Collection[] }) {
   if (!combinedSettings) {
     return null;
   }
+
   const settings = combinedSettings.settings;
   const enterpriseSettings = combinedSettings.enterpriseSettings;
 
   return (
-    <aside className="pl-0">
-      <nav className="space-y-2 pl-2">
-        <div className="mb-4 flex">
-          <div className="bg-background-100">
+    <div className="pl-0">
+      <nav className="space-y-2 ">
+        <div className="w-full justify-center mb-4 flex">
+          <div className="w-52">
             <Link
               className="flex flex-col"
               href={
@@ -63,29 +72,62 @@ export function AdminSidebar({ collections }: { collections: Collection[] }) {
             </Link>
           </div>
         </div>
-        <div className="px-3">
+        <div className="flex w-full justify-center">
           <Link href={"/chat"}>
-            <button className="text-sm block w-48 py-2.5 flex px-2 text-left bg-background-200 hover:bg-background-200/80 cursor-pointer rounded">
+            <button className="text-sm block w-52 py-2.5 flex px-2 text-left bg-background-200 hover:bg-background-200/80 cursor-pointer rounded">
               <BackIcon size={20} className="text-neutral" />
-              <p className="ml-1">Back to Blona</p>
+              <p className="ml-1">
+                Back to{" "}
+                {combinedSettings.enterpriseSettings?.application_name ||
+                  "Blona"}
+              </p>
             </button>
           </Link>
         </div>
         {collections.map((collection, collectionInd) => (
-          <div className="px-3" key={collectionInd}>
-            <h2 className="text-xs text-strong font-bold pb-2">
+          <div
+            className="flex flex-col items-center justify-center w-full"
+            key={collectionInd}
+          >
+            <h2 className="text-xs text-strong w-52 font-bold pb-2">
               <div>{collection.name}</div>
             </h2>
             {collection.items.map((item) => (
               <Link key={item.link} href={item.link}>
-                <button className="text-sm block w-48 py-2.5 px-2 text-left hover:bg-hover rounded">
+                <button
+                  className={`  text-sm block  flex gap-x-2 items-center w-52 py-2.5 px-2 text-left hover:bg-hover rounded`}
+                >
                   {item.name}
+                  {item.error && (
+                    <TooltipProvider>
+                      <Tooltip>
+                        <TooltipTrigger asChild>
+                          <WarningCircle size={18} className="text-error" />
+                        </TooltipTrigger>
+                        <TooltipContent>
+                          <p className="max-w-xs text-text-100 mb-1 p-2 rounded-lg bg-background-900">
+                            Navigate here to update your search settings
+                          </p>
+                        </TooltipContent>
+                      </Tooltip>
+                    </TooltipProvider>
+                  )}
                 </button>
               </Link>
             ))}
           </div>
         ))}
       </nav>
-    </aside>
+      {combinedSettings.webVersion && (
+        <div
+          className="flex flex-col mt-6 items-center justify-center w-full"
+          key={"danswerVersion"}
+        >
+          <h2 className="text-xs text-text w-52 font-medium pb-2">
+            Danswer version: {combinedSettings.webVersion}
+          </h2>
+        </div>
+      )}
+    </div>
   );
 }

@@ -17,10 +17,8 @@ import {
   SearchDanswerDocument,
 } from "@/lib/search/interfaces";
 import { searchRequestStreamed } from "@/lib/search/streamingQa";
-
 import { CancellationToken, cancellable } from "@/lib/search/cancellable";
 import { useFilters, useObjectState } from "@/lib/hooks";
-import { questionValidationStreamed } from "@/lib/search/streamingQuestionValidation";
 import { Persona } from "@/app/[locale]/admin/assistants/interfaces";
 import { computeAvailableFilters } from "@/lib/filters";
 import { useRouter, useSearchParams } from "next/navigation";
@@ -32,15 +30,16 @@ import { useSidebarVisibility } from "../chat_search/hooks";
 import { SIDEBAR_TOGGLED_COOKIE_NAME } from "../resizable/constants";
 import { AGENTIC_SEARCH_TYPE_COOKIE_NAME } from "@/lib/constants";
 import Cookies from "js-cookie";
-import FixedLogo from "@/app/[locale]/chat/shared_chat_search/FixedLogo";
-import { useTranslations } from "next-intl";
+import FixedLogo from "@/app/chat/shared_chat_search/FixedLogo";
 
 export type searchState =
   | "input"
   | "searching"
   | "reading"
   | "analyzing"
-  | "summarizing";
+  | "summarizing"
+  | "generating"
+  | "citing";
 
 const SEARCH_DEFAULT_OVERRIDES_START: SearchDefaultOverrides = {
   forceDisplayQA: false,
@@ -49,7 +48,6 @@ const SEARCH_DEFAULT_OVERRIDES_START: SearchDefaultOverrides = {
 
 const VALID_QUESTION_RESPONSE_DEFAULT: ValidQuestionResponse = {
   reasoning: null,
-  answerable: null,
   error: null,
 };
 
@@ -146,6 +144,9 @@ export const SearchSection = ({
     personas[0]?.id || 0
   );
 
+  // Used for search state display
+  const [analyzeStartTime, setAnalyzeStartTime] = useState<number>(0);
+
   // Filters
   const filterManager = useFilters();
   const availableSources = ccPairs.map((ccPair) => ccPair.source);
@@ -168,11 +169,12 @@ export const SearchSection = ({
     if (existingSearchIdRaw == null) {
       return;
     }
-    function extractFirstUserMessage(
-      chatSession: SearchSession
+    function extractFirstMessageByType(
+      chatSession: SearchSession,
+      messageType: "user" | "assistant"
     ): string | null {
       const userMessage = chatSession?.messages.find(
-        (msg) => msg.message_type === "user"
+        (msg) => msg.message_type === messageType
       );
       return userMessage ? userMessage.message : null;
     }
@@ -182,14 +184,18 @@ export const SearchSection = ({
         `/api/query/search-session/${existingSearchessionId}`
       );
       const searchSession = (await response.json()) as SearchSession;
-      const message = extractFirstUserMessage(searchSession);
+      const userMessage = extractFirstMessageByType(searchSession, "user");
+      const assistantMessage = extractFirstMessageByType(
+        searchSession,
+        "assistant"
+      );
 
-      if (message) {
-        setQuery(message);
+      if (userMessage) {
+        setQuery(userMessage);
         const danswerDocs: SearchResponse = {
           documents: searchSession.documents,
           suggestedSearchType: null,
-          answer: null,
+          answer: assistantMessage || "Search response not found",
           quotes: null,
           selectedDocIndices: null,
           error: null,
@@ -211,6 +217,16 @@ export const SearchSection = ({
   const [defaultOverrides, setDefaultOverrides] =
     useState<SearchDefaultOverrides>(SEARCH_DEFAULT_OVERRIDES_START);
 
+  const newSearchState = (
+    currentSearchState: searchState,
+    newSearchState: searchState
+  ) => {
+    if (currentSearchState != "input") {
+      return newSearchState;
+    }
+    return "input";
+  };
+
   // Helpers
   const initialSearchResponse: SearchResponse = {
     answer: null,
@@ -224,35 +240,48 @@ export const SearchSection = ({
     additional_relevance: undefined,
   };
   // Streaming updates
-  const updateCurrentAnswer = (answer: string) =>
+  const updateCurrentAnswer = (answer: string) => {
     setSearchResponse((prevState) => ({
       ...(prevState || initialSearchResponse),
       answer,
     }));
-  const updateQuotes = (quotes: Quote[]) =>
+
+    if (analyzeStartTime) {
+      const elapsedTime = Date.now() - analyzeStartTime;
+      const nextInterval = Math.ceil(elapsedTime / 1500) * 1500;
+      setTimeout(() => {
+        setSearchState((searchState) =>
+          newSearchState(searchState, "generating")
+        );
+      }, nextInterval - elapsedTime);
+    }
+  };
+
+  const updateQuotes = (quotes: Quote[]) => {
     setSearchResponse((prevState) => ({
       ...(prevState || initialSearchResponse),
       quotes,
     }));
+    setSearchState((searchState) => "input");
+  };
 
   const updateDocs = (documents: SearchDanswerDocument[]) => {
-    setTimeout(() => {
-      setSearchState((searchState) => {
-        if (searchState != "input") {
-          return "reading";
-        }
-        return "input";
-      });
-    }, 1500);
+    if (agentic) {
+      setTimeout(() => {
+        setSearchState((searchState) => newSearchState(searchState, "reading"));
+      }, 1500);
 
-    setTimeout(() => {
-      setSearchState((searchState) => {
-        if (searchState != "input") {
-          return "analyzing";
-        }
-        return "input";
-      });
-    }, 4500);
+      setTimeout(() => {
+        setAnalyzeStartTime(Date.now());
+        setSearchState((searchState) => {
+          const newState = newSearchState(searchState, "analyzing");
+          if (newState === "analyzing") {
+            setAnalyzeStartTime(Date.now());
+          }
+          return newState;
+        });
+      }, 4500);
+    }
 
     setSearchResponse((prevState) => ({
       ...(prevState || initialSearchResponse),
@@ -281,11 +310,14 @@ export const SearchSection = ({
       ...(prevState || initialSearchResponse),
       selectedDocIndices: docIndices,
     }));
-  const updateError = (error: FlowType) =>
+  const updateError = (error: FlowType) => {
+    resetInput(true);
+
     setSearchResponse((prevState) => ({
       ...(prevState || initialSearchResponse),
       error,
     }));
+  };
   const updateMessageAndThreadId = (
     messageId: number,
     chat_session_id: number
@@ -295,8 +327,9 @@ export const SearchSection = ({
       messageId,
     }));
     router.refresh();
-    setSearchState("input");
+    // setSearchState("input");
     setIsFetching(false);
+    setSearchState((searchState) => "input");
 
     // router.replace(`/search?searchId=${chat_session_id}`);
   };
@@ -310,7 +343,11 @@ export const SearchSection = ({
     setContentEnriched(true);
 
     setIsFetching(false);
-    setSearchState("input");
+    if (disabledAgentic) {
+      setSearchState("input");
+    } else {
+      setSearchState("analyzing");
+    }
   };
 
   const updateComments = (comments: any) => {
@@ -318,14 +355,18 @@ export const SearchSection = ({
   };
 
   const finishedSearching = () => {
-    setSearchState("input");
+    if (disabledAgentic) {
+      setSearchState("input");
+    }
   };
+  const [searchAnswerExpanded, setSearchAnswerExpanded] = useState(false);
 
-  const resetInput = () => {
+  const resetInput = (finalized?: boolean) => {
     setSweep(false);
     setFirstSearch(false);
     setComments(null);
-    setSearchState("searching");
+    setSearchState(finalized ? "input" : "searching");
+    setSearchAnswerExpanded(false);
   };
 
   const [agenticResults, setAgenticResults] = useState<boolean | null>(null);
@@ -340,7 +381,6 @@ export const SearchSection = ({
     if ((overrideMessage || query) == "") {
       return;
     }
-    setSearchResponse;
     setAgenticResults(agentic!);
     resetInput();
     setContentEnriched(false);
@@ -403,7 +443,6 @@ export const SearchSection = ({
         cancellationToken: lastSearchCancellationToken.current,
         fn: updateDocumentRelevance,
       }),
-
       updateComments: cancellable({
         cancellationToken: lastSearchCancellationToken.current,
         fn: updateComments,
@@ -416,15 +455,7 @@ export const SearchSection = ({
       offset: offset ?? defaultOverrides.offset,
     };
 
-    const questionValidationArgs = {
-      query,
-      update: setValidQuestionResponse,
-    };
-
-    await Promise.all([
-      searchRequestStreamed(searchFnArgs),
-      questionValidationStreamed(questionValidationArgs),
-    ]);
+    await Promise.all([searchRequestStreamed(searchFnArgs)]);
   };
 
   // handle redirect if search page is disabled
@@ -457,6 +488,12 @@ export const SearchSection = ({
     };
   }, [router]);
 
+  useEffect(() => {
+    if (settings?.isMobile) {
+      router.push("/chat");
+    }
+  }, [settings?.isMobile, router]);
+
   const handleTransitionEnd = (e: React.TransitionEvent<HTMLDivElement>) => {
     if (e.propertyName === "opacity" && !firstSearch) {
       const target = e.target as HTMLDivElement;
@@ -470,28 +507,52 @@ export const SearchSection = ({
   const [firstSearch, setFirstSearch] = useState(true);
   const [searchState, setSearchState] = useState<searchState>("input");
 
+  // Used to maintain a "time out" for history sidebar so our existing refs can have time to process change
+  const [untoggled, setUntoggled] = useState(false);
+
+  const explicitlyUntoggle = () => {
+    setShowDocSidebar(false);
+
+    setUntoggled(true);
+    setTimeout(() => {
+      setUntoggled(false);
+    }, 200);
+  };
+
   useSidebarVisibility({
     toggledSidebar,
     sidebarElementRef,
     showDocSidebar,
     setShowDocSidebar,
+    mobile: settings?.isMobile,
   });
-
-  // TRANSLATIONS
-  const trans = useTranslations("home");
 
   return (
     <>
-      <div className="flex relative w-full pr-[8px] h-full text-default overflow-x-hidden">
+      <div className="flex relative pr-[8px] h-full text-default">
+        {popup}
+        {currentFeedback && (
+          <FeedbackModal
+            feedbackType={currentFeedback[0]}
+            onClose={() => setCurrentFeedback(null)}
+            onSubmit={({ message, predefinedFeedback }) => {
+              onFeedback(
+                currentFeedback[1],
+                currentFeedback[0],
+                message,
+                predefinedFeedback
+              );
+              setCurrentFeedback(null);
+            }}
+          />
+        )}
         <div
           ref={sidebarElementRef}
           className={`
             flex-none 
-            fixed -8
+            fixed
             left-0 
-            z-20
-            overflow-y-hidden 
-            sidebar 
+            z-30
             bg-background-100 
             h-screen
             transition-all 
@@ -499,14 +560,16 @@ export const SearchSection = ({
             duration-300 
             ease-in-out
             ${
-              showDocSidebar || toggledSidebar
-                ? "opacity-100 w-[300px] translate-x-0"
+              !untoggled && (showDocSidebar || toggledSidebar)
+                ? "opacity-100 w-[250px] translate-x-0"
                 : "opacity-0 w-[200px] pointer-events-none -translate-x-10"
             }
           `}
         >
           <div className="w-full relative">
             <HistorySidebar
+              explicitlyUntoggle={explicitlyUntoggle}
+              reset={() => setQuery("")}
               page="search"
               ref={innerSidebarElementRef}
               toggleSidebar={toggleSidebar}
@@ -516,9 +579,11 @@ export const SearchSection = ({
           </div>
         </div>
 
-        <div className="absolute left-0 w-full top-0">
+        <div className="absolute include-scrollbar h-screen overflow-y-auto left-0 w-full top-0">
           <FunctionalHeader
-            showSidebar={showDocSidebar}
+            sidebarToggled={toggledSidebar}
+            reset={() => setQuery("")}
+            toggleSidebar={toggleSidebar}
             page="search"
             user={user}
           />
@@ -526,35 +591,61 @@ export const SearchSection = ({
             <div
               style={{ transition: "width 0.30s ease-out" }}
               className={`
-                    flex-none
-                    overflow-y-hidden
-                    bg-background-100
-                    h-full
-                    transition-all
-                    bg-opacity-80
-                    duration-300 
-                    ease-in-out
-                    ${toggledSidebar ? "w-[300px]" : "w-[0px]"}
-                  `}
+                  flex-none
+                  overflow-y-hidden
+                  bg-background-100
+                  h-full
+                  transition-all
+                  bg-opacity-80
+                  duration-300 
+                  ease-in-out
+                  ${toggledSidebar ? "w-[250px]" : "w-[0px]"}
+                `}
             />
 
             {
-              <div className="px-24 w-full pt-10 relative max-w-[2000px] xl:max-w-[1430px] mx-auto">
-                <div className="absolute z-10 top-12 left-0 hidden 2xl:block w-52 3xl:w-64">
-                  {(ccPairs.length > 0 || documentSets.length > 0) && (
-                    <SourceSelector
-                      {...filterManager}
-                      showDocSidebar={showDocSidebar || toggledSidebar}
-                      availableDocumentSets={finalAvailableDocumentSets}
-                      existingSources={finalAvailableSources}
-                      availableTags={tags}
-                    />
-                  )}
+              <div
+                className={`desktop:px-24 w-full ${chatBannerPresent && "mt-10"} pt-10 relative max-w-[2000px] xl:max-w-[1430px] mx-auto`}
+              >
+                <div className="absolute z-10 mobile:px-4 mobile:max-w-searchbar-max mobile:w-[90%] top-12 desktop:left-4 hidden 2xl:block mobile:left-1/2 mobile:transform mobile:-translate-x-1/2 desktop:w-52 3xl:w-64">
+                  {!settings?.isMobile &&
+                    (ccPairs.length > 0 || documentSets.length > 0) && (
+                      <SourceSelector
+                        {...filterManager}
+                        showDocSidebar={showDocSidebar || toggledSidebar}
+                        availableDocumentSets={finalAvailableDocumentSets}
+                        existingSources={finalAvailableSources}
+                        availableTags={tags}
+                      />
+                    )}
                 </div>
                 <div className="absolute left-0 hidden 2xl:block w-52 3xl:w-64"></div>
                 <div className="max-w-searchbar-max w-[90%] mx-auto">
+                  {settings?.isMobile && (
+                    <div className="mt-6">
+                      {!(agenticResults && isFetching) || disabledAgentic ? (
+                        <SearchResultsDisplay
+                          searchState={searchState}
+                          disabledAgentic={disabledAgentic}
+                          contentEnriched={contentEnriched}
+                          comments={comments}
+                          sweep={sweep}
+                          agenticResults={agenticResults && !disabledAgentic}
+                          performSweep={performSweep}
+                          searchResponse={searchResponse}
+                          isFetching={isFetching}
+                          defaultOverrides={defaultOverrides}
+                        />
+                      ) : (
+                        <></>
+                      )}
+                    </div>
+                  )}
                   <div
-                    className={`transition-all duration-500 ease-in-out overflow-hidden 
+                    className={`mobile:fixed mobile:left-1/2 mobile:transform mobile:-translate-x-1/2 mobile:max-w-search-bar-max mobile:w-[90%] mobile:z-100 mobile:bottom-12`}
+                  >
+                    <div
+                      className={`transition-all duration-500 ease-in-out overflow-hidden 
                       ${
                         firstSearch
                           ? "opacity-100 max-h-[500px]"
@@ -566,7 +657,7 @@ export const SearchSection = ({
                       <div className="w-message-xs 2xl:w-message-sm 3xl:w-message">
                         <div className="flex">
                           <div className="text-3xl font-bold font-strong text-strong mx-auto">
-                            {trans("title")}
+                            Unlock Knowledge
                           </div>
                         </div>
                       </div>

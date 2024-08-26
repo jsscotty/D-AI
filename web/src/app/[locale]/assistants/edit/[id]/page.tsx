@@ -31,7 +31,6 @@ export default async function Page({ params }: { params: { id: string } }) {
                 redirectType={SuccessfulPersonaUpdateRedirectType.CHAT}
               />
             </Card>
-
             <Title className="mt-12">{trans("delete-assistant")}</Title>
             <Text>
               {trans("delete-assistant-text")}
@@ -60,7 +59,6 @@ export default async function Page({ params }: { params: { id: string } }) {
           </div>
         </div>
       </HeaderWrapper>
-
       {body}
     </div>
   );

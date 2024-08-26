@@ -1,5 +1,5 @@
 import { FiTrash, FiX } from "react-icons/fi";
-import { ModalWrapper } from "./ModalWrapper";
+import { ModalWrapper } from "@/components/modals/ModalWrapper";
 import { BasicClickable } from "@/components/BasicClickable";
 import { useTranslations } from "next-intl";
 export const DeleteChatModal = ({
@@ -17,6 +17,7 @@ export const DeleteChatModal = ({
     <ModalWrapper onClose={onClose}>
       <>
         <div className="flex mb-4">
+<<<<<<< HEAD:web/src/app/[locale]/chat/modal/DeleteChatModal.tsx
           <h2 className="my-auto text-2xl font-bold">
             {transChat("delete-chat")}
           </h2>
@@ -26,6 +27,9 @@ export const DeleteChatModal = ({
           >
             <FiX size={20} />
           </div>
+=======
+          <h2 className="my-auto text-2xl font-bold">Delete chat?</h2>
+>>>>>>> c0e1a02e8edf16c4c4874a9c2eb739cccbdc20d1:web/src/app/chat/modal/DeleteChatModal.tsx
         </div>
         <p className="mb-4">
           {transChat("delete-confirm")}{" "}

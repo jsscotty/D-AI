@@ -13,10 +13,11 @@ import {
 } from "@/lib/types";
 import { ChatSession } from "@/app/[locale]/chat/interfaces";
 import { Persona } from "@/app/[locale]/admin/assistants/interfaces";
-import { FullEmbeddingModelResponse } from "@/app/[locale]/admin/models/embedding/components/types";
+import { InputPrompt } from "@/app/[locale]/admin/prompt-library/interfaces";
+import { FullEmbeddingModelResponse } from "@/components/embedding/interfaces";
 import { Settings } from "@/app/[locale]/admin/settings/interfaces";
 import { fetchLLMProvidersSS } from "@/lib/llm/fetchLLMs";
-import { LLMProviderDescriptor } from "@/app/[locale]/admin/models/llm/interfaces";
+import { LLMProviderDescriptor } from "@/app/[locale]/admin/configuration/llm/interfaces";
 import { Folder } from "@/app/[locale]/chat/folders/interfaces";
 import { personaComparator } from "@/app/[locale]/admin/assistants/lib";
 import { cookies } from "next/headers";
@@ -44,6 +45,7 @@ interface FetchChatDataResult {
   finalDocumentSidebarInitialWidth?: number;
   shouldShowWelcomeModal: boolean;
   shouldDisplaySourcesIncompleteModal: boolean;
+  userInputPrompts: InputPrompt[];
 }
 
 export async function fetchChatData(searchParams: {
@@ -59,6 +61,7 @@ export async function fetchChatData(searchParams: {
     fetchSS("/query/valid-tags"),
     fetchLLMProvidersSS(),
     fetchSS("/folder"),
+    fetchSS("/input_prompt?include_public=true"),
   ];
 
   let results: (
@@ -85,11 +88,13 @@ export async function fetchChatData(searchParams: {
     Persona[],
     string | null,
   ];
+
   const chatSessionsResponse = results[5] as Response | null;
 
   const tagsResponse = results[6] as Response | null;
   const llmProviders = (results[7] || []) as LLMProviderDescriptor[];
-  const foldersResponse = results[8] as Response | null; // Handle folders result
+  const foldersResponse = results[8] as Response | null;
+  const userInputPromptsResponse = results[9] as Response | null;
 
   const authDisabled = authTypeMetadata?.authType === "disabled";
   if (!authDisabled && !user) {
@@ -133,6 +138,15 @@ export async function fetchChatData(searchParams: {
     );
   }
 
+  let userInputPrompts: InputPrompt[] = [];
+  if (userInputPromptsResponse?.ok) {
+    userInputPrompts = await userInputPromptsResponse.json();
+  } else {
+    console.log(
+      `Failed to fetch user input prompts - ${userInputPromptsResponse?.status}`
+    );
+  }
+
   let assistants = rawAssistantsList;
   if (assistantsFetchError) {
     console.log(`Failed to fetch assistants - ${assistantsFetchError}`);
@@ -173,6 +187,7 @@ export async function fetchChatData(searchParams: {
     !hasCompletedWelcomeFlowSS() &&
     !hasAnyConnectors &&
     (!user || user.role === "admin");
+
   const shouldDisplaySourcesIncompleteModal =
     hasAnyConnectors &&
     !shouldShowWelcomeModal &&
@@ -185,6 +200,18 @@ export async function fetchChatData(searchParams: {
   // passthrough and don't do any retrieval
   if (!hasAnyConnectors) {
     assistants = assistants.filter((assistant) => assistant.num_chunks === 0);
+  }
+
+  const hasOpenAIProvider = llmProviders.some(
+    (provider) => provider.provider === "openai"
+  );
+  if (!hasOpenAIProvider) {
+    assistants = assistants.filter(
+      (assistant) =>
+        !assistant.tools.some(
+          (tool) => tool.in_code_tool_id === "ImageGenerationTool"
+        )
+    );
   }
 
   let folders: Folder[] = [];
@@ -215,5 +242,6 @@ export async function fetchChatData(searchParams: {
     toggleSidebar,
     shouldShowWelcomeModal,
     shouldDisplaySourcesIncompleteModal,
+    userInputPrompts,
   };
 }
