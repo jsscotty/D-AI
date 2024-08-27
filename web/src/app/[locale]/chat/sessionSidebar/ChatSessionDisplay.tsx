@@ -54,6 +54,7 @@ export function ChatSessionDisplay({
   const [isShareModalVisible, setIsShareModalVisible] = useState(false);
   const [chatName, setChatName] = useState(chatSession.name);
   const [delayedSkipGradient, setDelayedSkipGradient] = useState(skipGradient);
+  const settings = useContext(SettingsContext);
 
   useEffect(() => {
     if (skipGradient) {
@@ -72,7 +73,7 @@ export function ChatSessionDisplay({
       setIsRenamingChat(false);
       router.refresh();
     } else {
-      alert(trans("rename-chat-fail"));
+      alert("Failed to rename chat session");
     }
   };
 
@@ -95,22 +96,6 @@ export function ChatSessionDisplay({
         />
       )}
 
-      {isDeletionModalVisible && (
-        <DeleteChatModal
-          onClose={() => setIsDeletionModalVisible(false)}
-          onSubmit={async () => {
-            const response = await deleteChatSession(chatSession.id);
-            if (response.ok) {
-              setIsDeletionModalVisible(false);
-              // go back to the main page
-              router.push("/chat");
-            } else {
-              alert("Failed to delete chat session");
-            }
-          }}
-          chatSessionName={chatSession.name}
-        />
-      )}
       <Link
         className="flex my-1 group relative"
         key={chatSession.id}
@@ -223,13 +208,15 @@ export function ChatSessionDisplay({
                           }
                           popover={
                             <div className="border border-border rounded-lg bg-background z-50 w-32">
+                              {showShareModal && (
+                                <DefaultDropdownElement
+                                  name="Share"
+                                  icon={FiShare2}
+                                  onSelect={() => showShareModal(chatSession)}
+                                />
+                              )}
                               <DefaultDropdownElement
-                                name="Share"
-                                icon={FiShare2}
-                                onSelect={() => setIsShareModalVisible(true)}
-                              />
-                              <DefaultDropdownElement
-                                name={trans("rename")}
+                                name="Rename"
                                 icon={FiEdit2}
                                 onSelect={() => setIsRenamingChat(true)}
                               />
