@@ -22,6 +22,9 @@ import { HeaderTitle } from "@/components/header/HeaderTitle";
 import { Logo } from "@/components/Logo";
 import { UserProvider } from "@/components/user/UserProvider";
 import { NextIntlClientProvider } from "next-intl";
+import { useTranslations } from "next-intl";
+
+
 
 const inter = Inter({
   subsets: ["latin"],
@@ -30,18 +33,16 @@ const inter = Inter({
 });
 
 export async function generateMetadata(): Promise<Metadata> {
-  let logoLocation = buildClientUrl("/danswer.ico");
-  let enterpriseSettings: EnterpriseSettings | null = null;
-  if (SERVER_SIDE_ONLY__PAID_ENTERPRISE_FEATURES_ENABLED) {
-    enterpriseSettings = await (await fetchEnterpriseSettingsSS()).json();
-    logoLocation =
-      enterpriseSettings && enterpriseSettings.use_custom_logo
-        ? "/api/enterprise-settings/logo"
-        : buildClientUrl("/blona.ico");
-  }
+  const dynamicSettings = await getCombinedSettings({ forceRetrieval: true });
+  const transWelcome = useTranslations("general");
+  const logoLocation =
+    dynamicSettings.enterpriseSettings &&
+    dynamicSettings.enterpriseSettings?.use_custom_logo
+      ? "/api/enterprise-settings/logo"
+      : buildClientUrl("/blona.ico");
 
   return {
-    title: enterpriseSettings?.application_name ?? "Blona",
+    title: dynamicSettings.enterpriseSettings?.application_name ?? "Blona",
     description: "Question answering for your documents",
     icons: {
       icon: logoLocation,

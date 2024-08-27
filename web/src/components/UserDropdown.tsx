@@ -41,7 +41,7 @@ export function UserDropdown({
   const handleLogout = () => {
     logout().then((isSuccess) => {
       if (!isSuccess) {
-        alert(transWelcome("failed-logout"));
+        alert((transWelcome("failed-logout")));
       }
       router.push("/auth/login");
     });
@@ -104,10 +104,7 @@ export function UserDropdown({
                 overscroll-contain
               `}
           >
-            {/* LANGS */}
-            <div className="flex py-3 px-4 cursor-pointer rounded hover:bg-hover-light">
-              <LanguageSwitcher />
-            </div>
+            
             {showAdminPanel && (
               <>
                 <Link
@@ -149,7 +146,15 @@ export function UserDropdown({
                 </div>
               </>
             )}
+            {/* LANGS */}
+            <div 
+              className="mt-1 flex py-3 px-4 cursor-pointer hover:bg-hover-light min-h-[200px] border-t border-border my-1"
+            > 
+              <LanguageSwitcher /> 
+            </div>
+
           </div>
+          
         }
         side="bottom"
         align="end"

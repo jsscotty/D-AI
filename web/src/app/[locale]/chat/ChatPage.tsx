@@ -80,6 +80,8 @@ import { useSidebarVisibility } from "@/components/chat_search/hooks";
 import { SIDEBAR_TOGGLED_COOKIE_NAME } from "@/components/resizable/constants";
 import FixedLogo from "./shared_chat_search/FixedLogo";
 import { getSecondsUntilExpiration } from "@/lib/time";
+import { useTranslations } from "next-intl";
+
 import { SetDefaultModelModal } from "./modal/SetDefaultModelModal";
 import { DeleteChatModal } from "./modal/DeleteChatModal";
 import { MinimalMarkdown } from "@/components/chat_search/MinimalMarkdown";
@@ -90,6 +92,7 @@ import { useUser } from "@/components/user/UserProvider";
 const TEMP_USER_MESSAGE_ID = -1;
 const TEMP_ASSISTANT_MESSAGE_ID = -2;
 const SYSTEM_MESSAGE_ID = -3;
+const transWelcome = useTranslations("chat");
 
 export function ChatPage({
   toggle,
@@ -798,8 +801,7 @@ export function ChatPage({
 
     if (!messageToResend && messageIdToResend !== undefined) {
       setPopup({
-        message:
-          "Failed to re-send message - please refresh the page and try again.",
+        message: transWelcome("failed_resend"),
         type: "error",
       });
       setRegenerationState(null);
@@ -1178,14 +1180,14 @@ export function ChatPage({
 
     if (response.ok) {
       setPopup({
-        message: "Thanks for your feedback!",
+        message: transWelcome("feedback_thx"),
         type: "success",
       });
     } else {
       const responseJson = await response.json();
       const errorMsg = responseJson.detail || responseJson.message;
       setPopup({
-        message: `Failed to submit feedback - ${errorMsg}`,
+        message: (transWelcome("feedback_thx") ,{errorMsg}),
         type: "error",
       });
     }
@@ -1219,7 +1221,7 @@ export function ChatPage({
       setPopup({
         type: "error",
         message:
-          "The current Assistant does not support image input. Please select an assistant with Vision support.",
+          transWelcome("no_image_input"),
       });
       return;
     }
@@ -1766,7 +1768,7 @@ export function ChatPage({
                                                 setPopup({
                                                   type: "error",
                                                   message:
-                                                    "Cannot edit query of first message - please refresh the page and try again.",
+                                                    transWelcome("query_edit_error"),
                                                 });
                                                 return;
                                               }
@@ -1778,7 +1780,7 @@ export function ChatPage({
                                                 setPopup({
                                                   type: "error",
                                                   message:
-                                                    "Cannot edit query of a pending message - please wait a few seconds and try again.",
+                                                    transWelcome("query_edit_error2"),
                                                 });
                                                 return;
                                               }
@@ -1824,7 +1826,7 @@ export function ChatPage({
                                           setPopup({
                                             type: "error",
                                             message:
-                                              "Failed to force search - please refresh the page and try again.",
+                                            transWelcome("faild_force"),
                                           });
                                         }
                                       }}

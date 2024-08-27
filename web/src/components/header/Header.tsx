@@ -9,7 +9,6 @@ import { SettingsContext } from "../settings/SettingsProvider";
 import { UserDropdown } from "../UserDropdown";
 import { Logo } from "../Logo";
 import { NEXT_PUBLIC_DO_NOT_USE_TOGGLE_OFF_DANSWER_POWERED } from "@/lib/constants";
-import { TranslateWidget } from "@/components/TranslateWidget";
 
 export function HeaderTitle({ children }: { children: JSX.Element | string }) {
   return (
@@ -65,7 +64,6 @@ export function Header({ user, page }: HeaderProps) {
 
         <div className="ml-auto h-full flex flex-col">
           <div className="my-auto">
-            <TranslateWidget />
             <UserDropdown user={user} page={page} />
           </div>
         </div>

@@ -6,12 +6,16 @@ import { SettingsContext } from "@/components/settings/SettingsProvider";
 import { NEXT_PUBLIC_DO_NOT_USE_TOGGLE_OFF_DANSWER_POWERED } from "@/lib/constants";
 import Link from "next/link";
 import { useContext } from "react";
+import { useTranslations } from "next-intl";
+
+
 import { FiSidebar } from "react-icons/fi";
 
 export default function FixedLogo() {
   const combinedSettings = useContext(SettingsContext);
   const settings = combinedSettings?.settings;
   const enterpriseSettings = combinedSettings?.enterpriseSettings;
+  const transWelcome = useTranslations("general");
 
   return (
     <>
@@ -30,7 +34,7 @@ export default function FixedLogo() {
               <div>
                 <HeaderTitle>{enterpriseSettings.application_name}</HeaderTitle>
                 {!NEXT_PUBLIC_DO_NOT_USE_TOGGLE_OFF_DANSWER_POWERED && (
-                  <p className="text-xs text-subtle">Powered by Blona</p>
+                  <p className="text-xs text-subtle">{transWelcome("powered")}</p>
                 )}
               </div>
             ) : (

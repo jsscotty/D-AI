@@ -2,6 +2,8 @@ import { Callout } from "@tremor/react";
 import { FiAlertOctagon } from "react-icons/fi";
 import { useTranslations } from "next-intl";
 
+
+
 export function ErrorCallout({
   errorTitle,
   errorMsg,
@@ -11,6 +13,7 @@ export function ErrorCallout({
 }) {
   const transWelcome = useTranslations("general");
   return (
+  
     <div>
       <Callout
         className="mt-4"

@@ -35,8 +35,9 @@ export default function LanguageSwitcher() {
         rightIcon={<ChevronDownIcon />}
         ref={menuButtonRef}
         size={"sm"}
+        leftIcon={locale === "de" ? <DE /> : <GB />}
       >
-        {locale == "de" ? <Icon as={DE} /> : <Icon as={GB} />}
+       {locale === "de" ? "Deutsch" : "English"}
       </MenuButton>
       <MenuList>
         <MenuItem icon={<Icon as={GB} />} onClick={() => toggleLocale("en")}>

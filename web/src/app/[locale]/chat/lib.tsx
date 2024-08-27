@@ -28,6 +28,9 @@ import {
 import { Persona } from "../admin/assistants/interfaces";
 import { ReadonlyURLSearchParams } from "next/navigation";
 import { SEARCH_PARAM_NAMES } from "./searchParams";
+import { useTranslations } from "next-intl";
+
+
 import { Settings } from "../admin/settings/interfaces";
 
 interface ChatRetentionInfo {
@@ -74,6 +77,7 @@ export async function updateModelOverrideForChatSession(
       new_alternate_model: newAlternateModel,
     }),
   });
+  const transWelcome = useTranslations("chat");
   return response;
 }
 
@@ -98,7 +102,7 @@ export async function createChatSession(
     console.log(
       `Failed to create chat session - ${createChatSessionResponse.status}`
     );
-    throw Error("Failed to create chat session");
+    throw Error(transWelcome("create_error"));
   }
   const chatSessionResponseJson = await createChatSessionResponse.json();
   return chatSessionResponseJson.chat_session_id;
@@ -153,56 +157,53 @@ export async function* sendMessage({
   const documentsAreSelected =
     selectedDocumentIds && selectedDocumentIds.length > 0;
 
-  const body = JSON.stringify({
-    alternate_assistant_id: alternateAssistantId,
-    chat_session_id: chatSessionId,
-    parent_message_id: parentMessageId,
-    message: message,
-    prompt_id: promptId,
-    search_doc_ids: documentsAreSelected ? selectedDocumentIds : null,
-    file_descriptors: fileDescriptors,
-    regenerate,
-    retrieval_options: !documentsAreSelected
-      ? {
-          run_search:
-            promptId === null ||
-            promptId === undefined ||
-            queryOverride ||
-            forceSearch
-              ? "always"
-              : "auto",
-          real_time: true,
-          filters: filters,
-        }
-      : null,
-    query_override: queryOverride,
-    prompt_override: systemPromptOverride
-      ? {
-          system_prompt: systemPromptOverride,
-        }
-      : null,
-    llm_override:
-      temperature || modelVersion
-        ? {
-            temperature,
-            model_provider: modelProvider,
-            model_version: modelVersion,
-          }
-        : null,
-    use_existing_user_message: useExistingUserMessage,
-  });
-
-  const response = await fetch(`/api/chat/send-message`, {
+  const sendMessageResponse = await fetch("/api/chat/send-message", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
-    body,
-    signal,
+    body: JSON.stringify({
+      alternate_assistant_id: alternateAssistantId,
+      chat_session_id: chatSessionId,
+      parent_message_id: parentMessageId,
+      message: message,
+      prompt_id: promptId,
+      search_doc_ids: documentsAreSelected ? selectedDocumentIds : null,
+      file_descriptors: fileDescriptors,
+      retrieval_options: !documentsAreSelected
+        ? {
+            run_search:
+              promptId === null ||
+              promptId === undefined ||
+              queryOverride ||
+              forceSearch
+                ? "always"
+                : "auto",
+            real_time: true,
+            filters: filters,
+          }
+        : null,
+      query_override: queryOverride,
+      prompt_override: systemPromptOverride
+        ? {
+            system_prompt: systemPromptOverride,
+          }
+        : null,
+      llm_override:
+        temperature || modelVersion
+          ? {
+              temperature,
+              model_provider: modelProvider,
+              model_version: modelVersion,
+            }
+          : null,
+      use_existing_user_message: useExistingUserMessage,
+    }),
   });
-
-  if (!response.ok) {
-    throw new Error(`HTTP error! status: ${response.status}`);
+  if (!sendMessageResponse.ok) {
+    const errorJson = await sendMessageResponse.json();
+    const errorMsg = errorJson.message || errorJson.detail || "";
+    throw Error(transWelcome("send_error") ,{errorMsg});
   }
 
   yield* handleSSEStream<PacketType>(response);
@@ -632,7 +633,7 @@ export async function uploadFilesForChat(
     body: formData,
   });
   if (!response.ok) {
-    return [[], `Failed to upload files - ${(await response.json()).detail}`];
+    return [[], (transWelcome("upload_error") ,{(await response.json()).detail})];
   }
   const responseJson = await response.json();
 
