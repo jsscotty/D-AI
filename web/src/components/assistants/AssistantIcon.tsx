@@ -2,7 +2,7 @@ import { Persona } from "@/app/[locale]/admin/assistants/interfaces";
 import React from "react";
 import { Tooltip } from "../tooltip/Tooltip";
 import { createSVG } from "@/lib/assistantIconUtils";
-import { buildImgUrl } from "@/app/chat/files/images/utils";
+import { buildImgUrl } from "@/app/[locale]/chat/files/images/utils";
 
 export function darkerGenerateColorFromId(id: string): string {
   const hash = Array.from(id).reduce(

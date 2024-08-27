@@ -14,7 +14,7 @@ import {
   LightSettingsIcon,
   UsersIcon,
 } from "./icons/icons";
-import { pageType } from "@/app/chat/sessionSidebar/types";
+import { pageType } from "@/app/[locale]/chat/sessionSidebar/types";
 import { useTranslations } from "next-intl";
 import LanguageSwitcher from "./LanguageSwitcher";
 

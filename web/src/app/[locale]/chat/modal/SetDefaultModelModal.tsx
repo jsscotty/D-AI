@@ -2,7 +2,7 @@ import { Dispatch, SetStateAction, useState, useEffect, useRef } from "react";
 import { ModalWrapper } from "@/components/modals/ModalWrapper";
 import { Badge, Text } from "@tremor/react";
 import { getDisplayNameForModel, LlmOverride } from "@/lib/hooks";
-import { LLMProviderDescriptor } from "@/app/admin/configuration/llm/interfaces";
+import { LLMProviderDescriptor } from "@/app/[locale]/admin/configuration/llm/interfaces";
 
 import { destructureValue, structureValue } from "@/lib/llm/utils";
 import { setUserDefaultModel } from "@/lib/users/UserSettings";

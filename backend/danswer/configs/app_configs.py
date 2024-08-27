@@ -118,7 +118,7 @@ VESPA_PORT = os.environ.get("VESPA_PORT") or "8081"
 VESPA_TENANT_PORT = os.environ.get("VESPA_TENANT_PORT") or "19071"
 # The default below is for dockerized deployment
 VESPA_DEPLOYMENT_ZIP = (
-    os.environ.get("VESPA_DEPLOYMENT_ZIP") or "/app/danswer/vespa-app.zip"
+    os.environ.get("VESPA_DEPLOYMENT_ZIP") or "/app/[locale]/danswer/vespa-app.zip"
 )
 # Number of documents in a batch during indexing (further batching done by chunks before passing to bi-encoder)
 try:

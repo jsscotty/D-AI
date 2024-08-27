@@ -7,7 +7,7 @@ import { listSourceMetadata } from "@/lib/sources";
 import { Title, Text, Button } from "@tremor/react";
 import Link from "next/link";
 import { useEffect, useMemo, useRef, useState } from "react";
-import { useTranslations } from "next-intl";
+import { useTranslations } from "@next-intl";
 
 function SourceTile({
   sourceMetadata,

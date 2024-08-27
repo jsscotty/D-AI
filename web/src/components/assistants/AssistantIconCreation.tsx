@@ -1,5 +1,5 @@
-import { Persona } from "@/app/admin/assistants/interfaces";
-import { buildImgUrl } from "@/app/chat/files/images/utils";
+import { Persona } from "@/app/[locale]/admin/assistants/interfaces";
+import { buildImgUrl } from "@/app/[locale]/chat/files/images/utils";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import Dropzone from "react-dropzone";
 import { usePopup } from "../admin/connectors/Popup";

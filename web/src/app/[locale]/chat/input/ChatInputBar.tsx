@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useRef, useState } from "react";
 import { FiPlusCircle, FiPlus, FiInfo, FiX } from "react-icons/fi";
 import { ChatInputOption } from "./ChatInputOption";
 import { Persona } from "@/app/[locale]/admin/assistants/interfaces";
-import { InputPrompt } from "@/app/admin/prompt-library/interfaces";
+import { InputPrompt } from "@/app/[locale]/admin/prompt-library/interfaces";
 import {
   FilterManager,
   getDisplayNameForModel,

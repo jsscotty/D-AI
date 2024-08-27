@@ -1,8 +1,8 @@
 "use client";
 
-import { HistorySidebar } from "@/app/chat/sessionSidebar/HistorySidebar";
-import { ChatSession } from "@/app/chat/interfaces";
-import { Folder } from "@/app/chat/folders/interfaces";
+import { HistorySidebar } from "@/app/[locale]/chat/sessionSidebar/HistorySidebar";
+import { ChatSession } from "@/app/[locale]/chat/interfaces";
+import { Folder } from "@/app/[locale]/chat/folders/interfaces";
 import { User } from "@/lib/types";
 import Cookies from "js-cookie";
 import { SIDEBAR_TOGGLED_COOKIE_NAME } from "@/components/resizable/constants";

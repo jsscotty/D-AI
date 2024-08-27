@@ -9,7 +9,7 @@ import {
   StringOrNumberOption,
 } from "@/components/Dropdown";
 
-import { Persona } from "@/app/admin/assistants/interfaces";
+import { Persona } from "@/app/[locale]/admin/assistants/interfaces";
 import { destructureValue, getFinalLLM, structureValue } from "@/lib/llm/utils";
 import { useState } from "react";
 import { Hoverable } from "@/components/Hoverable";

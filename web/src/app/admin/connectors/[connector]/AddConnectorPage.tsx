@@ -7,7 +7,7 @@ import { HealthCheckBanner } from "@/components/health/healthcheck";
 
 import { Card, Title } from "@tremor/react";
 import { AdminPageTitle } from "@/components/admin/Title";
-import { buildSimilarCredentialInfoURL } from "@/app/admin/connector/[ccPairId]/lib";
+import { buildSimilarCredentialInfoURL } from "@/app/[locale]/admin/connector/[ccPairId]/lib";
 import { usePopup } from "@/components/admin/connectors/Popup";
 import { useFormContext } from "@/components/context/FormContext";
 import { getSourceDisplayName } from "@/lib/sources";

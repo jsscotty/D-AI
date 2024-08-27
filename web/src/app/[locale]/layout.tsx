@@ -1,4 +1,4 @@
-import "@/app/globals.css";
+import "@/app/[locale]/globals.css";
 
 import {
   fetchEnterpriseSettingsSS,
